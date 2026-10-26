@@ -1,0 +1,6 @@
+/home/claude/ncdcal/stage1_analysis.py:96: RuntimeWarning: All-NaN slice encountered
+  df[f"flat_{k}"] = np.mean(c >= (np.nanmax(c, axis=1, keepdims=True) - 0.005), axis=1)
+/home/claude/ncdcal/stage1_analysis.py:96: RuntimeWarning: All-NaN slice encountered
+  df[f"flat_{k}"] = np.mean(c >= (np.nanmax(c, axis=1, keepdims=True) - 0.005), axis=1)
+/home/claude/ncdcal/stage1_analysis.py:96: RuntimeWarning: All-NaN slice encountered
+  df[f"flat_{k}"] = np.mean(c >= (np.nanmax(c, axis=1, keepdims=True) - 0.005), axis=1)

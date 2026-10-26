@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Stage~1 candidate rules $r=f(\bar P)$, $\bar P=\bar P^{(M)}_{\mathrm{esc}}$, at $\alpha_0=0.85$, truth NCD. Columns \texttt{test}--\texttt{real}: mean Kendall $\tau$ at the rule's $r$. CV $\tau$: grouped 8-fold cross-validation over calibration graphs. Gap: share of the canonical-to-oracle gap closed on \texttt{test}. $p$: Wilcoxon signed-rank test of the per-graph mean differences against the constant rule on \texttt{test}. Clip-linear rules are clipped to $[0.01,0.99]$; LS: least squares on the oracle values; $\tau$-opt.: fitted by maximising the mean calibration $\tau$. The logistic and isotonic rules are reported for completeness.}
+\label{tab:stage1}
+\begin{tabular}{@{}llrrrrrrr@{}}
+\toprule
+rule & formula & CV $\tau$ & \texttt{test} & \texttt{scale} & \texttt{topo} & \texttt{real} & gap \% & $p$ \\
+\midrule
+constant $r$ & $0.180$ & 0.6854 & 0.6864 & 0.6681 & 0.7838 & 0.7586 & 33 & -- \\
+clip-linear, LS & $\mathrm{clip}(0.304-0.156\,\bar P)$ & 0.6831 & 0.6855 & 0.6656 & 0.7816 & 0.7523 & 28 & 0.443 \\
+clip-linear, $\tau$-opt.\ (locked) & $\mathrm{clip}(0.242-0.143\,\bar P)$ & 0.6859 & 0.6867 & 0.6681 & 0.7844 & 0.7601 & 34 & 0.331 \\
+logistic, $\tau$-opt. & -- & 0.6860 & 0.6868 & 0.6680 & 0.7845 & 0.7599 & 34 & 0.360 \\
+isotonic & -- & 0.6832 & 0.6859 & 0.6650 & 0.7818 & 0.7522 & 30 & 0.612 \\
+\midrule
+canonical $r=0.118$ & & & 0.6801 & 0.6633 & 0.7840 & 0.7559 & 0 & \\
+oracle $r^*$ & & & 0.6995 & 0.6788 & 0.7905 & 0.7685 & 100 & \\
+\bottomrule
+\end{tabular}
+\end{table*}

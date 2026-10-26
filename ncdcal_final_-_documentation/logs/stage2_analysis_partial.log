@@ -1,0 +1,44 @@
+rule   NCD   h_rule           corr=-0.045 within=-0.304 between=+0.291 a*=0.791+-0.058 lower=0.00 upper=0.00
+rule   NCD   hv_rule          corr=-0.037 within=-0.407 between=+0.255 a*=0.791+-0.058 lower=0.00 upper=0.00
+can    NCD   h_can            corr=+0.012 within=-0.296 between=+0.386 a*=0.781+-0.073 lower=0.00 upper=0.00
+ng13   NCD   h_ng13           corr=+0.022 within=-0.300 between=+0.399 a*=0.778+-0.076 lower=0.00 upper=0.00
+const  NCD   h_const          corr=-0.066 within=-0.297 between=+0.254 a*=0.787+-0.062 lower=0.00 upper=0.00
+rule   TOT   h_rule           corr=-0.254 within=-0.374 between=-0.154 a*=0.471+-0.049 lower=0.19 upper=0.00
+can    TOT   h_can            corr=-0.133 within=-0.323 between=+0.279 a*=0.452+-0.044 lower=0.28 upper=0.00
+ng13   TOT   h_ng13           corr=-0.126 within=-0.312 between=+0.280 a*=0.449+-0.043 lower=0.30 upper=0.00
+const  TOT   h_const          corr=-0.203 within=-0.364 between=+0.090 a*=0.467+-0.048 lower=0.21 upper=0.00
+rule   POP   h_rule           corr=-0.007 within=-0.547 between=+0.353 a*=0.707+-0.092 lower=0.01 upper=0.00
+rule   Q     h_rule           corr=+0.051 within=-0.185 between=+0.176 a*=0.968+-0.033 lower=0.00 upper=0.49
+can    POP   h_can            corr=+0.034 within=-0.536 between=+0.409 a*=0.686+-0.108 lower=0.02 upper=0.00
+can    Q     h_can            corr=+0.030 within=-0.163 between=+0.190 a*=0.970+-0.040 lower=0.00 upper=0.57
+const  POP   h_const          corr=-0.018 within=-0.536 between=+0.335 a*=0.701+-0.097 lower=0.01 upper=0.00
+const  Q     h_const          corr=-0.014 within=-0.192 between=+0.111 a*=0.968+-0.036 lower=0.00 upper=0.49
+ng13   POP   h_ng13           corr=+0.043 within=-0.539 between=+0.425 a*=0.683+-0.110 lower=0.02 upper=0.00
+ng13   Q     h_ng13           corr=+0.040 within=-0.164 between=+0.213 a*=0.971+-0.041 lower=0.00 upper=0.59
+popLS  POP   h_popLS          corr=-0.109 within=-0.539 between=+0.144 a*=0.726+-0.079 lower=0.00 upper=0.00
+popLS  Q     h_popLS          corr=+0.100 within=-0.116 between=+0.180 a*=0.967+-0.032 lower=0.00 upper=0.45
+popTAU POP   h_popTAU         corr=-0.081 within=-0.535 between=+0.174 a*=0.725+-0.081 lower=0.00 upper=0.00
+popTAU Q     h_popTAU         corr=+0.179 within=-0.095 between=+0.278 a*=0.968+-0.032 lower=0.00 upper=0.49
+ng13   NCD95 h_ng13           corr=+0.017 within=-0.219 between=+0.259 a*=0.914+-0.053 lower=0.00 upper=0.00
+rule   NCD95 h_rule           corr=+0.026 within=-0.165 between=+0.206 a*=0.910+-0.044 lower=0.00 upper=0.00
+can    NCD95 h_can            corr=+0.010 within=-0.216 between=+0.245 a*=0.913+-0.050 lower=0.00 upper=0.00
+rule   NCD   pesc_M           corr=+0.245 within=+0.315 between=+0.307 a*=0.791+-0.058 lower=0.00 upper=0.00
+rule   NCD   dangling_frac    corr=-0.211 within=-0.338 between=+0.001 a*=0.791+-0.058 lower=0.00 upper=0.00
+rule   NCD   log_mean_outdeg  corr=+0.295 within=+0.365 between=+0.296 a*=0.791+-0.058 lower=0.00 upper=0.00
+rule   NCD   zero_in_frac     corr=-0.411 within=-0.683 between=-0.105 a*=0.791+-0.058 lower=0.00 upper=0.00
+rule   NCD   h_H              corr=-0.117 within=-0.363 between=+0.225 a*=0.791+-0.058 lower=0.00 upper=0.00
+rule   NCD   hv_H             corr=-0.128 within=-0.500 between=+0.201 a*=0.791+-0.058 lower=0.00 upper=0.00
+rule   NCD   keep_frac        corr=+0.380 within=+0.438 between=+0.084 a*=0.791+-0.058 lower=0.00 upper=0.00
+Traceback (most recent call last):
+  File "/home/claude/ncdcal/stage2_analysis.py", line 444, in <module>
+    main()
+    ~~~~^^
+  File "/home/claude/ncdcal/stage2_analysis.py", line 438, in main
+    pipe = pipelines(df, TAU, fits)
+  File "/home/claude/ncdcal/stage2_analysis.py", line 344, in pipelines
+    g_rule = {d["name"]: rule_from_dict(d) for d in fits["rule|NCD|h_rule"]}
+                         ~~~~~~~~~~~~~~^^^
+  File "/home/claude/ncdcal/stage2_analysis.py", line 333, in rule_from_dict
+    ru = ARule(d["name"], d["form"], d.get("params", []), d["feature"], d["fit"])
+                                                                        ~^^^^^^^
+KeyError: 'fit'

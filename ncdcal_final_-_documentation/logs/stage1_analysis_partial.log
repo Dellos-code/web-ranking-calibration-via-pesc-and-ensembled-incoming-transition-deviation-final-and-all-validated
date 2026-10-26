@@ -1,0 +1,172 @@
+/home/claude/ncdcal/stage1_analysis.py:96: RuntimeWarning: All-NaN slice encountered
+  df[f"flat_{k}"] = np.mean(c >= (np.nanmax(c, axis=1, keepdims=True) - 0.005), axis=1)
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+
+==== GT = NCD: calib n=1792 corr(Pbar, r*) = {'pearson': -0.20358789956913376, 'spearman': -0.2061581186501605, 'kendall': -0.15122989428081235}
+within/between: {'pooled': -0.20358789956913376, 'within': -0.5596322763748749, 'between': -0.054081647508793476, 'n_bases': 64}
+noise ceiling: {'test_retest_pearson': 0.9196941594982815, 'test_retest_mad': 0.02747767857142857, 'pesc_test_retest': 0.9992139748635394, 'n_pairs': 896}
+panel                         calib    real   scale    test    topo
+rule                                                               
+PageRank_r0                  0.6369  0.7092  0.6231  0.6346  0.7618
+cliplin_LS                   0.6835  0.7475  0.6656  0.6855  0.7816
+cliplin_TAU                  0.6862  0.7546  0.6681  0.6867  0.7844
+cliplin_free_LS              0.6836  0.7469  0.6656  0.6854  0.7818
+cliplin_free_TAU             0.6862  0.7542  0.6680  0.6868  0.7846
+const                        0.6856  0.7488  0.6681  0.6864  0.7838
+const_hindsight              0.6856  0.7539  0.6682  0.6867  0.7843
+exp_LS                       0.6836  0.7472  0.6656  0.6855  0.7816
+gbm[all observable]          0.6959  0.7318  0.6557  0.6806  0.7778
+isotonic                     0.6840  0.7471  0.6650  0.6859  0.7818
+lin2[pesc_M+inter_arc_frac]  0.6838  0.7488  0.6659  0.6854  0.7818
+logistic_LS                  0.6836  0.7473  0.6656  0.6855  0.7816
+logistic_TAU                 0.6862  0.7544  0.6680  0.6868  0.7845
+CV (calib, grouped by base): {'const': 0.6854, 'cliplin_LS': 0.6831, 'cliplin_free_LS': 0.6832, 'logistic_LS': 0.6832, 'exp_LS': 0.6832, 'isotonic': 0.6832, 'cliplin_TAU': 0.6859, 'cliplin_free_TAU': 0.6859, 'logistic_TAU': 0.686, 'lin2[pesc_M+inter_arc_frac]': 0.6833, 'gbm[all observable]': 0.681, '_oracle': 0.697, '_canonical': 0.6805}
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+
+==== GT = PR: calib n=1792 corr(Pbar, r*) = {'pearson': -0.05078784782112168, 'spearman': 0.003692547548334263, 'kendall': -0.002568737174678661}
+within/between: {'pooled': -0.05078784782112168, 'within': -0.48625561665325123, 'between': 0.15260352753976283, 'n_bases': 64}
+noise ceiling: {'test_retest_pearson': 0.9730945914678295, 'test_retest_mad': 0.017410714285714286, 'pesc_test_retest': 0.9992139748635394, 'n_pairs': 896}
+panel                         calib    real   scale    test    topo
+rule                                                               
+PageRank_r0                  0.6658  0.7831  0.6513  0.6648  0.7792
+cliplin_LS                   0.6587  0.7459  0.6428  0.6587  0.7611
+cliplin_TAU                  0.6656  0.7833  0.6509  0.6650  0.7755
+cliplin_free_LS              0.6587  0.7440  0.6428  0.6586  0.7613
+cliplin_free_TAU             0.6658  0.7833  0.6509  0.6651  0.7739
+const                        0.6658  0.7833  0.6509  0.6651  0.7739
+const_hindsight              0.6658  0.7833  0.6509  0.6651  0.7755
+exp_LS                       0.6587  0.7455  0.6428  0.6587  0.7611
+gbm[all observable]          0.6746  0.7774  0.6263  0.6508  0.7567
+isotonic                     0.6582  0.7773  0.6434  0.6577  0.7602
+lin2[pesc_M+inter_arc_frac]  0.6587  0.7460  0.6428  0.6586  0.7611
+logistic_LS                  0.6587  0.7455  0.6428  0.6587  0.7611
+logistic_TAU                 0.6658  0.7833  0.6509  0.6652  0.7737
+CV (calib, grouped by base): {'const': 0.6656, 'cliplin_LS': 0.6582, 'cliplin_free_LS': 0.6582, 'logistic_LS': 0.6582, 'exp_LS': 0.6582, 'isotonic': 0.6573, 'cliplin_TAU': 0.665, 'cliplin_free_TAU': 0.6656, 'logistic_TAU': 0.6654, 'lin2[pesc_M+inter_arc_frac]': 0.6581, 'gbm[all observable]': 0.6532, '_oracle': 0.6761, '_canonical': 0.6566}
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: NearConstantInputWarning: An input array is nearly constant; the computed correlation coefficient may be inaccurate.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: NearConstantInputWarning: An input array is nearly constant; the computed correlation coefficient may be inaccurate.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: NearConstantInputWarning: An input array is nearly constant; the computed correlation coefficient may be inaccurate.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: NearConstantInputWarning: An input array is nearly constant; the computed correlation coefficient may be inaccurate.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: NearConstantInputWarning: An input array is nearly constant; the computed correlation coefficient may be inaccurate.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+
+==== GT = SELF: calib n=1792 corr(Pbar, r*) = {'pearson': 0.11704689169659857, 'spearman': 0.11653023050699168, 'kendall': 0.08547650575890867}
+within/between: {'pooled': 0.11704689169659857, 'within': 0.07536771862947904, 'between': 0.17396629483433687, 'n_bases': 64}
+noise ceiling: {'test_retest_pearson': 0.5027169706621074, 'test_retest_mad': 0.050647321428571423, 'pesc_test_retest': 0.9992139748635394, 'n_pairs': 896}
+panel                         calib    real   scale    test    topo
+rule                                                               
+PageRank_r0                  0.6658  0.7831  0.6513  0.6648  0.7792
+cliplin_LS                   0.8199  0.8325  0.8166  0.8282  0.8151
+cliplin_TAU                  0.8230  0.8531  0.8215  0.8306  0.8152
+cliplin_free_LS              0.8199  0.8325  0.8166  0.8282  0.8151
+cliplin_free_TAU             0.8230  0.8432  0.8215  0.8306  0.8152
+const                        0.8230  0.8432  0.8215  0.8306  0.8152
+const_hindsight              0.8230  0.8510  0.8215  0.8306  0.8153
+exp_LS                       0.8199  0.8325  0.8166  0.8282  0.8151
+gbm[all observable]          0.8227  0.8269  0.8120  0.8259  0.8151
+isotonic                     0.8199  0.8348  0.8166  0.8280  0.8151
+lin2[pesc_M+inter_arc_frac]  0.8204  0.8389  0.8175  0.8281  0.8163
+logistic_LS                  0.8199  0.8318  0.8166  0.8282  0.8150
+logistic_TAU                 0.8230  0.8432  0.8215  0.8306  0.8152
+CV (calib, grouped by base): {'const': 0.823, 'cliplin_LS': 0.8196, 'cliplin_free_LS': 0.8198, 'logistic_LS': 0.8196, 'exp_LS': 0.8196, 'isotonic': 0.8194, 'cliplin_TAU': 0.8229, 'cliplin_free_TAU': 0.8229, 'logistic_TAU': 0.823, 'lin2[pesc_M+inter_arc_frac]': 0.8201, 'gbm[all observable]': 0.8186, '_oracle': 0.8261, '_canonical': 0.6805}
+/home/claude/ncdcal/stage1_analysis.py:316: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  out["pearson_fx_rstar"] = float(stats.pearsonr(r_hat, y)[0]) if np.std(r_hat) > 0 else np.nan
+
+==== GT = POP: calib n=1856 corr(Pbar, r*) = {'pearson': -0.34098756505643985, 'spearman': -0.3312741101534606, 'kendall': -0.23712998270213617}
+within/between: {'pooled': -0.34098756505643985, 'within': -0.38714136020174095, 'between': -0.33381150926324954, 'n_bases': 64}
+noise ceiling: {'test_retest_pearson': 0.944655797551762, 'test_retest_mad': 0.032466517857142864, 'pesc_test_retest': 0.9992139748635394, 'n_pairs': 896}
+panel                         calib   scale    test
+rule                                               
+PageRank_r0                  0.5261  0.4943  0.5218
+cliplin_LS                   0.5526  0.5267  0.5532
+cliplin_TAU                  0.5534  0.5262  0.5519
+cliplin_free_LS              0.5529  0.5266  0.5534
+cliplin_free_TAU             0.5537  0.5257  0.5525
+const                        0.5503  0.5246  0.5513
+const_hindsight              0.5503  0.5254  0.5517
+exp_LS                       0.5529  0.5267  0.5533
+gbm[all observable]          0.5679  0.5181  0.5458
+isotonic                     0.5533  0.5265  0.5535
+lin2[pesc_M+inter_arc_frac]  0.5526  0.5267  0.5532
+logistic_LS                  0.5529  0.5267  0.5533
+logistic_TAU                 0.5538  0.5256  0.5523
+CV (calib, grouped by base): {'const': 0.5493, 'cliplin_LS': 0.5518, 'cliplin_free_LS': 0.5519, 'logistic_LS': 0.5521, 'exp_LS': 0.5522, 'isotonic': 0.5521, 'cliplin_TAU': 0.5525, 'cliplin_free_TAU': 0.5524, 'logistic_TAU': 0.553, 'lin2[pesc_M+inter_arc_frac]': 0.5516, 'gbm[all observable]': 0.5456, '_oracle': 0.5689, '_canonical': 0.5462}

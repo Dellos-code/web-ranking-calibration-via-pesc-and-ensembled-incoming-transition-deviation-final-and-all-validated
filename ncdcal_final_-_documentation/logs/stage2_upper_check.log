@@ -1,0 +1,12 @@
+calib_000
+calib_001
+calib_002
+calib_003
+calib_004
+calib_005
+calib_006
+calib_007
+tau_0.99     0.42822
+tau_0.995    0.42788
+tau_0.999    0.42731
+share of instances whose best alpha among [0.99, 0.995, 0.999] is: {0.99: 0.5603448275862069, 0.995: 0.15086206896551724, 0.999: 0.28879310344827586}

@@ -1,0 +1,18 @@
+\begin{table}[!htbp]
+\centering
+\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Stage~1 under the four Stage~1 truths. Const $r$: the best constant on the calibration panel; $\tau$-opt.\ rule: the $\tau$-optimised clip-linear rule on $\bar P=\bar P^{(M)}_{\mathrm{esc}}$. Canonical $\tau$: mean Kendall $\tau$ of the canonical $r=0.118$ on \texttt{test}; const $-$ can.: gain of the constant over it. The last four columns give the mean $\tau$ difference between the rule and the constant per panel. $^{\dagger}$: Wilcoxon signed-rank $p<0.01$ over graphs. POP exists only for the static generator. Under SELF both the constant and the rule sit at the upper bound $r=0.99$.}
+\label{tab:stage1truth}
+\begin{tabular}{@{}lllrrrrrr@{}}
+\toprule
+& & & \multicolumn{2}{c}{\texttt{test}} & \multicolumn{4}{c}{rule $-$ constant} \\
+\cmidrule(lr){4-5}\cmidrule(l){6-9}
+truth & const $r$ & $\tau$-opt.\ rule & canonical $\tau$ & const $-$ can. & \texttt{test} & \texttt{scale} & \texttt{topo} & \texttt{real} \\
+\midrule
+NCD & $0.18$ & $\mathrm{clip}(0.242-0.143\,\bar P)$ & 0.6801 & $+$0.0063$^{\dagger}$ & $+$0.0003 & 0.0000 & $+$0.0007 & $+$0.0008 \\
+PR & $0.02$ & $\mathrm{clip}(-0.017-0.075\,\bar P)$ & 0.6569 & $+$0.0083 & $-$0.0002 & 0.0000 & $+$0.0016$^{\dagger}$ & $+$0.0015 \\
+POP & $0.23$ & $\mathrm{clip}(0.448-0.547\,\bar P)$ & 0.5446 & $+$0.0067$^{\dagger}$ & $+$0.0006 & $+$0.0016 & -- & -- \\
+SELF & $0.99$ & $\mathrm{clip}(0.960+0.836\,\bar P)$ & 0.6801 & $+$0.1504$^{\dagger}$ & 0.0000 & 0.0000 & 0.0000 & $+$0.0040 \\
+\bottomrule
+\end{tabular}
+\end{table}

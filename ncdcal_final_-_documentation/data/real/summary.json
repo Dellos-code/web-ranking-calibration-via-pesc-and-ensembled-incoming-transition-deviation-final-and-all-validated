@@ -1,0 +1,63 @@
+{
+  "cora_ml": {
+    "partition": "7 topic labels",
+    "n": 2995,
+    "arcs": 8416,
+    "blocks": 7,
+    "block_size_median": 402.0,
+    "block_size_max": 857,
+    "singleton_blocks": 0,
+    "intra_block_arc_fraction": 0.7920627376425855,
+    "dangling_fraction": 0.11652754590984975,
+    "mean_outdegree": 2.810016694490818
+  },
+  "citeseer": {
+    "partition": "6 topic labels",
+    "n": 4230,
+    "arcs": 5358,
+    "blocks": 6,
+    "block_size_median": 717.5,
+    "block_size_max": 831,
+    "singleton_blocks": 0,
+    "intra_block_arc_fraction": 0.9494214259051885,
+    "dangling_fraction": 0.21347517730496454,
+    "mean_outdegree": 1.2666666666666666
+  },
+  "cora_full": {
+    "partition": "70 topic labels",
+    "n": 19793,
+    "arcs": 65311,
+    "blocks": 70,
+    "block_size_median": 241.5,
+    "block_size_max": 928,
+    "singleton_blocks": 0,
+    "intra_block_arc_fraction": 0.5709298586761801,
+    "dangling_fraction": 0.10993785681806699,
+    "mean_outdegree": 3.29970191481837
+  },
+  "wikics": {
+    "partition": "10 topic labels",
+    "n": 11701,
+    "arcs": 290519,
+    "blocks": 10,
+    "block_size_median": 822.5,
+    "block_size_max": 2679,
+    "singleton_blocks": 0,
+    "intra_block_arc_fraction": 0.6884609956663764,
+    "dangling_fraction": 0.03837278865054269,
+    "mean_outdegree": 24.828561661396463
+  },
+  "cnr2000": {
+    "merges": 317953,
+    "partition": "contiguous modularity segmentation (host proxy)",
+    "n": 325557,
+    "arcs": 3128710,
+    "blocks": 7604,
+    "block_size_median": 5.0,
+    "block_size_max": 18399,
+    "singleton_blocks": 1597,
+    "intra_block_arc_fraction": 0.893541427617133,
+    "dangling_fraction": 0.26710837119152714,
+    "mean_outdegree": 9.610329373965236
+  }
+}

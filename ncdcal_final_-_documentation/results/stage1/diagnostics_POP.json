@@ -1,0 +1,70 @@
+{
+  "gt": "POP",
+  "n_calib_instances": 1856,
+  "n_calib_bases": 64,
+  "corr_pesc_rstar": {
+    "pearson": -0.34098756505643985,
+    "spearman": -0.3312741101534606,
+    "kendall": -0.23712998270213617
+  },
+  "within_between": {
+    "pooled": -0.34098756505643985,
+    "within": -0.38714136020174095,
+    "between": -0.33381150926324954,
+    "n_bases": 64
+  },
+  "within_between_by_exp": {
+    "A": {
+      "pooled": -0.4742865571828984,
+      "within": -0.664524638110311,
+      "between": -0.42811162642110134,
+      "n_bases": 64
+    },
+    "B": {
+      "pooled": -0.24914317039660747,
+      "within": -0.6246038067261773,
+      "between": -0.21351310468987575,
+      "n_bases": 64
+    }
+  },
+  "noise_ceiling": {
+    "test_retest_pearson": 0.944655797551762,
+    "test_retest_mad": 0.032466517857142864,
+    "pesc_test_retest": 0.9992139748635394,
+    "n_pairs": 896
+  },
+  "rstar_kendall_vs_spearman": {
+    "pearson": 0.9924499198426108,
+    "mean_abs_diff": 0.015087440381558029
+  },
+  "rstar_at_bounds": {
+    "lower": 0.023168103448275863,
+    "upper": 0.0
+  },
+  "flatness_mean": 0.19719827586206898,
+  "competitor_corr": {
+    "pesc_H_block": -0.13056817373096535,
+    "inter_arc_frac": -0.2518567519548804,
+    "mean_k": -0.2829208389648884,
+    "log_mean_outdeg": -0.3411970300466886,
+    "dangling_frac": 0.17862799212579628,
+    "zero_in_frac": 0.16083927276727478,
+    "pesc_M_linked": -0.36174458644328955,
+    "keep_frac": -0.23484969823217142
+  },
+  "cv_tau": {
+    "const": 0.5492625469181301,
+    "cliplin_LS": 0.5518334918361112,
+    "cliplin_free_LS": 0.5519135513914971,
+    "logistic_LS": 0.5521373389816397,
+    "exp_LS": 0.5522048603460007,
+    "isotonic": 0.5520643077347933,
+    "cliplin_TAU": 0.5524870437838025,
+    "cliplin_free_TAU": 0.5524156560428409,
+    "logistic_TAU": 0.5529862214520679,
+    "lin2[pesc_M+inter_arc_frac]": 0.551644769931766,
+    "gbm[all observable]": 0.5455780040710725,
+    "_oracle": 0.5688855739888447,
+    "_canonical": 0.5461845356842567
+  }
+}

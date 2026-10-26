@@ -1,0 +1,30 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Stage~2 candidate rules $\alpha=g(h)$ and $\alpha=g(h_v)$ with $r$ locked to the Stage~1 rule, truth NCD. Top block: mean Kendall $\tau$ of the static damping, the locked constant, their difference and the oracle. Lower blocks: difference in mean $\tau$ of each fitted rule against the locked constant. CV $\tau$: grouped 8-fold cross-validation on the calibration graphs. $^{\dagger}$: Wilcoxon signed-rank $p<0.01$ over graphs. Every rule is clipped to $[0.40,0.99]$; LS: least squares on the oracle values; $\tau$-opt.: fitted by maximising the mean calibration $\tau$.}
+\label{tab:stage2}
+\begin{tabular}{@{}llrrrrr@{}}
+\toprule
+rule & formula & CV $\tau$ & \texttt{test} & \texttt{scale} & \texttt{topo} & \texttt{real} \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{mean Kendall $\tau$}} \\
+static $\alpha=0.85$ & & -- & 0.6867 & 0.6681 & 0.7844 & 0.7600 \\
+constant $\alpha=0.810$ (locked) & & 0.6913 & 0.6911 & 0.6735 & 0.7875 & 0.7559 \\
+\quad difference & &  & $+$0.0044$^{\dagger}$ & $+$0.0054$^{\dagger}$ & $+$0.0031$^{\dagger}$ & $-$0.0012 \\
+oracle $\alpha^*$ & & -- & 0.6960 & 0.6787 & 0.7911 & 0.7738 \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{rules on $h$: difference in mean $\tau$ against the locked constant}} \\
+clip-linear, $\tau$-opt.\ (locked) & $\mathrm{clip}(0.810-0.000\,h)$ & 0.6912 & 0.0000 & 0.0000 & 0.0000 & 0.0000 \\
+clip-linear, LS & $\mathrm{clip}(0.803-0.021\,h)$ & 0.6898 & $-$0.0015$^{\dagger}$ & $-$0.0013 & $-$0.0007$^{\dagger}$ & $-$0.0033 \\
+isotonic & -- & 0.6897 & $-$0.0016$^{\dagger}$ & $-$0.0014 & $-$0.0010$^{\dagger}$ & $-$0.0049 \\
+budget $c/(c+x)$, $\tau$-opt. & $c=2.69$ & 0.6891 & $-$0.0023$^{\dagger}$ & $-$0.0043$^{\dagger}$ & $-$0.0016$^{\dagger}$ & $-$0.0045 \\
+boosted trees, all observables & -- & 0.6905 & $-$0.0002 & $-$0.0030 & $-$0.0018$^{\dagger}$ & $-$0.0124 \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{rules on $h_v$: difference in mean $\tau$ against the locked constant}} \\
+clip-linear, $\tau$-opt.\ (locked) & $\mathrm{clip}(0.810+0.000\,h_v)$ & 0.6912 & 0.0000 & 0.0000 & 0.0000 & 0.0000 \\
+clip-linear, LS & $\mathrm{clip}(0.802-0.016\,h_v)$ & 0.6898 & $-$0.0015$^{\dagger}$ & $-$0.0013 & $-$0.0011$^{\dagger}$ & $-$0.0029 \\
+isotonic & -- & 0.6896 & $-$0.0018$^{\dagger}$ & $-$0.0013 & $-$0.0024$^{\dagger}$ & $-$0.0037 \\
+budget $c/(c+x)$, $\tau$-opt. & $c=3.04$ & 0.6888 & $-$0.0024 & $-$0.0037 & $-$0.0083$^{\dagger}$ & $-$0.0019 \\
+\bottomrule
+\end{tabular}
+\end{table*}

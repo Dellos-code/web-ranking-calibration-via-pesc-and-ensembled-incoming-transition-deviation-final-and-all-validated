@@ -1,0 +1,14 @@
+\begin{table*}[t]
+\centering
+\small
+\caption{Power-iteration counts before and after the noise discount (stopping rule $\|\pi^{(k+1)}-\pi^{(k)}\|_1<\varepsilon=10^{-6}$, start $v$). The bound column is the a-priori estimate from $|\lambda_2(P)|\le\alpha$; measured columns are mean counts over all perturbed instances of the panel.}
+\label{tab:conv}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+configuration & $\alpha$ & bound $\ln\varepsilon/\ln\alpha$ & measured, \texttt{test} & measured, \texttt{real} \\
+\midrule
+NCD branch ($r$ = rule) & 0.85$\to$0.81 & 85$\to$66 ($-22.9\%$) & 30.2$\to$25.8 ($-14.7\%$) & 30.5$\to$26.5 ($-13.1\%$) \\
+NCD95 branch ($r=0.105$) & 0.95$\to$0.93 & 269$\to$190 ($-29.3\%$) & 67.2$\to$54.2 ($-19.3\%$) & 69.9$\to$59.2 ($-15.3\%$) \\
+\bottomrule
+\end{tabular}
+\end{table*}

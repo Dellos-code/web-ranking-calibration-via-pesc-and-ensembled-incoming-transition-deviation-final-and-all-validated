@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Share of the variance of the oracle damping $\alpha^*$ explained ($R^2$) on the calibration panel, for each truth and $r$-setting. Graph identity, perturbation level and their additive combination are in-sample ANOVA shares. Starred columns are out of sample (grouped 8-fold CV by graph): boosted trees on the hidden generator parameters plus the perturbation level; ridge regression on every observable global statistic, including $h$ and $h_v$; and the clip-linear rule on $h$ alone. Negative values mean worse than predicting the mean.}
+\label{tab:stage2dec}
+\begin{tabular}{@{}llrrrrrr@{}}
+\toprule
+truth & $r$ & graph & level & graph+level & hidden+level$^{*}$ & all observables$^{*}$ & $h$ alone$^{*}$ \\
+\midrule
+NCD & Stage~1 & 0.25 & 0.47 & 0.72 & 0.60 & 0.17 & $-$0.02 \\
+NCD & 0.118 & 0.32 & 0.41 & 0.73 & 0.62 & 0.13 & $-$0.03 \\
+NCD95 & 0.105 & 0.40 & 0.22 & 0.62 & 0.38 & 0.10 & $-$0.03 \\
+TOT & Stage~1 & 0.10 & 0.77 & 0.87 & 0.87 & 0.18 & 0.05 \\
+POP & POP rule & 0.54 & 0.29 & 0.83 & 0.44 & 0.28 & $-$0.03 \\
+Q & Stage~1 & 0.67 & 0.02 & 0.69 & $-$0.20 & 0.05 & $-$0.03 \\
+\bottomrule
+\end{tabular}
+\end{table}

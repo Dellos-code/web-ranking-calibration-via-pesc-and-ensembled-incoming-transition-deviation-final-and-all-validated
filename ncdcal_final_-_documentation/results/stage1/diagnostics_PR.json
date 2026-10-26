@@ -1,0 +1,70 @@
+{
+  "gt": "PR",
+  "n_calib_instances": 1792,
+  "n_calib_bases": 64,
+  "corr_pesc_rstar": {
+    "pearson": -0.05078784782112168,
+    "spearman": 0.003692547548334263,
+    "kendall": -0.002568737174678661
+  },
+  "within_between": {
+    "pooled": -0.05078784782112168,
+    "within": -0.48625561665325123,
+    "between": 0.15260352753976283,
+    "n_bases": 64
+  },
+  "within_between_by_exp": {
+    "A": {
+      "pooled": -0.2323131450558328,
+      "within": -0.7080967861110437,
+      "between": 0.007579290167411844,
+      "n_bases": 64
+    },
+    "B": {
+      "pooled": 0.07264698218311513,
+      "within": -0.7164871185201773,
+      "between": 0.26685047183828736,
+      "n_bases": 64
+    }
+  },
+  "noise_ceiling": {
+    "test_retest_pearson": 0.9730945914678295,
+    "test_retest_mad": 0.017410714285714286,
+    "pesc_test_retest": 0.9992139748635394,
+    "n_pairs": 896
+  },
+  "rstar_kendall_vs_spearman": {
+    "pearson": 0.9438602047962993,
+    "mean_abs_diff": 0.030498257839721255
+  },
+  "rstar_at_bounds": {
+    "lower": 0.38169642857142855,
+    "upper": 0.0
+  },
+  "flatness_mean": 0.11975784632034632,
+  "competitor_corr": {
+    "pesc_H_block": -0.005708984277446623,
+    "inter_arc_frac": -0.03495464875187757,
+    "mean_k": -0.04726507943997897,
+    "log_mean_outdeg": -0.0702967575738448,
+    "dangling_frac": 0.048394232331034355,
+    "zero_in_frac": 0.028760735384212296,
+    "pesc_M_linked": -0.048632412802072304,
+    "keep_frac": -0.40598179872186024
+  },
+  "cv_tau": {
+    "const": 0.665576626197435,
+    "cliplin_LS": 0.6581614212837861,
+    "cliplin_free_LS": 0.6582277031668952,
+    "logistic_LS": 0.6581746408395004,
+    "exp_LS": 0.6581743794608451,
+    "isotonic": 0.657324704549665,
+    "cliplin_TAU": 0.6649536389083703,
+    "cliplin_free_TAU": 0.6655722602594543,
+    "logistic_TAU": 0.6654069904497136,
+    "lin2[pesc_M+inter_arc_frac]": 0.6580600209355507,
+    "gbm[all observable]": 0.6532249787225354,
+    "_oracle": 0.6760548427700996,
+    "_canonical": 0.6565927340915161
+  }
+}

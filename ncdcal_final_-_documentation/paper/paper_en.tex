@@ -1,0 +1,1058 @@
+% =============================================================================
+%  Two-Stage Calibration of Decomposable Web Ranking
+%  English manuscript.  Compile with:  xelatex paper_en && xelatex paper_en
+%  Every number in the text comes from generated/macros.tex and every table from
+%  generated/en/, both written by ../make_paper_assets.py from the saved results.
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{txfonts}
+\usepackage[no-math]{fontspec}
+\setmainfont{FreeSerif}
+\setmonofont{DejaVu Sans Mono}[Scale=0.82]
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{enumitem}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{microtype}
+\usepackage{placeins}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\input{generated/macros.tex}
+\newcommand{\Pesc}{P^{(M)}_{\mathrm{esc}}}
+\newcommand{\Pbar}{\bar P^{(M)}_{\mathrm{esc}}}
+\newcommand{\Sin}{\Sigma_{\mathrm{in}}}
+\newcommand{\clip}{\mathrm{clip}}
+\newcommand{\Exp}{\mathbb{E}}
+\graphicspath{{../figures/}}
+
+\title{\bfseries Two-Stage Calibration of Decomposable Web Ranking:\\
+Block Escape Probability, Incoming-Transition Deviation,\\
+and the Anchoring of Oracle Damping}
+\author{Ioannis Konstantellos\\[2pt]
+\small Computer Engineering and Informatics Department, University of Patras, Greece\\
+\small\texttt{st1059599@ceid.upatras.gr}, \texttt{idellos1999@gmail.com}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+NCDawareRank combines the hyperlink matrix $H$ of a Web graph with an inter-level proximity matrix
+$M$ defined over nearly completely decomposable (NCD) blocks, and its two weights $\eta$ and $\mu$ are
+fixed by convention. Writing $\eta=(1-r)\alpha$ and $\mu=r\alpha$, we formulate and test a two-stage,
+zero-cost calibration: Stage~1 chooses the mixing ratio $r$ from the mean block escape probability
+$\Pbar=\frac1n\sum_u k_u/(k_u+1)$, and Stage~2 chooses the total damping $\alpha$ from the deviation
+$h$ of the ensembled operator $Z_r=(1-r)H+rM$ from double stochasticity. We prove that
+$h=\|u^\top Z_r-u^\top\|_1$, that its teleportation-weighted counterpart $h_v=\|v^\top Z_r-v^\top\|_1$
+equals the $L_1$ norm of $\mathrm d\pi/\mathrm d\alpha$ at $\alpha=0$, and that
+$\|\pi(\alpha)-v\|_1\le\frac{\alpha}{1-\alpha}\,h_v$ for every $\alpha$. We evaluate the procedure on
+\nInstTotal{} perturbed instances of synthetic block webs and five real networks, including cnr-2000,
+one of the Web graphs of the original NCDawareRank experiments. The perturbations follow the original
+protocol: links removed at random, and newly added pages that have lost most of their in-links.
+Three findings emerge. First,
+neither $\Pbar$ nor $h$ nor $h_v$ predicts the oracle parameters out of sample: inside a graph they track
+the amount of link loss rather than structure, across graphs their relation with the oracle is weak or
+reversed, and $h$ moves in opposite directions under the two perturbations. The rules that maximise
+rank agreement therefore collapse to the constants
+$r\approx0.18$--$0.24$ and $\alpha=\STwoConstAlpha$. Second, these constants recover the canonical
+ranking better than the static NCDawareRank setting on held-out synthetic graphs (Kendall $\tau$
+\TwoTestD, better on \TwoTestWins{} graphs), but not on the real networks (\TwoRealD, $p=\TwoRealP$).
+Third, the oracle damping is set by the reference ranking itself: for references computed on the
+complete graph it lies $0.03$--$0.06$ below the damping that defines the reference (a noise discount),
+and it moves with the prior mean of Random-$\alpha$ references with slope \RaprSlope. Whether a calibrated setting beats the static one therefore depends
+on the ground truth chosen. We also show that the stability protocol commonly used to compare
+link-analysis methods is degenerate as a calibration target.
+\end{abstract}
+
+% =============================================================================
+\section{Introduction}
+\label{sec:intro}
+
+Link analysis in the PageRank tradition~\cite{page99,langville06} ranks the pages of a directed graph
+$\mathcal G=(\mathcal W,\mathcal E)$ by the stationary distribution of a random surfer who follows a
+hyperlink with probability $\alpha$ and teleports otherwise. The Web is also organised hierarchically
+into sites and domains, which makes its link matrix \emph{nearly completely decomposable} (NCD) in the
+sense of Simon and Ando~\cite{simon61} and Courtois~\cite{courtois77}: links are dense inside blocks
+and sparse between them. NCDawareRank~\cite{ng13} exploits this structure by adding to the hyperlink
+matrix $H$ an \emph{inter-level proximity} matrix $M$ that spreads rank uniformly over the blocks a page
+touches, giving the chain
+\begin{equation}
+P=\eta H+\mu M+(1-\eta-\mu)E,
+\label{eq:ncd}
+\end{equation}
+where $E$ is a block-aware teleportation matrix. The method reduces the sensitivity of the ranking to
+sparse or missing links and to newly added pages, and it accelerates convergence~\cite{ng13,ng20}.
+
+Its two weights are chosen by convention. In the original experiments $\eta=0.85$ and $\mu=0.10$, so the
+total damping is $\eta+\mu=0.95$. A second configuration, $\eta=0.75$ and $\mu=0.10$ (total damping
+$0.85$), appears in the convergence comparison. The value $\mu\approx0.10$ was motivated by iteration
+counts on complete graphs together with ``the fact that we want to avoid ignoring the direct link
+structure''~\cite[§3.2.2]{ng13}. The choice of the PageRank damping factor has a literature of its own:
+for real Web graphs, values close to~$1$ do not give more meaningful rankings~\cite{boldi05,boldi09};
+structural arguments favour values near $1/2$~\cite{avrachenkov08}; and empirically measured
+teleportation behaviour follows a Beta distribution with mean between $0.3$ and $0.7$, depending on the
+site~\cite{gleich10}. Gleich et al.\ conjectured that good choices of $\alpha$ ``may depend on a
+topological property of the graph''~\cite{gleich10}. In earlier work on uncertain graphs, we calibrated
+the damping of a diffusion heuristic from a free structural statistic, the mean escape
+probability~\cite{konstantellos26}.
+
+This paper asks the analogous question for NCDawareRank: \emph{can $(\eta,\mu)$ be calibrated at no cost
+from statistics that are already computed when the operator is built?} We write $\eta=(1-r)\alpha$ and
+$\mu=r\alpha$, which separates the mixing ratio $r$ between $H$ and $M$ from the total damping $\alpha$,
+and we study a sequential two-stage scheme. Stage~1 fixes $\alpha_0=0.85$ and sets
+$r=f(\Pbar)$ from the mean \emph{block escape probability}. Stage~2 sets $\alpha=g(h)$ from the mean
+absolute deviation $h$ of the incoming transition sums of $Z_r$ from unity.
+
+\paragraph{Contributions.}
+\begin{enumerate}[leftmargin=1.4em,itemsep=2pt]
+\item \textbf{Framework and theory} (Sections~\ref{sec:stage1}--\ref{sec:proc}). We define the two
+statistics and show that both are computable in $O(|\mathcal E|+n)$ time. We prove that
+$h=\|u^\top Z_r-u^\top\|_1$ and that the teleportation-weighted $h_v=\|v^\top Z_r-v^\top\|_1$ is the
+$L_1$ norm of the first derivative of the ranking at $\alpha=0$. We then prove a displacement bound,
+$\|\pi(\alpha)-v\|_1\le\frac{\alpha}{1-\alpha}h_v$ (Theorem~\ref{thm:bound}), and characterise when the
+ranking equals the teleportation vector. Two statements in the literature are corrected along the way:
+$h=0$ does not imply a uniform ranking under block-even teleportation, and singleton blocks turn $M$
+into the lazy hyperlink walk rather than into $H$.
+\item \textbf{A large, cluster-aware evaluation} (Section~\ref{sec:method}). We follow the perturbation
+protocol of~\cite{ng13} (random link removal and newly added pages) on \nInstTotal{} instances. They
+come from synthetic block webs with held-out, scale-transfer and topology-transfer panels, and from five
+real networks. Rankings are scored against seven ground truths, and every test treats the base graph as
+the unit of replication.
+\item \textbf{Findings} (Sections~\ref{sec:res1}--\ref{sec:res2}). (i) $\Pbar$, $h$ and $h_v$ do not
+predict the oracle parameters, and we explain why. (ii) The calibration reduces to two constants that
+help on synthetic graphs but not on real ones. (iii) Oracle damping is anchored to the damping that
+defines the reference ranking, minus a noise discount, as a dose-response experiment shows directly.
+(iv) The stability protocol of~\cite{ng13} is degenerate as a calibration target.
+\end{enumerate}
+We report the negative results with the same care as the positive ones, because they determine what can
+and cannot be claimed about calibrating link-analysis parameters from structure.
+
+% =============================================================================
+\section{Background}
+\label{sec:background}
+
+\subsection{NCDawareRank}
+Let $\mathcal W=\{1,\dots,n\}$ be the pages, $\mathcal G_u$ the set of pages $u$ links to and
+$d_u=|\mathcal G_u|$. The hyperlink matrix has $H_{uv}=1/d_u$ for $v\in\mathcal G_u$; rows of dangling
+pages ($d_u=0$) are replaced by $\frac1n e^\top$, the uniform stochasticity adjustment of~\cite{page99}.
+The original paper leaves the adjustment open~\cite{ng13}, and the extended version proposes a
+block-confined alternative~\cite{ng20}. A partition $\mathcal A=\{\mathcal A_1,\dots,\mathcal A_N\}$ of
+$\mathcal W$ into NCD blocks is given, and $\mathcal A_{(u)}$ denotes the block of $u$. Following
+\cite[§3.1]{ng13}, the proximal set of $u$ is
+\[
+\mathcal X_u=\textstyle\bigcup_{w\in\{u\}\cup\mathcal G_u}\mathcal A_{(w)},
+\]
+and $N_u$ is the number of distinct blocks in $\mathcal X_u$. The inter-level proximity matrix is
+\begin{equation}
+M_{uv}=\begin{cases}\dfrac{1}{N_u\,|\mathcal A_{(v)}|},& v\in\mathcal X_u,\\[4pt] 0,&\text{otherwise,}\end{cases}
+\qquad M=RA,
+\label{eq:M}
+\end{equation}
+where $R_{uI}=1/(N_u|\mathcal A_I|)$ if $\mathcal A_I\subseteq\mathcal X_u$ (and $0$ otherwise) and
+$A_{Iv}=\mathbf 1[v\in\mathcal A_I]$. Thus $M$ is a two-step walk: first choose one of the $N_u$ proximal
+blocks uniformly, then choose a page inside it uniformly. The factorisation $M=RA$ keeps the storage at
+$O(\mathrm{nnz}(R)+n)$. Teleportation is block-even, $E=ev^\top$ with $v_u=1/(N|\mathcal A_{(u)}|)$:
+rank is spread first evenly over the blocks and then evenly over the pages of each block. The chain is
+\eqref{eq:ncd} with $\eta>0$, $\mu\ge0$ and $\eta+\mu<1$. The NCDawareRank vector $\pi$ satisfies
+$\pi^\top=\pi^\top P$ and is computed by a factorised power iteration~\cite[Alg.~1]{ng13}.
+
+\subsection{The \texorpdfstring{$(\alpha,r)$}{(α, r)} parameterisation}
+In the proof of Theorem~1 of~\cite{ng13}, the chain is rewritten as $P=\alpha Z+(1-\alpha)E$ with
+$\alpha=\eta+\mu$ and $Z=(\eta H+\mu M)/(\eta+\mu)$, which shows that the subdominant eigenvalue of $P$
+is at most $\eta+\mu$. We adopt this decomposition and introduce the \emph{mixing ratio}
+$r=\mu/\alpha\in[0,1]$:
+\begin{equation}
+\eta=(1-r)\alpha,\qquad \mu=r\alpha,\qquad Z_r=(1-r)H+rM,\qquad P=\alpha Z_r+(1-\alpha)ev^\top .
+\label{eq:param}
+\end{equation}
+The ranking is $\pi(\alpha)^\top=(1-\alpha)v^\top(I-\alpha Z_r)^{-1}=(1-\alpha)\sum_{k\ge0}\alpha^k v^\top Z_r^k$.
+The two published configurations correspond to $(\alpha,r)=(0.85,\,0.10/0.85)=(0.85,0.118)$ (the
+convergence comparison of~\cite[Table~2]{ng13}) and $(\alpha,r)=(0.95,\,0.10/0.95)=(0.95,0.105)$
+(the ranking experiments of~\cite[§4]{ng13}). We call the first the \emph{canonical} setting because its
+total damping equals the canonical PageRank value; anchoring Stage~1 at $\alpha_0=0.85$ is our design
+choice, not that of~\cite{ng13}.
+
+\subsection{Evaluation protocol in~\texorpdfstring{\cite{ng13}}{[NG13]}}
+The ranking experiments of~\cite{ng13} use two perturbations of a complete Web graph. In the
+\emph{newly added pages} test, a set of pages loses $90\%$ of its incoming links. In the
+\emph{sparseness} test, only $90\%$--$40\%$ of the links are kept. Each method's ranking on the
+perturbed graph is compared, with Kendall's $\tau$, to \emph{the same method's} ranking on the complete
+graph. This protocol measures stability. We show in Section~\ref{sec:res1-truth} that, as a target for
+choosing parameters, it is degenerate.
+
+\subsection{Related work}
+\paragraph{Choosing the damping factor.} Boldi, Santini and Vigna study PageRank as a function of
+$\alpha$, give closed-form derivatives and show that $\alpha\to1$ concentrates rank on irrelevant
+recurrent states~\cite{boldi05,boldi09}. Avrachenkov, Litvak and Pham analyse the ergodic structure of
+the Web graph with singular perturbation theory and recommend $\alpha\approx1/2$~\cite{avrachenkov08}.
+Bressan and Peserico show that, in the worst case, the top-$k$ ordering can take every permutation as
+$\alpha$ varies over an arbitrarily small interval~\cite{bressan10}. Kamvar and Haveliwala show that
+the condition number of the PageRank problem grows like $(1+\alpha)/(1-\alpha)$~\cite{kamvar03}, and
+Haveliwala and Kamvar bound the second eigenvalue of the Google matrix by $\alpha$~\cite{haveliwala03}.
+Gleich et al.\ measure the teleportation parameter from browsing data~\cite{gleich10}. Learned
+alternatives tune diffusion or teleportation coefficients from labelled data~\cite{berberidis19}. We are
+not aware of prior work that sets $\alpha$, or the NCDawareRank weights, from a closed-form structural
+statistic.
+\paragraph{Damping-free rankings.} TotalRank integrates PageRank over $\alpha\in[0,1]$~\cite{boldi05tr}.
+It is a special case of the generic damping functions of Baeza-Yates, Boldi and
+Castillo~\cite{baeza06}, and it equals Random-$\alpha$ PageRank with $\alpha\sim\mathrm{Beta}(1,1)$
+\cite{constantine09}. In~\cite{ng13} these methods appear as competitors; here we use them as
+$\alpha$-integrated references.
+\paragraph{PageRank and in-degree.} In networks without degree correlations, the mean PageRank of the
+pages with a given in-degree is an affine function of that in-degree~\cite{fortunato08}, and PageRank and
+in-degree have power-law tails with the same exponent~\cite{litvak07}. The column sums of $Z_r$ play the
+role of normalised in-degrees, and our statistic $h$ measures how far they deviate from uniformity.
+
+% =============================================================================
+\section{Stage~1: the block escape probability}
+\label{sec:stage1}
+
+\subsection{Degeneracy of the escape probability under \texorpdfstring{$H$}{H}}
+In earlier work~\cite{konstantellos26} the damping of a diffusion heuristic was calibrated from the mean
+probability that one step of the walk leaves the current vertex. Under $H$ this statistic is degenerate:
+every non-dangling page sends all of its mass along its out-links, so the vertex-level escape probability
+is identically~$1$ (and $1-1/n$ for a dangling page) and carries no information about the graph. What does
+vary from page to page is \emph{where} the mass goes, inside the home block or outside it, and under $M$
+this depends only on how many distinct blocks a page touches.
+
+\subsection{Escape probability under \texorpdfstring{$M$}{M}}
+Let $k_u$ be the number of distinct external blocks that $u$ links to,
+\[
+k_u=\bigl|\{\mathcal A_{(w)}:w\in\mathcal G_u,\ \mathcal A_{(w)}\ne\mathcal A_{(u)}\}\bigr|,
+\qquad\text{so that } N_u=k_u+1 .
+\]
+
+\begin{definition}[Block escape probability]
+$\Pesc(u)=1-\frac{1}{k_u+1}=\frac{k_u}{k_u+1}$, and $\Pbar=\frac1n\sum_{u\in\mathcal W}\Pesc(u)$.
+\end{definition}
+
+\begin{proposition}\label{prop:esc}
+$\Pesc(u)$ is the probability that one step of $M$ from $u$ leaves the home block $\mathcal A_{(u)}$.
+\end{proposition}
+\begin{proof}
+By~\eqref{eq:M}, the row $M_{u\cdot}$ puts mass $1/N_u$ on each of the $N_u$ proximal blocks, so the mass
+that stays in $\mathcal A_{(u)}$ is $1/N_u=1/(k_u+1)$.
+\end{proof}
+
+\begin{remark}[Special partitions]\label{rem:remark1}
+With a single block, $M=\frac1n ee^\top$ and $v=u$ (the uniform vector), so NCDawareRank reduces to
+PageRank with damping $\eta$, as noted in~\cite[Remark~1]{ng13}. With $n$ singleton blocks the same
+remark states that $M$ coincides with $H$. Because $u$ always belongs to $\mathcal X_u$, the exact
+statement is $M=(D+I)^{-1}(\mathrm{Adj}+I)$ on non-dangling rows, the \emph{lazy} hyperlink walk, and
+$M_{u\cdot}=e_u^\top$ on dangling rows. Our unit tests verify both forms.
+\end{remark}
+
+\subsection{The Stage~1 rule}
+Stage~1 fixes the total damping at $\alpha_0=0.85$ and sets the mixing ratio from the observed graph,
+$r=f(\Pbar)$. The statistic summarises how strongly $M$ couples the blocks: $\Pbar=0$ when no page links
+outside its block, and $\Pbar$ grows towards~$1$ as pages touch many blocks. The functional form of $f$
+is not fixed in advance. We fit several candidate families on calibration graphs and lock the one that
+recovers the reference ranking best (Section~\ref{sec:res1}). The locked rule is
+$f(\Pbar)=\clip(0.242-0.143\,\Pbar,0.01,0.99)$. For the population truth POP we use the corresponding
+least-squares fit, $\clip(0.420-0.386\,\Pbar,0.01,0.99)$.
+
+% =============================================================================
+\section{Stage~2: the incoming-transition deviation}
+\label{sec:stage2}
+
+\subsection{The ensembled incoming transition sum}
+For each page $v$, the incoming transition sums under the two logics are the column sums
+\begin{align}
+\Sin^{(H)}(v)&=\sum_{u}H_{uv}=\sum_{u:\,v\in\mathcal G_u}\frac{1}{d_u}+\frac{n_{\mathrm d}}{n},
+\label{eq:sinh}\\
+\Sin^{(M)}(v)&=\sum_u M_{uv}=\frac{1}{|\mathcal A_{(v)}|}\sum_{u:\,\mathcal A_{(v)}\subseteq\mathcal X_u}\frac{1}{N_u},
+\label{eq:sinm}
+\end{align}
+where $n_{\mathrm d}$ is the number of dangling pages, each of which contributes $1/n$ to every column.
+$\Sin^{(M)}$ is constant within a block, and it equals the row sum of $R^\top$ at that block. The
+\emph{ensembled} incoming sum is the column sum of $Z_r$,
+\begin{equation}
+\Sin(v;r)=r\,\Sin^{(M)}(v)+(1-r)\,\Sin^{(H)}(v).
+\label{eq:sin}
+\end{equation}
+
+\begin{proposition}[Mean incoming sum]\label{prop:mean}
+$\frac1n\sum_v\Sin(v;r)=1$ for every $r$.
+\end{proposition}
+\begin{proof}
+$\sum_v\Sin(v;r)=\sum_u\sum_v(Z_r)_{uv}=n$, because $Z_r$ is row-stochastic.
+\end{proof}
+\noindent
+The identity holds only when the dangling correction in~\eqref{eq:sinh} is included; without it the mean
+is $1-n_{\mathrm d}/n$. Across all instances and $r$-settings of our experiments, the largest deviation
+of the mean from~$1$ is $\MaxSigmaDev$.
+
+\subsection{The meaning of the deviation statistic}
+\begin{definition}[Deviation statistics]
+\[
+h(r)=\frac1n\sum_{v\in\mathcal W}\bigl|1-\Sin(v;r)\bigr|,\qquad
+h_v(r)=\bigl\|v^\top Z_r-v^\top\bigr\|_1 .
+\]
+\end{definition}
+
+\begin{proposition}[Interpretation]\label{prop:interp}
+Let $u=\frac1n e$ be the uniform distribution. Then
+\begin{enumerate}[label=(\roman*),leftmargin=2em,itemsep=0pt]
+\item $h(r)=\|u^\top Z_r-u^\top\|_1$: $h$ is the $L_1$ distance that the uniform distribution moves in
+one step of $Z_r$, and $h=0$ if and only if $Z_r$ is doubly stochastic;
+\item $h_v(r)=\bigl\|\tfrac{\mathrm d}{\mathrm d\alpha}\pi(\alpha)\big|_{\alpha=0}\bigr\|_1$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(i) $(u^\top Z_r)_v=\frac1n\sum_w(Z_r)_{wv}=\Sin(v;r)/n$, so $\|u^\top Z_r-u^\top\|_1=\frac1n\sum_v|\Sin(v;r)-1|$,
+which vanishes if and only if every column sum equals~$1$.
+(ii) From $\pi(\alpha)^\top=(1-\alpha)\sum_k\alpha^kv^\top Z_r^k=v^\top+\alpha(v^\top Z_r-v^\top)+O(\alpha^2)$,
+the derivative at $0$ is $v^\top Z_r-v^\top$. The same power series of PageRank in $\alpha$ is the starting
+point of the analysis in~\cite{boldi09}.
+\end{proof}
+
+\begin{proposition}[When the ranking equals the prior]\label{prop:fixed}
+For any $\alpha\in(0,1)$: $\pi(\alpha)=v$ if and only if $h_v(r)=0$. If all blocks have the same size,
+then $v=u$, $h_v=h$, and $\pi(\alpha)=u$ if and only if $h=0$. If block sizes differ, $h=0$ (that is,
+$Z_r$ doubly stochastic) does \emph{not} imply $\pi(\alpha)=u$. In that case
+$\|\pi(\alpha)-u\|_1\le\|v-u\|_1$.
+\end{proposition}
+\begin{proof}
+If $v^\top Z_r=v^\top$, every term of the series equals $v^\top$, so $\pi=v$. Conversely, the fixed-point
+equation $\pi^\top=\alpha\pi^\top Z_r+(1-\alpha)v^\top$ with $\pi=v$ gives $\alpha v^\top=\alpha v^\top Z_r$.
+If $u^\top Z_r=u^\top$, then $\pi(\alpha)^\top-u^\top=(1-\alpha)(v-u)^\top(I-\alpha Z_r)^{-1}$. The
+matrix $(1-\alpha)(I-\alpha Z_r)^{-1}=(1-\alpha)\sum_k\alpha^kZ_r^k$ is row-stochastic, and a
+row-stochastic matrix does not increase the $L_1$ norm of a row vector (Lemma~\ref{lem:contract}).
+\end{proof}
+\noindent
+Thus $h$ describes the chain under uniform teleportation, whereas under the block-even teleportation of
+NCDawareRank the relevant quantity is $h_v$.
+
+\subsection{A displacement bound}
+
+\begin{lemma}\label{lem:contract}
+For every row vector $x$ and every row-stochastic $S$, $\|x^\top S\|_1\le\|x\|_1$.
+\end{lemma}
+\begin{proof}
+$\|x^\top S\|_1=\sum_j\bigl|\sum_ix_iS_{ij}\bigr|\le\sum_i|x_i|\sum_jS_{ij}=\|x\|_1$.
+\end{proof}
+
+\begin{theorem}[Displacement bound]\label{thm:bound}
+For every $r\in[0,1]$ and $\alpha\in[0,1)$,
+\begin{equation}
+\|\pi(\alpha)-v\|_1\;\le\;\frac{\alpha}{1-\alpha}\,h_v(r),
+\label{eq:bound}
+\end{equation}
+and $\|\pi(\alpha)-v\|_1=\alpha\,h_v(r)+O(\alpha^2)$ as $\alpha\to0$, so the bound is tight to first order.
+\end{theorem}
+\begin{proof}
+Since $\sum_{k\ge0}(1-\alpha)\alpha^k=1$,
+\(
+\pi(\alpha)^\top-v^\top=\sum_{k\ge0}(1-\alpha)\alpha^k\,(v^\top Z_r^k-v^\top).
+\)
+Each bracket telescopes,
+\(
+v^\top Z_r^k-v^\top=\sum_{j=0}^{k-1}(v^\top Z_r-v^\top)Z_r^{\,j},
+\)
+and by Lemma~\ref{lem:contract} every summand has $L_1$ norm at most $\|v^\top Z_r-v^\top\|_1=h_v(r)$.
+Hence $\|v^\top Z_r^k-v^\top\|_1\le k\,h_v(r)$ and
+\[
+\|\pi(\alpha)-v\|_1\le h_v(r)\sum_{k\ge0}(1-\alpha)\alpha^k k=h_v(r)\,\frac{\alpha}{1-\alpha}.
+\]
+The first-order statement follows from Proposition~\ref{prop:interp}(ii).
+\end{proof}
+
+\begin{remark}[What the bound does and does not say]\label{rem:bound}
+Because $\|\pi-v\|_1\le2$, the useful form is $\|\pi(\alpha)-v\|_1\le\min\{2,\alpha h_v/(1-\alpha)\}$.
+The bound limits how far the ranking can move away from the teleportation prior, and $h_v$ is the
+rate at which it starts to move. It says nothing about which $\alpha$ recovers a given ranking best.
+Numerically, on \BoundGraphs{} graphs (\BoundCases{} combinations of graph, $r$ and $\alpha$), the ratio
+of the left to the right side of~\eqref{eq:bound} never exceeds \BoundMax. It lies between \BoundLoMin{}
+and \BoundLoMax{} at $\alpha=0.05$, and its median is \BoundMedEightyFive{} at $\alpha=0.85$: the bound
+is tight for small $\alpha$ and conservative by a factor of about six at the usual damping.
+\end{remark}
+
+\subsection{Calibrating \texorpdfstring{$\alpha=g(h)$}{α = g(h)} and recovering \texorpdfstring{$(\eta,\mu)$}{(η, μ)}}
+Stage~2 keeps the ratio $r$ of Stage~1, computes $h(r)$ (or $h_v(r)$) on the observed graph and sets
+$\alpha=g(h)$, after which $\eta=(1-r)\alpha$ and $\mu=r\alpha$. The working hypothesis behind this
+stage was that a larger deviation from double stochasticity calls for a larger $\alpha$. We test this
+hypothesis, its opposite and several functional forms for $g$, including the one-parameter
+\emph{displacement-budget} rule $\alpha=c/(c+h_v)$ suggested by Theorem~\ref{thm:bound}: under it the
+right-hand side of~\eqref{eq:bound} equals the budget~$c$ for every graph (Section~\ref{sec:res2}).
+
+% =============================================================================
+\section{The complete procedure and its cost}
+\label{sec:proc}
+
+Algorithm~\ref{alg:twostage} states the procedure. Both statistics are by-products of building $R$, and
+the procedure adds no asymptotic cost to NCDawareRank.
+
+\begin{proposition}[Cost]\label{prop:cost}
+Given the arc list and the block map, $\{k_u\}$, $\Pbar$, $\Sin^{(H)}$, $\Sin^{(M)}$, $h(r)$ and
+$h_v(r)$ are computable in $O(|\mathcal E|+n)$ time with $O(n+N)$ memory beyond the graph.
+\end{proposition}
+\begin{proof}
+Keep an array $\mathrm{last}[1..N]$, initially zero. For each page $u$, visit its own block and then the
+block of every out-neighbour; a block $I$ is new for $u$ exactly when $\mathrm{last}[I]\ne u$, in which
+case we set $\mathrm{last}[I]\gets u$ and record the pair $(u,I)$. Page $u$ costs $O(1+d_u)$, so all
+non-zeros of $R$, which must be enumerated to build $R$ anyway, are found in $O(|\mathcal E|+n)$ time,
+and $\mathrm{nnz}(R)\le n+|\mathcal E|$. Counting them per page gives $N_u$, hence $k_u$ and $\Pbar$, in
+$O(n)$. One pass over the arcs accumulates $1/d_u$ into $\Sin^{(H)}$, and the dangling term adds
+$n_{\mathrm d}/n$ to every entry in $O(n)$. $\Sin^{(M)}$ accumulates $1/N_u$ into each proximal block in
+$O(\mathrm{nnz}(R))$ and is divided by the block sizes and copied to the pages in $O(n)$. $h(r)$ is one
+$O(n)$ pass. $h_v(r)$ needs the product $v^\top Z_r=(1-r)\,v^\top H+r\,(v^\top R)A$, which costs
+$O(\mathrm{nnz}(H)+\mathrm{nnz}(R)+n)$, the same as one power iteration. The extra memory is the array
+$\mathrm{last}$ and the block sums, $O(N)$, and a constant number of page vectors, $O(n)$.
+\end{proof}
+
+The functional forms of $f$ and $g$ are fitted on calibration graphs (Sections~\ref{sec:res1}
+and~\ref{sec:res2}). The rules locked by those experiments are
+\begin{equation}
+r=f(\Pbar)=\clip\bigl(0.242-0.143\,\Pbar,\;0.01,\;0.99\bigr),\qquad \alpha=g(h)\equiv\STwoConstAlpha .
+\label{eq:locked}
+\end{equation}
+The constant form of $g$ is not a simplification we imposed. It is the rule that maximises rank
+agreement among all fitted forms, as Section~\ref{sec:res2} shows. When the reference ranking is the
+setting of the original experiments, $(\alpha,r)=(0.95,0.105)$, the corresponding constant is
+$\alpha=\NfConstAlpha$.
+
+\begin{algorithm}[t]
+\caption{Two-stage calibrated NCDawareRank}
+\label{alg:twostage}
+\begin{algorithmic}[1]
+\Require arcs $\mathcal E$, block map $u\mapsto\mathcal A_{(u)}$, rules $f,g$, tolerance $\varepsilon$
+\State build $H$ (dangling rows uniform), the non-zeros of $R$, $A$ and $v$ \Comment{$O(|\mathcal E|+n)$}
+\State $k_u\gets N_u-1$; \ $\Pbar\gets\frac1n\sum_u k_u/(k_u+1)$; \ $r\gets f(\Pbar)$ \Comment{Stage 1}
+\State $\Sin^{(H)}\gets$ column sums of $H$; \ $\Sin^{(M)}(v)\gets(R^\top e)_{\mathcal A_{(v)}}$
+\State $h\gets\frac1n\sum_v|1-r\Sin^{(M)}(v)-(1-r)\Sin^{(H)}(v)|$; \ $\alpha\gets g(h)$ \Comment{Stage 2}
+\State $\eta\gets(1-r)\alpha$; \ $\mu\gets r\alpha$; \ $\pi\gets v$
+\Repeat
+  \State $\pi'\gets\eta\,\pi^\top H+\mu\,(\pi^\top R)A+(1-\alpha)v^\top$ \Comment{$O(\mathrm{nnz}(H)+\mathrm{nnz}(R)+n)$}
+  \State $\delta\gets\|\pi'-\pi\|_1$; \ $\pi\gets\pi'$
+\Until{$\delta<\varepsilon$}
+\State \Return $\pi$
+\end{algorithmic}
+\end{algorithm}
+
+% =============================================================================
+\section{Experimental methodology}
+\label{sec:method}
+
+\subsection{Synthetic block webs}
+\paragraph{Static fitness generator.} Pages are partitioned into blocks with log-normal sizes (mean
+block size log-uniform in $[4,100]$), and blocks are grouped into domains. Each page has a latent quality
+$q_u$ with $\log q_u=s_bz_{\mathcal A_{(u)}}+s_wz_u$. The total dispersion $\sigma_q$ lies in $[0.8,2]$,
+and the share of block-level variance (the intraclass correlation, ICC) in $[0,0.8]$. Out-degrees are
+log-normal (mean in $[2,25]$), and a fraction $0.02$--$0.30$ of pages is dangling. An arc stays in the
+source's block with probability $\varphi\in[0.30,0.97]$ and then targets a page in proportion to~$q$.
+Otherwise it goes to another block, chosen in proportion to a block attractiveness $Q_B^\beta$ times a
+log-normal factor, either inside the domain (probability $\lambda\in[0,0.9]$) or globally, and then to a
+page of that block in proportion to~$q$. Page identifiers are shuffled. The generator's expected walk
+is known in closed form, and its PageRank defines the population truth POP (Section~\ref{sec:truths}).
+\paragraph{Growth generator.} Pages arrive one at a time. Each either founds a new site or joins an
+existing one with probability proportional to its size, and links to earlier pages by preferential
+attachment on in-degree, inside its own site with probability $\varphi$. A final update phase adds
+$10\%$--$50\%$ more arcs from existing pages. The mechanism differs from the static generator (age
+effects, Yule-type site sizes), and we use it only for transfer.
+
+\subsection{Real networks}
+Table~\ref{tab:real} lists the five networks. cnr-2000 is the Italian CNR crawl of the LAW
+collection~\cite{boldi04,boldi04ubi} and one of the two graphs used in the ranking experiments
+of~\cite{ng13}. We decoded it from its BVGraph files. Its URL list was not available, so the host
+partition of~\cite{ng13} cannot be reproduced exactly. Because LAW numbers pages in lexicographic URL
+order, every host is an interval of identifiers, and we recover a \emph{host proxy} by greedy,
+contiguity-constrained maximisation of directed modularity. It yields 7\,604 segments, with $89\%$ of
+the arcs inside segments. WikiCS~\cite{mernyei20} and the CitationFull graphs Cora, Cora-ML and
+CiteSeer~\cite{bojchevski18} are directed and carry topic labels, which we use as blocks. Content
+category is one of the alternative decomposition criteria suggested in~\cite[§5]{ng13}. The real graphs
+span $\Pbar\in[\PbarRealMin,\PbarRealMax]$ on the complete graph, with cnr-2000 at \PbarCnr.
+
+\input{generated/en/tab_real.tex}
+
+\subsection{Perturbations}
+\label{sec:perturb}
+Following~\cite[§4.2]{ng13}, each base graph yields perturbed instances. In \emph{Experiment~A}
+(sparsity), a uniformly random fraction $p\in\{0.9,0.8,\dots,0.2\}$ of the arcs is kept. In
+\emph{Experiment~B} (newly added pages), a fraction $f\in\{0.1,\dots,0.6\}$ of the pages is chosen and
+each of their incoming arcs is deleted with probability~$0.9$. Every perturbation is followed by
+rebuilding $H$, $R$ and $A$ on the observed graph. Calibration graphs and the four smaller real graphs
+have two replicates per level, and the other panels one. The unperturbed graph (A1.0) is also kept.
+
+\subsection{Panels and splits}
+Table~\ref{tab:panels} summarises the panels. All splits are by base graph, and no base graph
+contributes to more than one panel. Rules are fitted on \texttt{calib} only. \texttt{test} uses the
+same generator with independent seeds, \texttt{scale} uses graphs eight times larger, \texttt{topo} uses
+the growth generator, and \texttt{real} uses the five networks.
+
+\input{generated/en/tab_panels.tex}
+
+\subsection{Ground truths}
+\label{sec:truths}
+A ranking method is scored by Kendall's $\tau$ between its ranking of the \emph{observed} (perturbed)
+graph and a reference ranking. Each reference is computed on the \emph{complete} base graph, except Q,
+which is latent.
+\begin{description}[leftmargin=1.2em,itemsep=1pt,font=\normalfont\bfseries]
+\item[NCD] canonical NCDawareRank, $(\alpha,r)=(0.85,0.118)$; the primary truth.
+\item[NCD95] the setting of the experiments of~\cite{ng13}, $(\alpha,r)=(0.95,0.105)$.
+\item[PR] PageRank ($r=0$) at $\alpha=0.85$ with block-even teleportation.
+\item[SELF] the protocol of~\cite{ng13}: the candidate's own ranking on the complete graph, with the same
+$(\alpha,r)$.
+\item[POP] PageRank at $0.85$ of the static generator's expected walk: a population importance that no
+ranking method defines.
+\item[Q] the latent quality $q$ of the static generator, which is free of any walk.
+\item[TOT] the $\alpha$-integrated NCDawareRank with $r=0.118$,
+$\int_0^1\pi(\alpha)\,\mathrm d\alpha=\sum_k v^\top Z_r^k/((k+1)(k+2))$, that is, TotalRank~\cite{boldi05tr}
+or Random-$\alpha$ NCDawareRank with a $\mathrm{Beta}(1,1)$ prior~\cite{constantine09}. Its implicit
+prior has mean $0.5$, so it is an $\alpha$-integrated reference rather than a neutral one.
+\end{description}
+A Random-$\alpha$ family $\Exp[\pi(A)]$, $A\sim\mathrm{Beta}(a,b)$, with weights
+$w_k=B(a+k,b+1)/B(a,b)$, is used for the dose-response test of Section~\ref{sec:anchor}.
+
+\subsection{Oracle parameters and solvers}
+For each instance, the oracle ratio $r^*$ maximises $\tau$ over $r\in\{0.01,\dots,0.99\}$ at
+$\alpha_0=0.85$. The oracle damping $\alpha^*$ maximises $\tau$ over $\alpha\in\{0.40,0.41,\dots,0.99\}$
+with $r$ locked; seven coarser points in $[0.05,0.35]$ are computed for diagnostics. References and
+Stage~1 rankings use the factorised power iteration with $L_1$ tolerance $10^{-10}$--$10^{-12}$. For
+Stage~2, all $67$ values of $\alpha$ come from a single Neumann series per $r$,
+\[
+\pi(\alpha_j)^\top\approx(1-\alpha_j)\sum_{k=0}^{K_j}\alpha_j^k\,u_k+\alpha_j^{K_j+1}u_{K_j+1},
+\qquad u_k=v^\top Z_r^k,
+\]
+with $K_j=\lceil\ln(10^{-13})/\ln\alpha_j\rceil$. The truncation error is at most $2\cdot10^{-13}$ in
+$L_1$. The series agrees with the power iteration to $10^{-11}$ and reproduces the Stage~1 values of
+$\tau$ at $\alpha=0.85$ to $10^{-6}$. Both methods use only matrix--vector products and entry-independent
+scalings, so pages with identical in-neighbourhoods keep bit-identical scores. This matters for
+Kendall's $\tau$: a pivoted direct solver breaks such structural ties with rounding noise, and on our
+$n=2\,000$ graphs this lowered $\tau$ by $0.002$--$0.004$, a sizeable fraction of the effects
+studied here.
+
+\subsection{Statistics and candidate rules}
+Kendall's $\tau$-b~\cite{kendall38,kendall45} is the primary metric, the one used in~\cite{ng13}, and
+Spearman's $\rho$ is secondary. The optimal parameters chosen by the two metrics agree closely (Pearson
+correlation \SOneSpearmanKendall{} for $r^*$). Perturbed instances of one base graph are not
+independent, so every paired comparison uses per-graph means. We report Wilcoxon signed-rank
+$p$-values~\cite{wilcoxon45} and bootstrap percentile intervals over graphs (20\,000
+resamples~\cite{efron93}). Model selection uses 8-fold cross-validation grouped by graph. The candidate
+families for $f$ and $g$ are:
+\begin{itemize}[leftmargin=1.4em,itemsep=0pt]
+\item a constant;
+\item clipped-linear rules $\clip(c_0+c_1x,\ell,u)$, fitted by least squares on the oracle values or
+directly by maximising the mean calibration $\tau$ over the stored $\tau$ curves (``$\tau$-optimised'');
+\item the same with free bounds;
+\item logistic rules;
+\item isotonic regression;
+\item for Stage~2, the displacement-budget rule $c/(c+x)$;
+\item as diagnostic ceilings, a two-feature linear rule and gradient-boosted trees~\cite{friedman01} on
+every observable global statistic of the observed graph.
+\end{itemize}
+Decision-focused ($\tau$-optimised) fitting is robust to flat optima and to oracle values that sit at
+the grid bounds.
+
+% =============================================================================
+\section{Results: Stage~1, the mixing ratio}
+\label{sec:res1}
+
+\subsection{Candidate rules}
+Figure~\ref{fig:s1scatter} plots the oracle ratio $r^*$ against $\Pbar$ for the 64 calibration graphs,
+and Table~\ref{tab:stage1} reports every candidate. Under the canonical truth, the $\tau$-optimised
+clipped-linear rule is $r=\clip(0.242-0.143\,\Pbar,0.01,0.99)$. Its cross-validated $\tau$
+(\SOneCVRule) ties with the logistic rule (\SOneCVLogit) and exceeds the constant rule $r=\SOneConstR$
+(\SOneCVConst) and the least-squares rule (\SOneCVLS). On the held-out \texttt{test} panel the rule
+reaches $\tau=\SOneTestRule$ against \SOneTestConst{} for the constant, closing \SOneTestGapRule\% of the
+canonical-to-oracle gap ($\tau$ from \SOneTestCan{} to \SOneTestOracle). The difference from the
+constant is not significant ($p=\SOneTestPConst$). The constant itself beats the canonical $r$ by
+\SOneTestConstVsCan{} (95\% CI $[\SOneTestConstVsCanLo,\SOneTestConstVsCanHi]$, \SOneTestConstVsCanWins/32
+graphs, $p=\SOneTestConstVsCanP$). On \texttt{topo}, the rule is significantly better than the constant
+(\SOneTopoRuleVsConst, $p=\SOneTopoPConst$, which survives a Holm correction over the four transfer
+panels), but the effect is small. There the constant does not differ significantly from the canonical
+setting (\SOneTopoConstVsCan, $p=\SOneTopoConstVsCanP$). On the real networks, the rule
+(\SOneRealRule) and the constant (\SOneRealConst) are statistically indistinguishable ($p=\SOneRealPConst$).
+
+\input{generated/en/tab_stage1.tex}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{stage1_calibration_scatter.pdf}
+\caption{Stage~1: oracle ratio $r^*$ against $\Pbar$ of the observed graph on the calibration panel.
+\textbf{(a)} Truth NCD with the fitted candidate rules and the canonical $r$. \textbf{(c)} Truth POP.
+\textbf{(b,\,d)} The same points, with grey lines joining the perturbation series of each graph and black
+dots marking graph means. The pooled slope is a mixture of a steep within-graph relation and an almost
+flat between-graph one.}
+\label{fig:s1scatter}
+\end{figure}
+
+\subsection{Why \texorpdfstring{$\Pbar$}{P̄} does not transfer: Simpson structure}
+The pooled correlation between $\Pbar$ and $r^*$ is \SOnePooled. Within graphs it is \SOneWithin{}
+(\SOneWithinA{} in Experiment~A and \SOneWithinB{} in Experiment~B), and between graph means it is
+\SOneBetween. Inside a graph, $\Pbar$ simply tracks how many links the perturbation removed: its
+within-graph correlation with the fraction of arcs kept is \SOnePkeepA{} (A) and \SOnePkeepB{} (B).
+Removing links lowers both $\Pbar$ and the agreement between observed and complete graph, and the
+latter calls for more weight on the block-level smoothing of $M$. Across graphs, however, the level of
+$\Pbar$ says almost nothing about $r^*$. A practitioner observes a single graph and cannot tell whether
+a low $\Pbar$ comes from heavy link loss or from a naturally block-confined graph. The fitted slope is
+therefore of little use out of sample.
+
+\subsection{What determines \texorpdfstring{$r^*$}{r*}}
+Table~\ref{tab:stage1dec} decomposes the variance of $r^*$ under each truth. Under NCD, graph identity
+explains \SOneDecBase{} and the perturbation level \SOneDecLevel{}; additively they explain \SOneDecBL.
+Boosted trees on the \emph{hidden} generator parameters plus the level recover \SOneDecHidden{} out of
+sample, whereas every observable statistic together recovers $\SOneDecObs$ and $\Pbar$ alone
+$\SOneDecP$. The graph-level component is associated with the latent quality structure. The graph mean
+of $r^*$ correlates \SOneCorrICC{} with the ICC and \SOneCorrFit{} with the dispersion of latent quality
+under NCD, and \SOneCorrICCPop{} and \SOneCorrFitPop{} under POP (Figure~\ref{fig:s1diag}c). This is
+the regime in which shrinkage towards block averages, which is what
+$M$ performs, pays off. Neither quantity is visible in global statistics of the observed graph. The
+test--retest correlation of $r^*$ between replicates is \SOneRetest, so the unexplained part is not
+noise in the oracle.
+
+\input{generated/en/tab_stage1_dec.tex}
+
+\subsection{Sensitivity to the ground truth}
+\label{sec:res1-truth}
+Figure~\ref{fig:s1truth} repeats the analysis under all four truths. Under PR, \SOnePrLower\% of the
+oracle ratios sit at the lower bound $r=0.01$, because a PageRank reference favours $r\to0$. Under POP,
+the relation with $\Pbar$ is negative both within graphs (\SOnePopWithinT) and between graphs
+(\SOnePopBetweenT), but the fitted rule still does not beat a constant out of sample
+(Appendix Table~\ref{tab:stage1truth}). Under SELF, the protocol of~\cite{ng13}, \SOneSelfUpper\%
+of the oracle ratios sit at the upper bound $r=0.99$. Comparing a ranking with \emph{its own}
+complete-graph ranking rewards whatever makes the ranking insensitive to links: large $r$ smooths rank
+over blocks, which are not perturbed. The same holds for $\alpha$: as $\alpha\to0$, both rankings tend
+to $v$, which depends only on the partition, so $\tau\to1$. Stability is a legitimate property to
+report, but it cannot serve as a target for choosing parameters.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{stage1_gt_sensitivity.pdf}
+\caption{Stage~1 oracle ratio against $\Pbar$ under the four truths of Stage~1 (calibration panel).
+Under SELF, the protocol of~\cite{ng13}, the oracle is pushed to the upper bound of the grid.}
+\label{fig:s1truth}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{stage1_diagnostics.pdf}
+\caption{Stage~1 diagnostics. \textbf{(a)} $\tau(r)$ curves for one calibration graph under increasing
+link loss; dots mark $r^*$, which moves away from the canonical value as links disappear.
+\textbf{(b)} Share of the variance of $r^*$ explained by each source. \textbf{(c)} Graph-mean $r^*$
+under POP against the latent ICC, coloured by the dispersion of latent quality. \textbf{(d)} Share of
+the canonical-to-oracle gap closed out of sample by the rule and by the best constant.}
+\label{fig:s1diag}
+\end{figure}
+
+\subsection{Real networks}
+Per graph, the Stage~1 rule changes $\tau$ relative to the canonical setting by \SOneRealCiteseer{}
+(CiteSeer), \SOneRealCnr{} (cnr-2000), \SOneRealCorafull{} (Cora), \SOneRealCoraml{} (Cora-ML) and
+\SOneRealWikics{} (WikiCS). The panel-level gain comes from CiteSeer alone, a very sparse graph (mean
+out-degree $1.27$) whose arcs fall $95\%$ inside blocks. The fitted rule is also extrapolated there:
+CiteSeer's $\Pbar=\PbarCiteseer$ lies at the edge of the calibration range. On cnr-2000
+($\Pbar=\PbarCnr$) the rule prescribes $r=\RuleRCnr$, i.e.\ $\mu=\RuleMuCnr$ at $\alpha=0.85$, about
+twice the canonical $\mu$, and loses $\tau$ against it. The rule returns $r\approx0.12$ only for
+$\Pbar\approx0.85$, a value no real graph in this study approaches.
+
+\FloatBarrier
+% =============================================================================
+\section{Results: Stage~2, the total damping}
+\label{sec:res2}
+
+\subsection{Candidate rules}
+Figure~\ref{fig:s2scatter}(a) plots the oracle damping $\alpha^*$ against $h$ for the calibration graphs,
+with $r$ locked to the Stage~1 rule; Table~\ref{tab:stage2} reports every candidate. The oracle is
+$\alpha^*=\STwoAstarMean\pm\STwoAstarSd$. The $\tau$-optimised clipped-linear rule converges to the
+constant $\alpha=\clip(0.810-0.000\,h)=\STwoConstAlpha$: once rank agreement is the objective, the
+slope on $h$ is driven to zero. Every candidate that does depend on $h$ is worse than the constant.
+\begin{itemize}[leftmargin=1.4em,itemsep=0pt]
+\item The least-squares rule $\clip(\STwoLSa\STwoLSb\,h)$ loses \STwoTestLSvsConst{} on \texttt{test}
+($p=\STwoTestLSvsConstP$) and \STwoTopoLSvsConst{} on \texttt{topo} ($p=\STwoTopoLSvsConstP$).
+\item The isotonic rule loses \STwoTestIsoVsConst{} ($p=\STwoTestIsoVsConstP$) on \texttt{test}.
+\item The displacement-budget rule $c/(c+h)$, $c=\STwoBudgetC$, loses \STwoTestBudVsConst{} on
+\texttt{test} and \STwoScaleBudVsConst{} on \texttt{scale}.
+\item Boosted trees on every observable statistic, including $h$ and $h_v$, are the most flexible
+candidate, yet they lose \STwoTopoGbmVsConst{} on \texttt{topo} ($p=\STwoTopoGbmVsConstP$).
+\item Replacing $h$ by $h_v$ changes nothing (the least-squares rule $\clip(\STwoLSva\STwoLSvb\,h_v)$
+loses \STwoTestLSvVsConst{} on \texttt{test}, $p=\STwoTestLSvVsConstP$).
+\end{itemize}
+The constant itself improves on $\alpha=0.85$ by \STwoTestConstVs{} on \texttt{test} ($p=\STwoTestConstP$),
+\STwoScaleConstVs{} on \texttt{scale} and \STwoTopoConstVs{} on \texttt{topo}, closing \STwoTestConstGap\%,
+\STwoScaleConstGap\% and \STwoTopoConstGap\% of the gap to the oracle. On \texttt{real} it changes $\tau$
+by \STwoRealConstVs{} ($p=\STwoRealConstP$).
+
+\input{generated/en/tab_stage2.tex}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.94\textwidth]{stage2_calibration_scatter.pdf}
+\caption{Stage~2: oracle damping $\alpha^*$ against $h$ (computed at the Stage~1 $r$) on the calibration
+panel. \textbf{(a)} Primary truth NCD with the fitted candidates of $g$. The least-squares and
+$\tau$-optimised fits are nearly flat, and the latter coincides with the constant $0.810$.
+\textbf{(b)} The same points with each graph's perturbation series joined. \textbf{(c,\,d)} The two
+$\alpha$-free truths, TOT ($\alpha^*\approx0.47$) and Q ($\alpha^*$ near the top of the grid).
+Horizontal lines: $\alpha_0=0.85$ and the $\alpha=0.95$ of~\cite{ng13}.}
+\label{fig:s2scatter}
+\end{figure}
+
+\subsection{Why \texorpdfstring{$h$}{h} cannot track \texorpdfstring{$\alpha^*$}{α*}}
+\label{sec:hmech}
+The pooled correlation between $h$ and $\alpha^*$ is \STwoPooled. Within graphs it is \STwoWithin, and
+between graph means \STwoBetween{} (for $h_v$: \STwoWithinHv{} and \STwoBetweenHv). The within-graph
+value is itself a mixture of two opposite mechanisms, one per perturbation:
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt]
+\item \emph{Experiment~A (uniform link removal) lowers $h$.} The mean $h$ falls from \STwoHmildA{} at
+$90\%$ of arcs kept to \STwoHsevereA{} at $20\%$ (within-graph correlation with the kept fraction
+\STwoHkeepA). Removing arcs creates dangling pages, and their uniform rows add $n_{\mathrm d}/n$ to every
+column sum, pulling $\Sin$ towards~$1$ (correlation of $h$ with the dangling fraction \STwoHdangA).
+\item \emph{Experiment~B (newly added pages) raises $h$}, from \STwoHmildB{} to \STwoHsevereB{}: pages
+that lose $90\%$ of their in-links acquire $\Sin\approx0$ (correlation of $h$ with the share of
+zero-inflow pages \STwoHzinB).
+\end{itemize}
+In both experiments $\alpha^*$ \emph{decreases} with severity, from \STwoAmildA{} to \STwoAsevereA{} (A)
+and from \STwoAmildB{} to \STwoAsevereB{} (B). The within-graph correlation of $h$ with $\alpha^*$ is
+therefore \STwoHastarA{} under A and \STwoHastarB{} under B. A statistic that rises under one kind of
+link loss and falls under the other, while the optimal damping falls under both, cannot calibrate
+$\alpha$. The initial hypothesis that a larger $h$ calls for a larger $\alpha$ is contradicted, and so
+is its opposite. Table~\ref{tab:stage2dec} quantifies this. Under NCD, $h$ alone explains $\STwoDecH$ of
+the variance of $\alpha^*$ out of sample, and at most \STwoDecHmax{} under any truth. Graph identity
+explains \STwoDecBase{} and the perturbation level, which is not observable in practice, \STwoDecLevel;
+boosted trees on the hidden generator parameters plus the level recover \STwoDecHidden{} out of sample,
+whereas every observable statistic together recovers only \STwoDecObs.
+
+\input{generated/en/tab_stage2_dec.tex}
+
+\paragraph{Non-monotone and dangling-deconfounded rules.}
+Because $\alpha^*$ falls under both perturbations while $h$ moves in opposite directions, within one
+graph $\alpha^*$ is an inverted V in $h$ around the graph's unperturbed value $h_0$ (the joined series in
+Figure~\ref{fig:s2scatter}b). The distance from that apex carries real information: $|h-h_0|$
+correlates \NmDistOwn{} with $\alpha^*$ (\NmDistOwnWithin{} within graphs). We therefore searched for a
+rule that exploits the shape (script \texttt{stage2\_nonmonotone\_search.py}; Table~\ref{tab:nonmono}).
+Asymmetric tents
+$\clip\bigl(\alpha_{\mathrm{peak}}-s_L\max(0,h_0-h)-s_R\max(0,h-h_0),\,0.40,\,0.99\bigr)$, symmetric
+tents, a concave quadratic, a Gaussian bump, two- and three-region step functions and a two-knot linear
+spline were fitted on $h$ and on $h_v$, both by least squares to $\alpha^*$ and by direct maximisation
+of mean $\tau$ (exactly for the step functions; otherwise by grid search, with the apex of rules on
+$h$ in $[0.50,0.70]$, followed by Nelder--Mead and Powell). They were
+evaluated exactly as the other candidates: 8-fold cross-validation by graph on \texttt{calib}, with the
+constant refitted in every fold, then the four held-out panels. The $\tau$-optimised tent places its
+apex at $h_0=\NmTentHzero$, with $\alpha_{\mathrm{peak}}=\NmTentPeak$, $s_L=\NmTentSL$ and
+$s_R=\NmTentSR$. It does follow part of the within-graph variation (its predictions correlate
+\NmTentWithin{} with $\alpha^*$ within graphs), yet it changes mean $\tau$ by only \NmTentCalib{} in
+sample, \NmTentCV{} in cross-validation ($p=\NmTentCVP$) and \NmTentHeld{} on the 73 held-out graphs
+($p=\NmTentHeldP$). No $\tau$-optimised non-monotone rule on $h$ or $h_v$ gains more than
+\NmMaxOneDCV{} in cross-validation or \NmMaxOneDHeld{} out of sample, and the least-squares fits change
+$\tau$ by \NmLSBest{} to \NmLSWorst{} out of sample.
+
+Removing the uniform dangling contribution $(1-r)\,\delta$, with $\delta=n_{\mathrm d}/n$, from every
+column sum tests whether the fall of $h$ under Experiment~A is a dangling artefact. Largely it is: the
+deconfounded deviation $h_{\mathrm{raw}}=\frac1n\sum_v|1-\Sin(v)+(1-r)\delta|$ barely moves under A
+(\NmHrawFull{} unperturbed, \NmHrawSevA{} at $20\%$ of arcs kept) and rises under B (\NmHrawSevB{} at
+$60\%$). Two further variants rise under both perturbations: the relative dispersion
+$h_{\mathrm{raw}}^{\mathrm{rel}}$ of the deconfounded sums (from \NmHrelFull{} to \NmHrelSevA{} under A
+and \NmHrelSevB{} under B) and the deviation $h_{\mathrm{raw}}^{H}$ of the column sums of the hyperlink
+matrix before its dangling rows are patched (from \NmHHFull{} to \NmHHSevA{} and \NmHHSevB). Within
+graphs, both correlate negatively with $\alpha^*$ under each experiment (\NmHrelAstarA{} and
+\NmHrelAstarB{} for $h_{\mathrm{raw}}^{\mathrm{rel}}$). Deconfounding thus turns the inverted V into a
+monotone relation, but only inside each graph. The unperturbed level of $h_{\mathrm{raw}}^{\mathrm{rel}}$
+varies across graphs with standard deviation \NmRelSd, against within-graph excursions of \NmRelExcA{}
+(A) and \NmRelExcB{} (B), and it correlates \emph{positively} with the graph-mean $\alpha^*$
+(\NmRelBetween): the Simpson structure of Stage~1 again. The $\tau$-optimised tents on the three
+deconfounded statistics degenerate to a decreasing hinge, and no rule on them gains more than
+\NmRawMaxCV{} in cross-validation or \NmRawMaxHeld{} out of sample.
+
+The two raw counts that rise under both perturbations give the strongest deployable rules: the dangling
+fraction $\delta$ (from \NmDangFull{} to \NmDangSevA{} under A and \NmDangSevB{} under B; Experiment~B
+also creates dangling pages, because it deletes the out-arcs of pages whose links all pointed to the new
+pages) and the share $\zeta$ of pages without in-links (from \NmZinFull{} to \NmZinSevA{} and
+\NmZinSevB). The bivariate rule $\clip(\NmBilinDeltaA\NmBilinDeltaH\,h\NmBilinDeltaD\,\delta)$ gains
+\NmBilinCV{} in cross-validation ($p=\NmBilinCVP$) but \NmBilinHeld{} out of sample
+($p=\NmBilinHeldP$). The clipped-linear rule $\alpha=\clip(\NmZetaA\NmZetaB\,\zeta)$ gains \NmZetaCV{}
+in cross-validation ($p=\NmZetaCVP$) and \NmZetaHeld{} on the held-out graphs ($p=\NmZetaHeldP$);
+adding $h$ leaves it unchanged (coefficient \NmBilinZetaH). Its gain comes from the two panels drawn from
+the calibration generator (\NmZetaTest{} on \texttt{test}, \NmZetaScale{} on \texttt{scale}), shrinks to
+\NmZetaTopo{} on \texttt{topo} and reverses on \texttt{real} (\NmZetaReal, worse on three of the five
+graphs). The unperturbed share of pages without in-links is \NmZinUnpertCalib{} on \texttt{calib} but
+\NmZinUnpertTopo{} on \texttt{topo} and \NmZinUnpertReal{} on \texttt{real} (\NmZinCiteMin--\NmZinCiteMax{}
+on the three citation graphs), so its level, too, mixes the graph with the perturbation.
+
+The obstacle is the location of the apex, not the shape of $g$. Given each graph's own unperturbed $h_0$,
+which the observed graph does not reveal, a $\tau$-optimised tent in $h-h_0$ gains \NmDhCV{} in
+cross-validation ($p=\NmDhCVP$; \NmDhShare\% of the oracle headroom of \NmOracleCalib) and \NmDhHeld{}
+out of sample ($p=\NmDhHeldP$). A step rule in $h_{\mathrm{raw}}-h_{\mathrm{raw},0}$ gains \NmDhrawHeld{}
+out of sample ($p=\NmDhrawHeldP$), on all four held-out panels. With one apex for every graph, the
+correlation of $\alpha^*$ with the distance falls from \NmDistOwn{} to \NmDistGlobal{} (best common apex
+\NmDistGlobalC): the apex varies across graphs with standard deviation \NmHzeroSd, as much as $h$ moves
+within a graph under the perturbations (mean excursions \NmExcA{} under A and \NmExcB{} under B). None of the \NmRules{} deployable
+rules meets the decision rule fixed before the held-out evaluation: a gain of at least $0.0005$ with
+$p<0.05$ both in cross-validation and on the pooled held-out panels, and no Holm-significant loss on any
+panel. The cross-validation part is passed by \NmMeetsCV{} rules, the held-out part by none. The constant
+$\alpha=\STwoConstAlpha$ therefore remains the Stage~2 rule. The same search under NCD95 (constant
+\NmNfConst) and TOT (constant \NmTotConst) promotes no rule either, while the tent in $h-h_0$ is again
+significant out of sample (\NmNfDhHeld, $p=\NmNfDhHeldP$, and \NmTotDhHeld, $p=\NmTotDhHeldP$).
+
+\input{generated/en/tab_nonmono.tex}
+
+\subsection{Anchoring and the noise discount}
+\label{sec:anchor}
+Table~\ref{tab:anchor} and Figure~\ref{fig:s2diag}(a,\,b) show the effect that dominates Stage~2: the
+oracle damping is set by the reference ranking. On the unperturbed graph, the oracle equals the damping
+that defines the truth: \AnchorNcd{} for NCD ($0.85$) and \AnchorNcdnf{} for NCD95 ($0.95$). It is
+\AnchorTot{} for TOT, whose Beta(1,1) prior has mean $0.5$, \AnchorPop{} for POP and \AnchorQ{} for the
+walk-free Q. Under perturbation it sits slightly lower: \MeanNcd, \MeanNcdnf, \MeanTot, \MeanPop{} and
+\MeanQ{} respectively. POP is the only truth whose anchor lies clearly below its own damping even on the
+unperturbed graph. This is expected: POP is defined on the generator's expected walk, and every realised
+graph is already a noisy copy of that walk before any link is removed. The two $\alpha$-free references
+disagree completely, TOT pointing to
+$\alpha\approx0.5$ and Q to the top of the grid. For Q the optimum lies at the top of the grid rather
+than beyond it: on \QupGraphs{} graphs, mean $\tau$ against $q$ is \QupNine, \QupNineFive{} and
+\QupNineNine{} at $\alpha=0.99$, $0.995$ and $0.999$.
+
+\input{generated/en/tab_anchor.tex}
+
+The dose-response test in Table~\ref{tab:rapr} isolates the mechanism. We vary the prior of
+Random-$\alpha$ NCDawareRank references and nothing else. The mean oracle damping then follows the prior
+mean with slope \RaprSlope{} (intercept \RaprIcpt): \RaprLo, \RaprMid, \RaprHi{} and \RaprTop{} for
+prior means $0.30$, $0.50$, $0.70$ and $0.85$. The offset of $-0.03$ to $-0.06$ is the \emph{noise
+discount}: when the observed graph is a perturbed copy of the reference graph, the best single damping
+is slightly lower than the reference's own. The natural interpretation is that long walks propagate the
+noise introduced by missing links, so a slightly shorter effective walk recovers the reference better.
+Stage~2's move from $0.85$
+to \STwoConstAlpha{} under NCD is exactly this effect. Under NCD95 the corresponding constant is
+\NfConstAlpha, which improves on $\alpha=0.95$ by \NfTestD{} on \texttt{test} ($p=\NfTestP$),
+\NfScaleD{} on \texttt{scale}, \NfTopoD{} on \texttt{topo} ($p=\NfTopoP$) and \NfRealD{} on
+\texttt{real}.
+
+\input{generated/en/tab_rapr.tex}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{stage2_diagnostics.pdf}
+\caption{Stage~2 diagnostics. \textbf{(a)} For one calibration graph (Experiment~A, $60\%$ of arcs kept),
+the curve $\tau(\alpha)-\max\tau$ under each truth peaks near the damping that defines that truth.
+\textbf{(b)} Distribution of $\alpha^*$ per truth; orange bars mark each truth's own $\alpha$.
+\textbf{(c)} Share of the variance of $\alpha^*$ explained. \textbf{(d)} Gain over the static setting
+$(0.118,0.85)$ on \texttt{test} for complete pipelines under three truths. The sign of the two-stage
+gain flips between truths.}
+\label{fig:s2diag}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{stage2_gt_sensitivity.pdf}
+\caption{Oracle damping against $h$ under the five truths (calibration panel). Within each truth the
+relation with $h$ is weak and of mixed sign; across truths the level of $\alpha^*$ follows the damping
+that defines the truth (green line).}
+\label{fig:s2truth}
+\end{figure}
+
+\subsection{Complete pipelines against the static settings}
+Table~\ref{tab:pipe} compares complete $(r,\alpha)$ pipelines with the two published static settings,
+under all five truths and on all panels. Under the primary truth, the two-stage pipeline (locked rule
+for $r$, $\alpha=\STwoConstAlpha$) improves on the canonical setting $(0.118,0.85)$ by \TwoTestD{} on
+\texttt{test} (95\% CI $[\TwoTestLo,\TwoTestHi]$, better on \TwoTestWins{} graphs, $p=\TwoTestP$),
+\TwoScaleD{} on \texttt{scale} (\TwoScaleWins) and \TwoTopoD{} on \texttt{topo} (\TwoTopoWins). This is
+about two thirds of the oracle headroom on \texttt{test} (\PipeNcdOracleVsLoTest). The gain splits into
+\StoTestD{} from Stage~1 ($p=\StoTestP$) and \SthTestD{} from Stage~2 ($p=\SthTestP$). On \texttt{real}
+it is \TwoRealD{} per graph (95\% CI $[\TwoRealLo,\TwoRealHi]$, \TwoRealWins{} graphs, $p=\TwoRealP$):
+\TwoRealCnr{} on cnr-2000, \TwoRealCorafull{} on Cora, \TwoRealCiteseer{} on CiteSeer, \TwoRealCoraml{}
+on Cora-ML and \TwoRealWikics{} on WikiCS (Appendix Table~\ref{tab:realdetail}).
+
+The verdict depends on the truth (Figure~\ref{fig:s2diag}d). The same locked pipeline:
+\begin{itemize}[leftmargin=1.4em,itemsep=0pt]
+\item beats the canonical setting under TOT (\PipeTotTwoVsLoTest) and POP (\PipePopTwoVsLoTest), simply
+because $0.81$ is closer than $0.85$ to those truths' anchors;
+\item loses to the setting $(0.105,0.95)$ of~\cite{ng13} under NCD95 (\PipeNcdnfTwoVsHiTest) and under
+the walk-free Q (\PipeQTwoVsHiTest), whose anchors lie above $0.9$.
+\end{itemize}
+Claims that a calibrated damping ``beats the default'' are therefore claims about the reference as much
+as about the method.
+
+\input{generated/en/tab_pipe.tex}
+
+\subsection{Convergence}
+Lowering $\alpha$ also shortens the power iteration. This holds for any lower $\alpha$ and is a side
+benefit, not a property of the calibration. The a-priori estimate $k\approx\ln\varepsilon/\ln\alpha$,
+based on $|\lambda_2(P)|\le\alpha$~\cite{haveliwala03,ng13}, predicts savings of \ConvNcdBound\% for
+$0.85\to0.81$ ($\ConvNcdBoundK$ iterations at $\varepsilon=10^{-6}$) and \ConvNfBound\% for
+$0.95\to0.93$. The measured savings are smaller. The actual contraction is faster than $\alpha$, so
+both iteration counts stay well below the estimate (Table~\ref{tab:conv}), and the saving is
+\ConvNcdTest\% on \texttt{test} and \ConvNcdReal\% on \texttt{real} for the NCD branch, and \ConvNfTest\%
+and \ConvNfReal\% for the NCD95 branch.
+
+\input{generated/en/tab_conv.tex}
+
+\subsection{Sensitivity truths with refitted rules}
+Refitting $g$ separately for each truth does not change the conclusion (Appendix
+Table~\ref{tab:sens}). Under Q, POP and NCD95, the $\tau$-optimised rule on $h$ is the constant or
+indistinguishable from it. Under TOT, $h$ carries a weak signal with the same negative sign within and
+between graphs. It gains \TotHTest{} on \texttt{test} ($p=\TotHTestP$), but \TotHTopo{} on \texttt{topo}
+and \TotHReal{} on \texttt{real}, so it does not transfer.
+
+\FloatBarrier
+% =============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{What the calibration achieves.} Against the canonical reference, the two-stage procedure
+amounts to re-tuning two constants: more weight on the proximity matrix ($r\approx0.2$, $\mu\approx0.17$
+instead of $0.10$) and slightly less damping ($\alpha=\STwoConstAlpha$ instead of $0.85$). On held-out
+synthetic graphs, including larger graphs and a different generative mechanism, the gain is
+$0.004$--$0.011$ in Kendall's $\tau$, consistent across graphs, plus a modest acceleration. On five real networks
+the gain is not distinguishable from zero. These are honest, if modest, results for a zero-cost
+procedure. They are not the adaptive, structure-driven calibration that motivated the study.
+
+\paragraph{Why structural statistics fail here.} The oracle parameters depend on two quantities: how
+severely the observed graph is perturbed relative to the reference, and the latent quality structure
+of the pages. Neither is revealed by global statistics of the observed graph. $\Pbar$ and $h$ react
+strongly to link loss inside a graph. Across graphs their levels are confounded with ordinary
+structural variation, and $h$ responds to different kinds of link loss with opposite signs.
+Section~\ref{sec:hmech} isolates the missing ingredient: given the unperturbed graph's own value $h_0$,
+a tent in $h-h_0$ recovers \NmDhShare\% of the oracle headroom in cross-validation, whereas none of
+\NmRules{} rules on statistics of the observed graph alone passes the held-out test. The statistic
+could therefore become useful where a less perturbed snapshot of the same graph is available as a
+reference; we have not tested this. A related
+pattern appeared in our earlier work on uncertain graphs~\cite{konstantellos26}: there, the correlation
+between the escape probability and the optimal damping did not survive on real networks, and routing
+among heuristics by the same statistic worked on synthetic graphs but failed on real ones. We take this
+as evidence that single global statistics are too coarse to transfer parameter choices between graphs.
+
+\paragraph{Anchoring as a methodological lesson.} The strongest finding is not about NCDawareRank. When a
+ranking method is tuned to agree with a reference ranking, the optimal damping is the reference's own
+damping minus a noise discount. This follows from the dose-response test and from five truths with
+very different anchors. Any statement that one damping factor is ``better'' therefore inherits the
+damping of the ground truth. The two $\alpha$-free references available to us disagree by almost
+$0.5$, which suggests that no truth-independent optimal damping exists for this problem. Evaluations
+of damping choices should report results under several references, and stability protocols should not
+be used to choose parameters.
+
+\paragraph{What the theory of $h$ offers.} The identities of Proposition~\ref{prop:interp} and the bound
+of Theorem~\ref{thm:bound} give $h$ and $h_v$ a precise meaning: they measure how strongly the chain
+pushes rank away from the uniform and the teleportation distribution, and $h_v$ bounds the total
+displacement of the ranking for every $\alpha$. They are useful diagnostics, for example for deciding
+whether the damping matters at all for a given graph. The empirical results show that they are not
+calibration statistics.
+
+\paragraph{Limitations.} The synthetic generators, however varied, are our own. The partition of
+cnr-2000 is a host proxy and the citation graphs use topic labels, not hosts. Dangling pages are handled
+by uniform rows, not by the block-confined strategy of~\cite{ng20}. Stage~1 is anchored at
+$\alpha_0=0.85$, and the Stage~2 grid stops at $0.99$, which censors the oracle under Q (we checked that
+the optimum does not lie beyond it). We evaluate rank correlations only, against references derived from
+models. External relevance judgements or browsing data, as in~\cite{gleich10}, would provide a ground
+truth that does not depend on a damping factor.
+
+% =============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We formulated a two-stage, zero-cost calibration of NCDawareRank. The mixing ratio comes from the block
+escape probability and the total damping from the deviation of the ensembled operator from double
+stochasticity. We proved identities and a displacement bound that give these statistics a precise
+meaning. A large, cluster-aware evaluation shows that the statistics do not predict the optimal
+parameters. The calibration reduces to two constants, $r\approx0.2$ and $\alpha=\STwoConstAlpha$, that
+improve the recovery of the canonical ranking on synthetic graphs by $0.004$--$0.011$ in Kendall's $\tau$
+and leave real networks unchanged. The optimal damping is anchored to the damping of the reference ranking,
+minus a noise discount. The choice of ground truth therefore decides which parameter setting wins, and
+we recommend that future comparisons of link-analysis parameters report results under several
+references.
+
+\section*{Reproducibility}
+All code, raw results and figures accompany the paper; the accompanying documentation describes every
+module. In brief:
+\begin{itemize}[leftmargin=1.4em,itemsep=0pt]
+\item \texttt{prepare\_real\_graphs.py} builds the real panel;
+\item \texttt{run\_experiments.py stage1} and \texttt{run\_experiments.py stage2} run both stages;
+\item \texttt{stage1\_analysis.py}, \texttt{stage2\_analysis.py} and the decomposition, anchoring,
+convergence and bound-check scripts produce every number;
+\item \texttt{make\_paper\_assets.py} writes the numbers and tables of this manuscript directly from the
+result files.
+\end{itemize}
+Unit tests check the implementation against the matrices of~\cite[Fig.~1]{ng13}, Theorems~1--2
+of~\cite{ng13}, dense solves, quadrature and the bound~\eqref{eq:bound}.
+
+% =============================================================================
+\begin{thebibliography}{PBMW99}
+\raggedright
+\small
+\bibitem[ALP08]{avrachenkov08} K.~Avrachenkov, N.~Litvak, K.~S.~Pham. A singular perturbation approach for
+choosing the PageRank damping factor. \emph{Internet Mathematics}, 5(1--2):47--69, 2008.
+\bibitem[BBC06]{baeza06} R.~Baeza-Yates, P.~Boldi, C.~Castillo. Generic damping functions for propagating
+importance in link-based ranking. \emph{Internet Mathematics}, 3(4):445--478, 2006.
+\bibitem[BCSV04]{boldi04ubi} P.~Boldi, B.~Codenotti, M.~Santini, S.~Vigna. UbiCrawler: a scalable fully
+distributed Web crawler. \emph{Software: Practice and Experience}, 34(8):711--726, 2004.
+\bibitem[BG18]{bojchevski18} A.~Bojchevski, S.~G\"unnemann. Deep Gaussian embedding of graphs: unsupervised
+inductive learning via ranking. In \emph{Proc.\ ICLR}, 2018.
+\bibitem[BNG19]{berberidis19} D.~Berberidis, A.~N.~Nikolakopoulos, G.~B.~Giannakis. Adaptive diffusions for
+scalable learning over graphs. \emph{IEEE Trans.\ Signal Processing}, 67(5):1307--1321, 2019.
+\bibitem[Bol05]{boldi05tr} P.~Boldi. TotalRank: ranking without damping. In \emph{Special Interest Tracks and
+Posters of the 14th WWW}, 898--899, 2005.
+\bibitem[BP10]{bressan10} M.~Bressan, E.~Peserico. Choose the damping, choose the ranking? \emph{J.\ Discrete
+Algorithms}, 8(2):199--213, 2010.
+\bibitem[BSV05]{boldi05} P.~Boldi, M.~Santini, S.~Vigna. PageRank as a function of the damping factor. In
+\emph{Proc.\ 14th WWW}, 557--566, 2005.
+\bibitem[BSV09]{boldi09} P.~Boldi, M.~Santini, S.~Vigna. PageRank: functional dependencies. \emph{ACM Trans.\
+Information Systems}, 27(4):19, 2009.
+\bibitem[BV04]{boldi04} P.~Boldi, S.~Vigna. The WebGraph framework I: compression techniques. In \emph{Proc.\
+13th WWW}, 595--602, 2004.
+\bibitem[CG09]{constantine09} P.~G.~Constantine, D.~F.~Gleich. Random alpha PageRank. \emph{Internet
+Mathematics}, 6(2):189--236, 2009.
+\bibitem[Cou77]{courtois77} P.-J.~Courtois. \emph{Decomposability: Queueing and Computer System Applications}.
+Academic Press, 1977.
+\bibitem[ET93]{efron93} B.~Efron, R.~J.~Tibshirani. \emph{An Introduction to the Bootstrap}. Chapman \& Hall,
+1993.
+\bibitem[FBFM08]{fortunato08} S.~Fortunato, M.~Bogu\~n\'a, A.~Flammini, F.~Menczer. Approximating PageRank from
+in-degree. In \emph{Algorithms and Models for the Web-Graph (WAW 2006)}, LNCS 4936, 59--71, 2008.
+\bibitem[Fri01]{friedman01} J.~H.~Friedman. Greedy function approximation: a gradient boosting machine.
+\emph{Annals of Statistics}, 29(5):1189--1232, 2001.
+\bibitem[GCFG10]{gleich10} D.~F.~Gleich, P.~G.~Constantine, A.~D.~Flaxman, A.~Gunawardana. Tracking the random
+surfer: empirically measured teleportation parameters in PageRank. In \emph{Proc.\ 19th WWW}, 381--390,
+2010.
+\bibitem[HK03]{haveliwala03} T.~H.~Haveliwala, S.~D.~Kamvar. The second eigenvalue of the Google matrix.
+Technical Report 2003-20, Stanford InfoLab, 2003.
+\bibitem[Ken38]{kendall38} M.~G.~Kendall. A new measure of rank correlation. \emph{Biometrika}, 30(1/2):81--93,
+1938.
+\bibitem[Ken45]{kendall45} M.~G.~Kendall. The treatment of ties in ranking problems. \emph{Biometrika},
+33(3):239--251, 1945.
+\bibitem[KH03]{kamvar03} S.~D.~Kamvar, T.~H.~Haveliwala. The condition number of the PageRank problem.
+Technical Report 2003-36, Stanford InfoLab, 2003.
+\bibitem[Kon26]{konstantellos26} I.~Konstantellos. Damping from the escape probability: a free calibration
+rule for diffusion-based reachability ranking in uncertain graphs. Computer Engineering and Informatics
+Department, University of Patras, 2026. Zenodo record \url{https://zenodo.org/records/23211440}.
+\bibitem[LM06]{langville06} A.~N.~Langville, C.~D.~Meyer. \emph{Google's PageRank and Beyond: The Science of
+Search Engine Rankings}. Princeton University Press, 2006.
+\bibitem[LSV07]{litvak07} N.~Litvak, W.~R.~W.~Scheinhardt, Y.~Volkovich. In-degree and PageRank: why do they
+follow similar power laws? \emph{Internet Mathematics}, 4(2--3):175--198, 2007.
+\bibitem[MC20]{mernyei20} P.~Mernyei, C.~Cangea. Wiki-CS: a Wikipedia-based benchmark for graph neural
+networks. arXiv:2007.02901, 2020.
+\bibitem[NG13]{ng13} A.~N.~Nikolakopoulos, J.~D.~Garofalakis. NCDawareRank: a novel ranking method that
+exploits the decomposable structure of the Web. In \emph{Proc.\ 6th ACM WSDM}, 143--152, 2013.
+\bibitem[Nik20]{ng20} A.~N.~Nikolakopoulos. Random surfing revisited: generalizing PageRank's teleportation
+model. arXiv:2008.12916, 2020.
+\bibitem[PBMW99]{page99} L.~Page, S.~Brin, R.~Motwani, T.~Winograd. The PageRank citation ranking: bringing order
+to the Web. Technical Report 1999-66, Stanford InfoLab, 1999.
+\bibitem[SA61]{simon61} H.~A.~Simon, A.~Ando. Aggregation of variables in dynamic systems. \emph{Econometrica},
+29(2):111--138, 1961.
+\bibitem[Wil45]{wilcoxon45} F.~Wilcoxon. Individual comparisons by ranking methods. \emph{Biometrics Bulletin},
+1(6):80--83, 1945.
+\end{thebibliography}
+
+% =============================================================================
+\FloatBarrier
+\appendix
+\section{Additional tables}
+\label{app:tables}
+Table~\ref{tab:stage1truth} repeats the Stage~1 comparison under the four Stage~1 truths.
+Table~\ref{tab:sens} refits the Stage~2 rule separately for each sensitivity truth.
+Table~\ref{tab:realdetail} breaks the real panel down by network.
+
+\input{generated/en/tab_stage1truth.tex}
+\input{generated/en/tab_sens.tex}
+\input{generated/en/tab_realdetail.tex}
+
+\end{document}

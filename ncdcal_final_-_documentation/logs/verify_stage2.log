@@ -1,0 +1,5 @@
+calib  n_graphs= 64  NG13(0.118,0.85)=0.6805  NG13(0.105,0.95)=0.6133  Stage1(rule,0.85)=0.6862  two-stage(rule,0.81)=0.6913  oracle=0.6965  two-stage minus NG13(0.85)=+0.0108 (Wilcoxon p=1e-11, 61/64 graphs better)
+test   n_graphs= 32  NG13(0.118,0.85)=0.6801  NG13(0.105,0.95)=0.6168  Stage1(rule,0.85)=0.6867  two-stage(rule,0.81)=0.6911  oracle=0.6960  two-stage minus NG13(0.85)=+0.0110 (Wilcoxon p=9.3e-10, 31/32 graphs better)
+scale  n_graphs= 12  NG13(0.118,0.85)=0.6633  NG13(0.105,0.95)=0.5979  Stage1(rule,0.85)=0.6681  two-stage(rule,0.81)=0.6735  oracle=0.6787  two-stage minus NG13(0.85)=+0.0102 (Wilcoxon p=0.00098, 11/12 graphs better)
+topo   n_graphs= 24  NG13(0.118,0.85)=0.7840  NG13(0.105,0.95)=0.7360  Stage1(rule,0.85)=0.7844  two-stage(rule,0.81)=0.7875  oracle=0.7911  two-stage minus NG13(0.85)=+0.0036 (Wilcoxon p=2.4e-07, 23/24 graphs better)
+real   n_graphs=  5  NG13(0.118,0.85)=0.7559  NG13(0.105,0.95)=0.6792  Stage1(rule,0.85)=0.7600  two-stage(rule,0.81)=0.7559  oracle=0.7738  two-stage minus NG13(0.85)=+0.0000 (Wilcoxon p=0.81, 2/5 graphs better)

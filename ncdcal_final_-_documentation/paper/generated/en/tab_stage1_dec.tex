@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Share of the variance of the oracle ratio $r^*$ explained ($R^2$) on the calibration panel. Graph identity, perturbation level and their additive combination are in-sample ANOVA shares. Starred columns are out of sample (grouped 8-fold CV by graph): boosted trees on the hidden generator parameters plus the perturbation level; ridge regression on every observable global statistic; and the clip-linear rule on $\bar P^{(M)}_{\mathrm{esc}}$. Negative values mean worse than predicting the mean.}
+\label{tab:stage1dec}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+truth & graph & level & graph+level & hidden+level$^{*}$ & all observables$^{*}$ & $\bar P^{(M)}_{\mathrm{esc}}$ alone$^{*}$ \\
+\midrule
+NCD & 0.31 & 0.42 & 0.74 & 0.71 & -0.01 & 0.03 \\
+PR & 0.41 & 0.30 & 0.71 & 0.70 & -0.08 & -0.02 \\
+POP & 0.74 & 0.13 & 0.87 & 0.63 & 0.11 & 0.07 \\
+SELF & 0.34 & 0.04 & 0.38 & -0.36 & -0.02 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{table}

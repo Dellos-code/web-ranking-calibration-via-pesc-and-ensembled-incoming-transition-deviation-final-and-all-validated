@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Experimental panels. Every instance is one perturbation of one base graph (Experiments A and B, Section~\ref{sec:perturb}); splits are by base graph. The instance counts are those of the Stage~2 replay and include the unperturbed graph A1.0.}
+\label{tab:panels}
+\begin{tabular}{@{}lllrrr@{}}
+\toprule
+panel & generator & role & graphs & instances & $n$ \\
+\midrule
+\texttt{calib} & static fitness block web & fitting & 64 & 1\,856 & 2\,000 \\
+\texttt{test} & static (independent seeds) & held-out & 32 & 480 & 2\,000 \\
+\texttt{scale} & static, $8\times$ larger & scale transfer & 12 & 180 & 16\,000 \\
+\texttt{topo} & growth / preferential attachment & topology transfer & 24 & 360 & 3\,000 \\
+\texttt{real} & Table~\ref{tab:real} & real-network transfer & 5 & 131 & 2\,995--325\,557 \\
+\bottomrule
+\end{tabular}
+\end{table}

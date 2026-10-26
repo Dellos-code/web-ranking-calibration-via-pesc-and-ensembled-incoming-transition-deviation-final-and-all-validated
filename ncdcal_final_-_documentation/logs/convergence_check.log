@@ -1,0 +1,41 @@
+test test_000
+test test_001
+test test_002
+test test_003
+test test_004
+test test_005
+test test_006
+test test_007
+test test_008
+test test_009
+test test_010
+test test_011
+test test_012
+test test_013
+test test_014
+test test_015
+test test_016
+test test_017
+test test_018
+test test_019
+test test_020
+test test_021
+test test_022
+test test_023
+test test_024
+test test_025
+test test_026
+test test_027
+test test_028
+test test_029
+test test_030
+test test_031
+real cora_ml
+real citeseer
+real cora_full
+real wikics
+real cnr2000
+real: NCD branch 30.5 -> 26.5 (13.1%), NCD95 branch 69.9 -> 59.2 (15.3%)
+test: NCD branch 30.2 -> 25.8 (14.7%), NCD95 branch 67.2 -> 54.2 (19.3%)
+bound-based estimate 0.85->0.81: 85.0 -> 65.6 (22.9%)
+bound-based estimate 0.95->0.93: 269.3 -> 190.4 (29.3%)

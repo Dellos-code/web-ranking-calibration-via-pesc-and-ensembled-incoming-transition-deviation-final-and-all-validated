@@ -1,0 +1,5 @@
+cnr2000 {"merges": 317953, "partition": "contiguous modularity segmentation (host proxy)", "n": 325557, "arcs": 3128710, "blocks": 7604, "block_size_median": 5.0, "block_size_max": 18399, "singleton_blocks": 1597, "intra_block_arc_fraction": 0.893541427617133, "dangling_fraction": 0.26710837119152714, "mean_outdegree": 9.610329373965236}
+
+real	0m17.024s
+user	0m16.671s
+sys	0m0.169s
