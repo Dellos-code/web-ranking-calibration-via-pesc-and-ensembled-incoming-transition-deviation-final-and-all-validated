@@ -19,10 +19,12 @@ The two-stage framework, the block escape probability and the deviation statisti
 as are the non-monotone and dangling-deconfounded hypotheses for the Stage 2 rule tested in
 Section 8.2.
 
-For this extension, the AI system assisted with additive experiment drivers, preregistration text,
-the practical CLI, test scaffolding and generated-asset plumbing. Dataset decisions, statistical
-criteria, execution limits and interpretation of positive or negative results were reviewed against
-the preregistered rules.
+For this extension, the AI system assisted with the mixed-damage generator and the WP0 mixture and
+anchor-matching analyses (mixed_damage, make_paper_assets.py), the preregistration text
+(PREREG_v2.md), the practical tool (ncd_autotune.py), its tests, and the generated-asset plumbing.
+The planned additional experiments (WP1 to WP4) have not been run in this version and no new datasets
+were added. The statistical criteria are those written in PREREG_v2.md; their interpretation and any
+decision to adopt the tool or its constants rest with the author.
 
 
 ΕΛΛΗΝΙΚΑ
@@ -34,7 +36,9 @@ the preregistered rules.
 απόκλισης h ανήκουν στον συγγραφέα, όπως και οι μη μονότονες υποθέσεις και οι υποθέσεις απαλοιφής της
 επίδρασης των κρεμάμενων σελίδων για τον κανόνα του Σταδίου 2 που ελέγχονται στην Ενότητα 8.2.
 
-Για την παρούσα επέκταση, το σύστημα τεχνητής νοημοσύνης βοήθησε με πρόσθετους οδηγούς πειραμάτων,
-το κείμενο προεγγραφής, το πρακτικό CLI, τα tests και τη σύνδεση των παραγόμενων αρχείων. Οι
-αποφάσεις για τα δεδομένα, τα στατιστικά κριτήρια, τα όρια εκτέλεσης και η ερμηνεία θετικών ή
-αρνητικών αποτελεσμάτων ελέγχθηκαν έναντι των προεγγεγραμμένων κανόνων.
+Για την παρούσα επέκταση, το σύστημα τεχνητής νοημοσύνης βοήθησε με τη γεννήτρια μικτής βλάβης και τις
+αναλύσεις WP0 μείγματος και αντιστοίχισης άγκυρας (mixed_damage, make_paper_assets.py), το κείμενο
+προεγγραφής (PREREG_v2.md), το πρακτικό εργαλείο (ncd_autotune.py), τα tests του και τη σύνδεση των
+παραγόμενων αρχείων. Τα προγραμματισμένα πρόσθετα πειράματα (WP1 έως WP4) δεν έχουν εκτελεστεί στην παρούσα
+έκδοση και δεν προστέθηκαν νέα σύνολα δεδομένων. Τα στατιστικά κριτήρια είναι όσα αναγράφονται στο
+PREREG_v2.md· η ερμηνεία τους και η απόφαση υιοθέτησης του εργαλείου ή των σταθερών του ανήκουν στον συγγραφέα.

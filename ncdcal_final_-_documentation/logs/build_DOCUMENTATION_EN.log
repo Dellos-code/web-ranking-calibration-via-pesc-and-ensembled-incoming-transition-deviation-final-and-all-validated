@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.10.22)  25 OCT 2026 13:14
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.10.22)  27 OCT 2026 16:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1267,83 +1267,83 @@ LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
 (Font)              scaled to size 9.39578pt on input line 170.
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
 (Font)              scaled to size 7.38007pt on input line 174.
+LaTeX Font Info:    Font shape `TU/FreeSerif(2)/b/n' will be
+(Font)              scaled to size 9.0pt on input line 182.
  [2] [3] [4]
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
-(Font)              scaled to size 9.84009pt on input line 413.
+(Font)              scaled to size 9.84009pt on input line 438.
  [5] [6]
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
-(Font)              scaled to size 8.20007pt on input line 632.
+(Font)              scaled to size 8.20007pt on input line 594.
  [7]
-Underfull \hbox (badness 1194) in paragraph at lines 768--773
+Underfull \hbox (badness 1194) in paragraph at lines 821--826
 []\TU/DejaVuSansMono(0)/b/n/10 stage2_rapr_anchor.py [n_graphs=16]\TU/FreeSerif
 (2)/b/n/10 . \TU/FreeSerif(2)/m/n/10 Dose-response test: Random-$[]$ references
  with priors Beta(3,7),
  []
 
-
-Underfull \hbox (badness 1152) in paragraph at lines 838--848
+[8]
+Underfull \hbox (badness 1152) in paragraph at lines 891--901
 []\TU/FreeSerif(2)/m/n/10 The script writes PDF (for LaTeX) and PNG (for previe
 ws) to \TU/DejaVuSansMono(0)/m/n/10 figures/ \TU/FreeSerif(2)/m/n/10 or, with \
 TU/DejaVuSansMono(0)/m/n/10 --lang gr\TU/FreeSerif(2)/m/n/10 , to \TU/DejaVuSan
 sMono(0)/m/n/10 figures_gr/\TU/FreeSerif(2)/m/n/10 .
  []
 
-[8]
-Underfull \hbox (badness 2980) in paragraph at lines 853--863
+
+Underfull \hbox (badness 2980) in paragraph at lines 906--916
 \TU/FreeSerif(2)/m/n/10 Reads every result file and writes \TU/DejaVuSansMono(0
 )/m/n/10 paper/generated/macros.tex \TU/FreeSerif(2)/m/n/10 (about 300 \TU/Deja
 VuSansMono(0)/m/n/10 \newcommand \TU/FreeSerif(2)/m/n/10 macros, each mode-
  []
 
 
-Underfull \hbox (badness 4072) in paragraph at lines 853--863
+Underfull \hbox (badness 4072) in paragraph at lines 906--916
 \TU/FreeSerif(2)/m/n/10 agnostic: signed numbers and powers of ten are wrapped 
 in \TU/DejaVuSansMono(0)/m/n/10 \ensuremath\TU/FreeSerif(2)/m/n/10 ), \TU/DejaV
 uSansMono(0)/m/n/10 paper/generated/en/tab_*.tex
  []
 
 
-Underfull \hbox (badness 6526) in paragraph at lines 853--863
+Underfull \hbox (badness 6526) in paragraph at lines 906--916
 \TU/FreeSerif(2)/m/n/10 and \TU/DejaVuSansMono(0)/m/n/10 paper/generated/gr/tab
 _*.tex \TU/FreeSerif(2)/m/n/10 (the same tables with English or Greek captions 
 and labels) and \TU/DejaVuSansMono(0)/m/n/10 re-
  []
 
+[9]
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 909.
+(Font)              scaled to size 12.0pt on input line 968.
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 909.
+(Font)              scaled to size 8.0pt on input line 968.
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 929.
+(Font)              scaled to size 7.0pt on input line 988.
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 929.
-[9] [10]
-LaTeX Font Info:    Font shape `TU/FreeSerif(2)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 1084.
- [11] [12] [13]
-Underfull \hbox (badness 1803) in paragraph at lines 1391--1403
+(Font)              scaled to size 5.0pt on input line 988.
+ [10] [11] [12] [13]
+Underfull \hbox (badness 1803) in paragraph at lines 1456--1468
 \TU/FreeSerif(2)/m/n/10 Laboratory for Web Algorithmics (https://law.di.unimi.i
 t/webdata/cnr-2000/) into \TU/DejaVuSansMono(0)/m/n/10 ../data/cnr2000/\TU/Free
 Serif(2)/m/n/10 ; the Wi-
  []
 
 
-Underfull \hbox (badness 5622) in paragraph at lines 1391--1403
+Underfull \hbox (badness 5622) in paragraph at lines 1456--1468
 \TU/FreeSerif(2)/m/n/10 kiCS file \TU/DejaVuSansMono(0)/m/n/10 dataset/data.jso
 n \TU/FreeSerif(2)/m/n/10 of https://github.com/pmernyei/wiki-cs-dataset (saved
  as \TU/DejaVuSansMono(0)/m/n/10 wikics_data.json\TU/FreeSerif(2)/m/n/10 )
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1391--1403
+Underfull \hbox (badness 10000) in paragraph at lines 1456--1468
 \TU/FreeSerif(2)/m/n/10 and the CitationFull archives \TU/DejaVuSansMono(0)/m/n
 /10 cora.npz\TU/FreeSerif(2)/m/n/10 , \TU/DejaVuSansMono(0)/m/n/10 cora_ml.npz\
 TU/FreeSerif(2)/m/n/10 , \TU/DejaVuSansMono(0)/m/n/10 citeseer.npz \TU/FreeSeri
 f(2)/m/n/10 of the graph2gauss repository
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1412--1418
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 1477--1483
 []\TU/FreeSerif(2)/b/n/10 Stage 1 analysis\TU/FreeSerif(2)/m/n/10 : \TU/DejaVuS
 ansMono(0)/m/n/10 python3 stage1_analysis.py\TU/FreeSerif(2)/m/n/10 , \TU/DejaV
 uSansMono(0)/m/n/10 python3 stage1_decomposition.py\TU/FreeSerif(2)/m/n/10 , \T
@@ -1351,7 +1351,7 @@ U/DejaVuSansMono(0)/m/n/10 python3
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1421--1431
+Underfull \hbox (badness 10000) in paragraph at lines 1486--1496
 []\TU/FreeSerif(2)/b/n/10 Stage 2 analysis\TU/FreeSerif(2)/m/n/10 : \TU/DejaVuS
 ansMono(0)/m/n/10 python3 stage2_analysis.py\TU/FreeSerif(2)/m/n/10 , \TU/DejaV
 uSansMono(0)/m/n/10 python3 stage2_decomposition.py\TU/FreeSerif(2)/m/n/10 , \T
@@ -1359,7 +1359,7 @@ U/DejaVuSansMono(0)/m/n/10 python3
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1421--1431
+Underfull \hbox (badness 10000) in paragraph at lines 1486--1496
 \TU/DejaVuSansMono(0)/m/n/10 stage2_rapr_anchor.py\TU/FreeSerif(2)/m/n/10 , \TU
 /DejaVuSansMono(0)/m/n/10 python3 stage2_upper_check.py\TU/FreeSerif(2)/m/n/10 
 , \TU/DejaVuSansMono(0)/m/n/10 python3 convergence_check.py\TU/FreeSerif(2)/m/n
@@ -1367,24 +1367,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 1421--1431
  []
 
 
-Underfull \hbox (badness 6016) in paragraph at lines 1421--1431
+Underfull \hbox (badness 6016) in paragraph at lines 1486--1496
 \TU/DejaVuSansMono(0)/m/n/10 python3 bound_check.py\TU/FreeSerif(2)/m/n/10 , \T
 U/DejaVuSansMono(0)/m/n/10 python3 verify_stage2.py\TU/FreeSerif(2)/m/n/10 , \T
 U/DejaVuSansMono(0)/m/n/10 python3 stage2_tables.py\TU/FreeSerif(2)/m/n/10 , an
 d \TU/DejaVuSansMono(0)/m/n/10 python3
  []
 
-[14] [15] (./doc_EN.aux)
+[15] (./doc_EN.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 21760 strings out of 476872
- 400264 string characters out of 5804585
+ 21762 strings out of 476872
+ 400320 string characters out of 5804585
  1949627 words of memory out of 5000000
- 43358 multiletter control sequences out of 15000+600000
+ 43360 multiletter control sequences out of 15000+600000
  565935 words of font info for 126 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  90i,10n,128p,1003b,618s stack positions out of 10000i,1000n,20000p,200000b,200000s

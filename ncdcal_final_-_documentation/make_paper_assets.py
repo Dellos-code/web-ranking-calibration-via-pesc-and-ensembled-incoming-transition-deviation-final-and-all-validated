@@ -1103,13 +1103,13 @@ def wp0_tables():
         a, b = me[first], me[last]
         rows.append({
             "experiment": exp,
-            "delta0": float(me["A1.0"]["delta"]),
+            "delta0": float(a["delta"]),
             "delta1": float(b["delta"]),
-            "zeta0": float(me["A1.0"]["zero_in_frac"]),
+            "zeta0": float(a["zero_in_frac"]),
             "zeta1": float(b["zero_in_frac"]),
-            "h0": float(me["A1.0"]["h_rule"]),
+            "h0": float(a["h_rule"]),
             "h1": float(b["h_rule"]),
-            "hraw0": float(me["A1.0"]["hraw_rule"]),
+            "hraw0": float(a["hraw_rule"]),
             "hraw1": float(b["hraw_rule"]),
         })
     for lang in ("en", "gr"):
@@ -1149,6 +1149,77 @@ def wp0_tables():
     macro("WpZeroNfMatchedP", pv(matched["p"]))
 
 
+def mismatch_table():
+    """Anchor-mismatch table (label tab:mismatch): each candidate (r, alpha) against each static [NG13] comparator,
+    under the NCD (reference 0.85) and NCD95 (reference 0.95) truths, on every held-out panel.
+    Candidates use the r convention of their own anchor: rule r with 0.81 for the 0.85 anchor,
+    r = 0.105 with 0.93 for the 0.95 anchor.  The two matched cells are the comparisons the paper
+    claims; every other cell is a deliberate mismatch."""
+    panels = ["test", "scale", "topo", "real"]
+    cands = [(("rule", 0.81), "RuleLo", "rule $r$, $\\alpha=0.81$", "$r$ κανόνα, $\\alpha=0.81$"),
+             (("rule", 0.93), "RuleHi", "rule $r$, $\\alpha=0.93$", "$r$ κανόνα, $\\alpha=0.93$"),
+             (("ng13", 0.93), "NgHi", "$r=0.105$, $\\alpha=0.93$", "$r=0.105$, $\\alpha=0.93$")]
+    comps = [(("can", 0.85), "Can", "$(0.118,\\,0.85)$"), (("ng13", 0.95), "Ng", "$(0.105,\\,0.95)$")]
+    matched = {("NCD", 0, 0), ("NCD95", 1, 1), ("NCD95", 2, 1)}
+    rows = {"en": [], "gr": []}
+    psig, pns = [], []
+    md = ["| truth | candidate | comparator | " + " | ".join(panels) + " |", "|---|---|---|" + "---|" * len(panels)]
+    for t in ("NCD", "NCD95"):
+        for lang in ("en", "gr"):
+            rows[lang].append(f"\\multicolumn{{5}}{{@{{}}l}}{{\\textit{{{'truth' if lang == 'en' else 'αλήθεια'} {t}}}}} \\\\")
+        for ci, (cand, cnm, cen, cgr) in enumerate(cands):
+            for ki, (comp, knm, kname) in enumerate(comps):
+                cells, mdcells = [], []
+                for pn in panels:
+                    st = cmp_stats(t, pn, cand, comp)
+                    sig = st["p"] < 0.05
+                    (psig if sig else pns).append(st["p"])
+                    cells.append(f"{sgn4(st['mean'])} ({st['wins']}/{st['n']})" + ("" if sig else "$^{\\dagger}$"))
+                    mdcells.append(f"{st['mean']:+.4f} ({st['wins']}/{st['n']}; p={st['p']:.2g})")
+                    if pn == "test":
+                        key = f"{'Ncd' if t == 'NCD' else 'Ncdnf'}{cnm}{knm}"
+                        macro(f"Mis{key}", sgn4(st["mean"]))
+                        macro(f"Mis{key}P", pv(st["p"]))
+                        macro(f"Mis{key}Wins", f"{st['wins']}/{st['n']}")
+                mark = "$^{\\star}$" if (t, ci, ki) in matched else ""
+                for lang, clab in (("en", cen), ("gr", cgr)):
+                    rows[lang].append(f"\\quad {clab} vs {kname}{mark} & " + " & ".join(cells) + " \\\\")
+                md.append(f"| {t} | {cen} | {kname} | " + " | ".join(mdcells) + " |")
+    for lang in ("en", "gr"):
+        head = ("candidate $(r,\\alpha)$ vs comparator & \\texttt{test} & \\texttt{scale} & \\texttt{topo} & \\texttt{real} \\\\"
+                if lang == "en" else
+                "υποψήφιο $(r,\\alpha)$ έναντι αναφοράς & \\texttt{test} & \\texttt{scale} & \\texttt{topo} & \\texttt{real} \\\\")
+        body = ("\\begin{tabular}{@{}lcccc@{}}\n\\toprule\n" + head + "\n\\midrule\n" +
+                "\n".join(rows[lang]) +
+                "\n\\bottomrule\n\\end{tabular}")
+        pmax = f"{max(psig):.4f}".rstrip("0")
+        cap_en = ("Anchor matching. Mean Kendall $\\tau$ difference (candidate minus comparator), averaged over graphs, "
+                  f"with graph wins in parentheses, on the four held-out panels; $^{{\\dagger}}$ marks an exact Wilcoxon $p\\ge0.05$ "
+                  f"(every other cell has $p\\le{pmax}$). The comparators are the "
+                  "static [NG13] settings $(r,\\alpha)$. Cells marked $^{\\star}$ are the anchor-matched comparisons claimed "
+                  "in the text; the others are deliberate mismatches, in which the candidate, the comparator or the "
+                  "truth is defined at the other damping. With five real graphs the smallest attainable "
+                  "$p$ is $0.0625$.")
+        cap_gr = ("Αντιστοίχιση άγκυρας. Μέση διαφορά $\\tau$ του Kendall (υποψήφιο μείον αναφορά), κατά μέσο όρο ανά γράφο, "
+                  f"με νίκες γράφων σε παρένθεση, στα τέσσερα σύνολα εκτός δείγματος· το $^{{\\dagger}}$ σημαίνει ακριβές $p\\ge0.05$ "
+                  f"του Wilcoxon (κάθε άλλο κελί έχει $p\\le{pmax}$). Οι αναφορές είναι "
+                  "οι στατικές ρυθμίσεις $(r,\\alpha)$ του [NG13]. Τα κελιά με $^{\\star}$ είναι οι συγκρίσεις με αντιστοίχιση "
+                  "άγκυρας που διατυπώνονται στο κείμενο· τα υπόλοιπα είναι σκόπιμες ασυμφωνίες, όπου το υποψήφιο, η αναφορά ή η "
+                  "αλήθεια ορίζεται στην άλλη απόσβεση. Με πέντε πραγματικούς γράφους "
+                  "το μικρότερο εφικτό $p$ είναι $0.0625$.")
+        write(os.path.join(OUT, lang, "tab_mismatch.tex"),
+              table_env("tab:mismatch", cap_en, cap_gr, body, lang, "\\scriptsize", star=True))
+    write(os.path.join(HERE, "V2_WP0_mismatch_table.md"), "\n".join(md) + "\n")
+    # best constant for the pairing used by the tool at the 0.95 anchor (rule r), fitted on calib only
+    mcal = S2.valid(df2, "NCD95") & (df2["panel"] == "calib").to_numpy()
+    cur = S2.curves(TAU2, "rule", "NCD95")[mcal]
+    bases = df2["base"].to_numpy()[mcal]
+    gmean = np.mean([cur[bases == b].mean(0) for b in np.unique(bases)], axis=0)
+    jb = int(np.argmax(gmean))
+    macro("MisRuleBestCalib", f3(float(GRID[jb])))
+    macro("MisRuleBestCalibGap", sgn4(float(gmean[jb] - gmean[J[0.93]])))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     real_dataset_table()
@@ -1171,6 +1242,7 @@ def main():
     convergence()
     real_detail()
     wp0_tables()
+    mismatch_table()
     lines = ["% generated by make_paper_assets.py -- do not edit",
              "% every value is mode-agnostic: signed numbers and powers of ten are wrapped in",
              "% \\ensuremath, so a macro can be used both in running text and inside $...$"]

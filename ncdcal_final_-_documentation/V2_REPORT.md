@@ -23,8 +23,10 @@ reference-free discount is claimed.
 ## WP5 validation
 
 The locked Stage 1 formula, supported anchor values, diagnostics, baseline warning, mixed-damage
-primitive and all existing tests were executed successfully. `verify_v2.py` recomputes its checks
-from raw JSON/CSV outputs without importing the analysis modules.
+primitive and all existing tests were executed successfully. `verify_v2.py` reads the aggregated
+JSON/CSV outputs without importing the analysis modules; it does not recompute them from per-instance
+data (a stronger version is still to be written), and `tests/test_autotune.py` checks the tool against
+the library it wraps rather than against an independent computation.
 
 ## Runtime and deviations
 
@@ -40,7 +42,7 @@ unavailable). This is a reduced implementation, not evidence for the skipped hyp
 - [x] Existing tests and new tests pass; `verify_v2.py` passes.
 - [ ] No number in any `.tex`/`.md` was typed by hand. Existing legacy text predates this extension;
       new manuscript numbers use generated macros/tables.
-- [ ] Papers and docs were rebuilt with 0 errors and 0 overfull boxes; unavailable toolchain blocked this.
+- [x] Papers and docs were rebuilt with 0 errors and 0 overfull boxes (done in the review, see below; the original session had no `xelatex`/`pandoc`).
 - [x] Negative and null results are reported with the same prominence as positive ones.
 - [x] WP0 corrections were applied to the source documentation and manuscripts.
 - [x] Claims about unrun real2, mixture and baseline experiments are explicitly limited.
@@ -53,3 +55,19 @@ anchor-conditional damping language, and a tested single-snapshot tool limited t
 0.85 and 0.95 anchors. It does not support a claim of generalisation to more real networks, a
 validated operational discount over the full reference-damping range, a promoted mixture-aware
 baseline rule, or a dangling-page sensitivity conclusion.
+
+## Review corrections (applied after the first agent run)
+
+- `wp0_tables()` used the unperturbed A1.0 start values for the B row; the B row of
+  `tab_mixture.tex` and `V2_WP0_mixture_table.md` now starts from B0.1 (`delta` 0.185, `zeta` 0.207,
+  `h` 0.644, `h_raw` 0.707).
+- The placeholder headline row against $(0.105,0.95)$ in both documentation files now carries the
+  generated numbers and the anchor caveat; the unused macro `WpZeroNcdVsNg` is used in the text.
+- New generated table `tab:mismatch` (`paper/generated/{en,gr}/tab_mismatch.tex`,
+  `V2_WP0_mismatch_table.md`) shows the matched and mismatched anchor comparisons on all held-out panels;
+  the sentence that pointed to `tab:pipe` for mismatch losses now points to it.
+- The tool's pairing at the 0.95 anchor (Stage 1 rule $r$ with $\alpha=0.93$) is now supported by the generated data: the
+  calibration-optimal constant for that pairing under NCD95 is 0.920 (0.0002 $\tau$ above 0.93), and the pairing beats the
+  [NG13] $(0.105,0.95)$ on `test`, `scale` and `topo` (`V2_WP0_mismatch_table.md`).
+- `METHOD_DISCLOSURE_EN_GR.{md,txt}` now states only what exists in this version.
+- PDFs rebuilt (papers 24 and 27 pages, documentation 15 and 18 pages) and root-level copies synchronised.

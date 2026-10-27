@@ -39,8 +39,8 @@ from the *total damping* $\alpha$. The study tests a zero-cost, two-stage calibr
 | Locked Stage 1 rule | $r=\mathrm{clip}(0.242-0.143\,\bar P,\,0.01,\,0.99)$; best constant $r=0.18$ |
 | Locked Stage 2 rule | the $\tau$-optimised rule on $h$ collapses to the constant $\alpha=0.810$ ($0.930$ under NCD95) |
 | Two-stage vs. canonical $(r,\alpha)=(0.118,0.85)$ | `test` $+0.0110$ Kendall $\tau$ (31/32 graphs, $p=9.3\times10^{-10}$); `scale` $+0.0102$; `topo` $+0.0036$; `real` $+0.0017$ ($p=0.812$, n.s.) |
-| Two-stage vs. [NG13] ranking setting $(r,\alpha)=(0.105,0.95)$ | Anchor-conditional comparison; the generated pipeline table reports the held-out difference against this setting. |
-| Anchor-matched constants | Use $\alpha=0.81$ for a reference at $0.85$ and $\alpha=0.93$ for a reference at $0.95$. The reference damping is a methodological choice, not an observable graph property. |
+| Two-stage vs. [NG13] ranking setting $(r,\alpha)=(0.105,0.95)$, NCD truth | `test` $+0.0743$ (32/32 graphs, $p=4.7\times10^{-10}$); `scale` $+0.0756$ (12/12); `topo` $+0.0515$ (24/24); `real` $+0.0848$ (5/5, $p=0.0625$, the exact floor for $n=5$). **Anchor caveat:** the NCD truth is itself defined at damping 0.85, so this number mostly measures the comparator's anchor mismatch and is not evidence about the method (Table `tab:mismatch`, `V2_WP0_mismatch_table.md`). |
+| Anchor-matched constants | Use $\alpha=0.81$ for a reference at $0.85$ and $\alpha=0.93$ for a reference at $0.95$. The reference damping is a methodological choice, not an observable graph property. Matched gains on `test`: $+0.0110$ (31/32, $p=9.3\times10^{-10}$) under NCD against $(0.118,0.85)$, but only $+0.0011$ (19/32, $p=0.062$, a tie) under NCD95 against $(0.105,0.95)$; on the NCD95 `real` panel the matched difference is $-0.0006$. With the Stage 1 rule $r$ in place of $0.105$ (the pairing used by `ncd_autotune.py` at the 0.95 anchor) the $0.93$ gain against $(0.105,0.95)$ is $+0.0089$ (30/32, $p=5.0\times10^{-7}$) on `test`, $+0.0062$ on `scale`, $+0.0034$ on `topo` and $-0.0025$ on `real`; the calibration-optimal constant for that pairing is $0.920$ ($+0.0002$ $\tau$ over $0.93$). Mismatched pairs change $\tau$ by $-0.03$ to $-0.04$ on `test` (Table `tab:mismatch`). |
 | Predictive value of $\bar P$, $h$, $h_v$ | none out of sample; $h$ falls under link removal and rises under the newly-added-pages perturbation, while $\alpha^*$ falls under both |
 | Non-monotone and dangling-deconfounded $g$ | none of 127 deployable rules (tents, quadratic, Gaussian bump, steps, splines on $h$, $h_v$, $h_{\mathrm{raw}}$, $\delta$, $\zeta$; bivariate $g(h,\delta)$, $g(h,\zeta)$) passes the pre-registered held-out test; the $\tau$-optimised tent on $h$ changes $\tau$ by $-0.0001$ out of sample; with the graph's own unperturbed $h_0$ (not observable) a tent in $h-h_0$ gains $+0.0018$ in CV and $+0.0006$ out of sample, so $\alpha=0.810$ stays locked |
 | Anchoring | oracle $\alpha^*$ equals the damping of the reference ranking minus a 0.03–0.06 noise discount; dose-response slope 0.950 |
@@ -712,14 +712,16 @@ trivial recovery problem.
 | 4 `tab:stage1dec` | variance decomposition of $r^*$ per truth | `stage1` |
 | 5 `tab:stage2` | Stage 2 candidate rules on $h$ and $h_v$, differences vs the locked constant | `stage2` |
 | 6 `tab:stage2dec` | variance decomposition of $\alpha^*$ per truth and $r$-setting | `stage2` |
-| 7 `tab:nonmono` | non-monotone, dangling-deconfounded and bivariate Stage 2 rules vs the locked constant | `nonmono` |
-| 8 `tab:anchor` | anchors: own $\alpha$, $\alpha^*$ on A1.0, mean $\alpha^*$, discount, within/between | `stage2` |
-| 9 `tab:rapr` | dose-response: $\alpha^*$ per Random-$\alpha$ prior | `stage2` |
-| 10 `tab:pipe` | complete pipelines vs static settings, five truths × five panels | `pipelines` |
-| 11 `tab:conv` | power-iteration counts and savings | `convergence` |
-| 12 `tab:stage1truth` | Stage 1 under the four Stage 1 truths (appendix) | `stage1_truth_table` |
-| 13 `tab:sens` | Stage 2 rules refitted per sensitivity truth (appendix) | `stage2` |
-| 14 `tab:realdetail` | real panel per network (appendix) | `real_detail` |
+| 7 `tab:mixture` | mechanism of Experiments A and B: $\delta$, $\zeta$, $h$, $h_{\mathrm{raw}}$ from least to most damaged level | `wp0_tables` |
+| 8 `tab:nonmono` | non-monotone, dangling-deconfounded and bivariate Stage 2 rules vs the locked constant | `nonmono` |
+| 9 `tab:anchor` | anchors: own $\alpha$, $\alpha^*$ on A1.0, mean $\alpha^*$, discount, within/between | `stage2` |
+| 10 `tab:rapr` | dose-response: $\alpha^*$ per Random-$\alpha$ prior | `stage2` |
+| 11 `tab:mismatch` | anchor matching: candidate vs [NG13] comparator on all held-out panels, truths NCD and NCD95 | `mismatch_table` |
+| 12 `tab:pipe` | complete pipelines vs static settings, five truths × five panels | `pipelines` |
+| 13 `tab:conv` | power-iteration counts and savings | `convergence` |
+| 14 `tab:stage1truth` | Stage 1 under the four Stage 1 truths (appendix) | `stage1_truth_table` |
+| 15 `tab:sens` | Stage 2 rules refitted per sensitivity truth (appendix) | `stage2` |
+| 16 `tab:realdetail` | real panel per network (appendix) | `real_detail` |
 
 # 11. Step-by-step reproduction
 

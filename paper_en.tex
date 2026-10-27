@@ -847,8 +847,19 @@ to \STwoConstAlpha{} under NCD is exactly this effect. Under NCD95 the correspon
 The anchor-matched operational claim is conditional on the reference: use $\alpha=0.81$ when the
 reference is defined at $0.85$, and $\alpha=0.93$ when it is defined at $0.95$. The first changes
 the NCD comparison by \WpZeroNcdVsCanonical{}, while the matched NCD95 comparison changes by
-\WpZeroNfMatched{} ($p=\WpZeroNfMatchedP$). The reference damping is a methodological decision;
-mismatched-anchor losses are shown in Table~\ref{tab:pipe}.
+\WpZeroNfMatched{} ($p=\WpZeroNfMatchedP$), a tie on \texttt{test}. The reference damping is a
+methodological decision, and Table~\ref{tab:mismatch} shows what a mismatch costs on \texttt{test}: under
+the NCD truth, a user whose reference is the canonical $(0.118,\,0.85)$ and who adopts the $0.95$-anchored
+constant changes $\tau$ by \MisNcdNgHiCan{}; under the NCD95 truth, a user whose reference is
+$(0.105,\,0.95)$ and who adopts $\alpha=0.81$ changes it by \MisNcdnfRuleLoNg{}.
+With the Stage~1 rule in place of $r=0.105$, the same constant $0.93$ improves on the [NG13] setting
+$(0.105,\,0.95)$ by \MisNcdnfRuleHiNg{} on \texttt{test} (\MisNcdnfRuleHiNgWins{} graphs, $p=\MisNcdnfRuleHiNgP$);
+the best constant for that pairing on \texttt{calib} is \MisRuleBestCalib{}, and its $\tau$ exceeds
+that of $0.93$ by only \MisRuleBestCalibGap{}. The two-stage pipeline also beats the [NG13] ranking setting $(0.105,\,0.95)$ by \WpZeroNcdVsNg{}
+under the NCD truth, but that number mostly reflects the fact that the NCD truth is itself defined at
+the damping $0.85$; it is not evidence about the method and is not used in any claim.
+
+\input{generated/en/tab_mismatch.tex}
 
 \begin{figure}[t]
 \centering
