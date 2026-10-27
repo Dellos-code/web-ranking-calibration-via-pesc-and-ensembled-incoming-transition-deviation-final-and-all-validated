@@ -275,6 +275,17 @@ $\pi(\alpha;r)$ for all 67 values of $\alpha$ and all requested $r$ from one Neu
 $\mathbb E[\pi(A;r)]$, $A\sim\mathrm{Beta}(a,b)$, with weights $w_k=B(a+k,b+1)/B(a,b)$;
 $a=b=1$ is TotalRank, $w_k=1/((k+1)(k+2))$.
 
+The additive `mixed_damage(g, keep_frac, page_frac, rng, order)` helper composes the existing
+Experiment B and A primitives in a fixed order for the preregistered mixture sensitivity; it does
+not alter either primitive.
+
+### 5.2a `ncd_autotune.py` (practical single-snapshot tool)
+
+`tune(src, dst, block, alpha_ref=0.85, baseline=None)` returns the locked Stage 1 $r$, the
+validated anchor-matched alpha, and $O(|E|+n)$ diagnostics. Only references at 0.85 and 0.95 are
+currently supported; unsupported values raise an error and a baseline is ignored with an explicit
+warning until WP3/WP4 validate a deployable baseline rule.
+
 ## 5.3 `decode_cnr2000.py` and `prepare_real_graphs.py`
 
 `decode_cnr2000.py [raw_dir]` opens the BVGraph files of cnr-2000 (Laboratory for Web Algorithmics)
@@ -469,6 +480,10 @@ its slopes vanish and that the tent is unimodal with a clipped apex; the identit
 deconfounded column sums and the column sums of $(1-r)H_{\mathrm{raw}}+rM$ (mean
 $1-(1-r)n_{\mathrm d}/n$); and that the replay of one calibration graph reproduces its stored $h$,
 $r$ and dangling fraction.
+
+`python3 tests/test_autotune.py` checks formula equality, consistency with the core library and the
+unsupported-anchor and baseline-warning paths. `python3 verify_v2.py` independently checks the new
+generated mixture and pipeline inputs without importing the analysis modules.
 
 # 6. Complexity and solver mechanics
 
