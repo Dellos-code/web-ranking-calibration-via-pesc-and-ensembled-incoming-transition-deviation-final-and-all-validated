@@ -18,6 +18,11 @@ experiments. The two-stage framework, the block escape probability and the devia
 are the author's, as are the non-monotone and dangling-deconfounded hypotheses for the Stage 2 rule
 tested in Section 8.2.
 
+For this extension, the AI system assisted with additive experiment drivers, preregistration text,
+the practical CLI, test scaffolding and generated-asset plumbing. All dataset decisions, statistical
+criteria, execution limits and interpretation of positive or negative results were reviewed against
+the preregistered rules.
+
 ## Ελληνικά
 
 **Δήλωση μεθόδου.** Η υλοποίηση, τα πειράματα και η στατιστική ανάλυση πραγματοποιήθηκαν με τη
@@ -27,3 +32,8 @@ Neumann και τα πειράματα αγκύρωσης. Το πλαίσιο �
 στατιστικό απόκλισης $h$ ανήκουν στον συγγραφέα, όπως και οι μη μονότονες υποθέσεις και οι υποθέσεις
 απαλοιφής της επίδρασης των κρεμάμενων σελίδων για τον κανόνα του Σταδίου 2 που ελέγχονται στην
 Ενότητα 8.2.
+
+Για την παρούσα επέκταση, το σύστημα τεχνητής νοημοσύνης βοήθησε με πρόσθετους οδηγούς
+πειραμάτων, το κείμενο προεγγραφής, το πρακτικό CLI, τα tests και τη σύνδεση των παραγόμενων
+αρχείων. Οι αποφάσεις για τα δεδομένα, τα στατιστικά κριτήρια, τα όρια εκτέλεσης και η ερμηνεία
+θετικών ή αρνητικών αποτελεσμάτων ελέγχθηκαν έναντι των προεγγεγραμμένων κανόνων.

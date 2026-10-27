@@ -24,13 +24,18 @@ Quick start (from this directory):
 python3 tests/test_lib.py          # unit tests (seconds)
 python3 tests/test_stage2.py
 python3 tests/test_nonmono.py
+python3 tests/test_autotune.py
 python3 verify_stage2.py           # recompute headline numbers
+python3 verify_v2.py               # independently verify v2 headline inputs
 bash build_papers.sh               # regenerate tables/macros, compile papers
 bash build_docs.sh                 # build the documentation PDFs
 ```
 
 The full reproduction (raw data download, both experiment stages, analyses and figures) is described
 step by step in Section 11 of `DOCUMENTATION_EN.pdf`.
+
+The practical single-snapshot tool is `ncd_autotune.py`; it accepts a prepared graph NPZ and supports
+the validated reference anchors 0.85 and 0.95.
 
 ## Ελληνικά
 
