@@ -184,6 +184,9 @@ def test_perturbations():
     assert ga.m == round(0.4 * g.m) and ga.n == g.n
     gb = L.newly_added_pages(g, 0.3, rng)
     assert gb.m < g.m and gb.n == g.n
+    gc = L.mixed_damage(g, 0.8, 0.3, np.random.default_rng(7))
+    assert gc.n == g.n and gc.m <= g.m
+    assert gc.meta["mixed_damage_order"] == "B_then_A"
 
 
 if __name__ == "__main__":
