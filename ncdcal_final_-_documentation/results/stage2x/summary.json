@@ -1,0 +1,405 @@
+{
+  "a_supported": [
+    0.5,
+    0.97
+  ],
+  "anchor_checks": {
+    "max_085": 0.0,
+    "max_095": 0.0
+  },
+  "fit": {
+    "bases": [
+      "calib_000",
+      "calib_001",
+      "calib_002",
+      "calib_003",
+      "calib_004",
+      "calib_005",
+      "calib_006",
+      "calib_007",
+      "calib_008",
+      "calib_009",
+      "calib_010",
+      "calib_011",
+      "calib_012",
+      "calib_013",
+      "calib_014",
+      "calib_015",
+      "calib_016",
+      "calib_017",
+      "calib_018",
+      "calib_019",
+      "calib_020",
+      "calib_021",
+      "calib_022",
+      "calib_023",
+      "calib_024",
+      "calib_025",
+      "calib_026",
+      "calib_027",
+      "calib_028",
+      "calib_029",
+      "calib_030",
+      "calib_031",
+      "calib_032",
+      "calib_033",
+      "calib_034",
+      "calib_035",
+      "calib_036",
+      "calib_037",
+      "calib_038",
+      "calib_039",
+      "calib_040",
+      "calib_041",
+      "calib_042",
+      "calib_043",
+      "calib_044",
+      "calib_045",
+      "calib_046",
+      "calib_047",
+      "calib_048",
+      "calib_049",
+      "calib_050",
+      "calib_051",
+      "calib_052",
+      "calib_053",
+      "calib_054",
+      "calib_055",
+      "calib_056",
+      "calib_057",
+      "calib_058",
+      "calib_059",
+      "calib_060",
+      "calib_061",
+      "calib_062",
+      "calib_063"
+    ],
+    "d_by_anchor": [
+      0.056928879310344856,
+      0.06918103448275861,
+      0.06875538793103446,
+      0.06643857758620693,
+      0.06275323275862074,
+      0.057219827586206855,
+      0.050134698275862075,
+      0.03921874999999996,
+      0.03263469827586206
+    ],
+    "constant": 0.05591834291187739,
+    "linear_slope": -0.057898738777800454,
+    "linear_intercept": 0.05186543119743136
+  },
+  "held_out": {
+    "test": [
+      {
+        "panel": "test",
+        "base": "test_000",
+        "mean_gain_discount_vs_no_discount": -0.0027256058464344176
+      },
+      {
+        "panel": "test",
+        "base": "test_001",
+        "mean_gain_discount_vs_no_discount": 0.007449521084911087
+      },
+      {
+        "panel": "test",
+        "base": "test_002",
+        "mean_gain_discount_vs_no_discount": 0.002533382639133682
+      },
+      {
+        "panel": "test",
+        "base": "test_003",
+        "mean_gain_discount_vs_no_discount": 0.00017411811859346926
+      },
+      {
+        "panel": "test",
+        "base": "test_004",
+        "mean_gain_discount_vs_no_discount": 0.0039820810391878085
+      },
+      {
+        "panel": "test",
+        "base": "test_005",
+        "mean_gain_discount_vs_no_discount": 0.014713613618773201
+      },
+      {
+        "panel": "test",
+        "base": "test_006",
+        "mean_gain_discount_vs_no_discount": 0.00039948383992951777
+      },
+      {
+        "panel": "test",
+        "base": "test_007",
+        "mean_gain_discount_vs_no_discount": -0.0010599050292512402
+      },
+      {
+        "panel": "test",
+        "base": "test_008",
+        "mean_gain_discount_vs_no_discount": -0.0036422036096660625
+      },
+      {
+        "panel": "test",
+        "base": "test_009",
+        "mean_gain_discount_vs_no_discount": 0.0043333029219259816
+      },
+      {
+        "panel": "test",
+        "base": "test_010",
+        "mean_gain_discount_vs_no_discount": -0.0017187822700685097
+      },
+      {
+        "panel": "test",
+        "base": "test_011",
+        "mean_gain_discount_vs_no_discount": 0.012545507084319575
+      },
+      {
+        "panel": "test",
+        "base": "test_012",
+        "mean_gain_discount_vs_no_discount": -0.0007827150919992062
+      },
+      {
+        "panel": "test",
+        "base": "test_013",
+        "mean_gain_discount_vs_no_discount": -0.009203128374388648
+      },
+      {
+        "panel": "test",
+        "base": "test_014",
+        "mean_gain_discount_vs_no_discount": -0.008994005546103127
+      },
+      {
+        "panel": "test",
+        "base": "test_015",
+        "mean_gain_discount_vs_no_discount": -0.005944134082205387
+      },
+      {
+        "panel": "test",
+        "base": "test_016",
+        "mean_gain_discount_vs_no_discount": -0.008540333335986361
+      },
+      {
+        "panel": "test",
+        "base": "test_017",
+        "mean_gain_discount_vs_no_discount": -0.00013015694114276103
+      },
+      {
+        "panel": "test",
+        "base": "test_018",
+        "mean_gain_discount_vs_no_discount": -0.00029606445200948254
+      },
+      {
+        "panel": "test",
+        "base": "test_019",
+        "mean_gain_discount_vs_no_discount": 0.0024993393486106973
+      },
+      {
+        "panel": "test",
+        "base": "test_020",
+        "mean_gain_discount_vs_no_discount": 0.0007458702505876621
+      },
+      {
+        "panel": "test",
+        "base": "test_021",
+        "mean_gain_discount_vs_no_discount": -0.0037225537816993892
+      },
+      {
+        "panel": "test",
+        "base": "test_022",
+        "mean_gain_discount_vs_no_discount": -0.003028037623961508
+      },
+      {
+        "panel": "test",
+        "base": "test_023",
+        "mean_gain_discount_vs_no_discount": 0.000376543948530323
+      },
+      {
+        "panel": "test",
+        "base": "test_024",
+        "mean_gain_discount_vs_no_discount": -0.006628366371539111
+      },
+      {
+        "panel": "test",
+        "base": "test_025",
+        "mean_gain_discount_vs_no_discount": -0.0037744735378105864
+      },
+      {
+        "panel": "test",
+        "base": "test_026",
+        "mean_gain_discount_vs_no_discount": -0.010280328013727235
+      },
+      {
+        "panel": "test",
+        "base": "test_027",
+        "mean_gain_discount_vs_no_discount": -0.00025409987170456187
+      },
+      {
+        "panel": "test",
+        "base": "test_028",
+        "mean_gain_discount_vs_no_discount": 0.00012873823935579922
+      },
+      {
+        "panel": "test",
+        "base": "test_029",
+        "mean_gain_discount_vs_no_discount": 0.0012864139749177007
+      },
+      {
+        "panel": "test",
+        "base": "test_030",
+        "mean_gain_discount_vs_no_discount": 0.002063867364389201
+      },
+      {
+        "panel": "test",
+        "base": "test_031",
+        "mean_gain_discount_vs_no_discount": -0.006704748433548957
+      }
+    ],
+    "topo": [
+      {
+        "panel": "topo",
+        "base": "topo_000",
+        "mean_gain_discount_vs_no_discount": 0.0006448118801927194
+      },
+      {
+        "panel": "topo",
+        "base": "topo_001",
+        "mean_gain_discount_vs_no_discount": -0.0009952015106035913
+      },
+      {
+        "panel": "topo",
+        "base": "topo_002",
+        "mean_gain_discount_vs_no_discount": -0.0004955446185906314
+      },
+      {
+        "panel": "topo",
+        "base": "topo_003",
+        "mean_gain_discount_vs_no_discount": -0.0008075034711509943
+      },
+      {
+        "panel": "topo",
+        "base": "topo_004",
+        "mean_gain_discount_vs_no_discount": -0.0008826057504241666
+      },
+      {
+        "panel": "topo",
+        "base": "topo_005",
+        "mean_gain_discount_vs_no_discount": 0.003237818468025782
+      },
+      {
+        "panel": "topo",
+        "base": "topo_006",
+        "mean_gain_discount_vs_no_discount": -0.00012288800225077366
+      },
+      {
+        "panel": "topo",
+        "base": "topo_007",
+        "mean_gain_discount_vs_no_discount": -0.0017300332029764024
+      },
+      {
+        "panel": "topo",
+        "base": "topo_008",
+        "mean_gain_discount_vs_no_discount": 0.008748630313978841
+      },
+      {
+        "panel": "topo",
+        "base": "topo_009",
+        "mean_gain_discount_vs_no_discount": -0.0004464220009039208
+      },
+      {
+        "panel": "topo",
+        "base": "topo_010",
+        "mean_gain_discount_vs_no_discount": -0.0033309400120439627
+      },
+      {
+        "panel": "topo",
+        "base": "topo_011",
+        "mean_gain_discount_vs_no_discount": -0.0006230464792275194
+      },
+      {
+        "panel": "topo",
+        "base": "topo_012",
+        "mean_gain_discount_vs_no_discount": -0.0015988623943283325
+      },
+      {
+        "panel": "topo",
+        "base": "topo_013",
+        "mean_gain_discount_vs_no_discount": -0.0034584851625065007
+      },
+      {
+        "panel": "topo",
+        "base": "topo_014",
+        "mean_gain_discount_vs_no_discount": -0.0028121422918856195
+      },
+      {
+        "panel": "topo",
+        "base": "topo_015",
+        "mean_gain_discount_vs_no_discount": 0.00013785442893600298
+      },
+      {
+        "panel": "topo",
+        "base": "topo_016",
+        "mean_gain_discount_vs_no_discount": -0.0012791699781599972
+      },
+      {
+        "panel": "topo",
+        "base": "topo_017",
+        "mean_gain_discount_vs_no_discount": 0.0004215408310604592
+      },
+      {
+        "panel": "topo",
+        "base": "topo_018",
+        "mean_gain_discount_vs_no_discount": -0.0014610211170899372
+      },
+      {
+        "panel": "topo",
+        "base": "topo_019",
+        "mean_gain_discount_vs_no_discount": -0.0007598585604379574
+      },
+      {
+        "panel": "topo",
+        "base": "topo_020",
+        "mean_gain_discount_vs_no_discount": 0.0026220066000759187
+      },
+      {
+        "panel": "topo",
+        "base": "topo_021",
+        "mean_gain_discount_vs_no_discount": -0.001908273128921994
+      },
+      {
+        "panel": "topo",
+        "base": "topo_022",
+        "mean_gain_discount_vs_no_discount": -0.002199156620311745
+      },
+      {
+        "panel": "topo",
+        "base": "topo_023",
+        "mean_gain_discount_vs_no_discount": -0.000892222800757736
+      }
+    ],
+    "real": [
+      {
+        "panel": "real",
+        "base": "citeseer",
+        "mean_gain_discount_vs_no_discount": 0.008117458627869686
+      },
+      {
+        "panel": "real",
+        "base": "cnr2000",
+        "mean_gain_discount_vs_no_discount": 0.01555653062597331
+      },
+      {
+        "panel": "real",
+        "base": "cora_full",
+        "mean_gain_discount_vs_no_discount": -0.0019112512074773097
+      },
+      {
+        "panel": "real",
+        "base": "cora_ml",
+        "mean_gain_discount_vs_no_discount": -0.010468942488336729
+      },
+      {
+        "panel": "real",
+        "base": "wikics",
+        "mean_gain_discount_vs_no_discount": -0.01008387497212324
+      }
+    ]
+  }
+}

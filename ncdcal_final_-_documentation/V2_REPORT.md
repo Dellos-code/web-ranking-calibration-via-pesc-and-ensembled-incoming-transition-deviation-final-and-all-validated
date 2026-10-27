@@ -5,10 +5,10 @@
 | WP | Status | Outcome |
 |---|---|---|
 | WP0 | done | Corrections and generated A/B mixture and anchor-matching outputs added to both manuscripts and both documentation sources. |
-| WP1 | reduced | PubMed and DBLP raw files were reachable and verified, but both are essentially symmetric (reverse-arc fraction 1.000) and were dropped as unsuitable directed candidates; SNAP, LAW and OGB hosts were unreachable by DNS, so no `real2` outcome is claimed. |
-| WP2 | skipped | The new `NCD(a)` sweep and its required 0.85/0.95 surface reproduction check were not run; the existing results support only the already validated 0.85/0.95 anchors. |
+| WP1 | reduced | Eight sources were prepared, but only six new graphs completed the locked Stage 2 outcome before the large web graphs exceeded the measured session budget. The four Geom-GCN graphs, Email-Eu-core and ogbn-arxiv were analysed; Stanford was stopped after 32.9 minutes without an output and NotreDame was not started. The six-graph subgroup is inferentially untestable under Amendment 1. |
+| WP2 | reduced | `stage2x` completed the full 64-graph calibration, 32-graph test, 24-graph topology, and five-graph real panels. Anchor reproduction errors were exactly 0.0 at both 0.85 and 0.95. The fitted discount is supported only on 0.50--0.97; the sensitivity and panel-best-constant comparisons are not yet integrated into the manuscripts. |
 | WP3 | reduced | Additive `mixed_experiment.py` now runs Experiment C, records the requested features and NCD/NCD95/TOT oracle surfaces, fits C0-C8 and single-snapshot counterparts, and writes pure-A/B/mixed grouped outputs plus the preregistered contrast filter. One synthetic base per `calib`, `test`, and `topo` (102 instances) and one reduced `cnr2000` cell were run; this is not a full held-out outcome. |
-| WP4 | skipped | No baseline outcome was computed; baseline use remains disabled. |
+| WP4 | reduced | A B1 damaged-baseline smoke panel (three calibration graphs, three independent baseline keep levels, nine rows) ran using the fixed WP3 C1 fit. B2 evolved baselines and B3 policies were not run, so no baseline rule is promoted. |
 | WP5 | done | `ncd_autotune.py`, strengthened independent tests, build checks, README recipe and independent v2 verification added. |
 | WP6 | skipped | No dangling-treatment re-run was performed. |
 
@@ -31,22 +31,47 @@ tables, macros and documentation headline rows without importing the analysis mo
 
 ## WP3 continuation evidence
 
-The one-cell `calib_000` probe took 0.74 s. The reduced synthetic command
-`mixed_experiment.py --panel calib,test,topo --limit 1` took 53.1 s and
-produced 102 Experiment C instances. The reduced `cnr2000` command with
-`--cnr-cells 1` took 347.1 s. Outputs are under `results/mixed/`, with
-copies under `results/mixed/synthetic/` and `results/mixed/real/`.
-`contrast_results.csv` applies the preregistered filter; the reduced sample
-does not support promotion or a generalisation claim.
+The one-cell `calib_000` probe took 0.74 s. The complete synthetic command
+`mixed_experiment.py --panel calib,test,topo --limit 0` took 623.5 s and
+produced 4,080 Experiment C instances over 120 base graphs. Outputs are under
+`results/mixed/`; `contrast_results.csv` applies the preregistered filter.
+The reverse-order sensitivity on 12 calibration graphs took 60.0 s and is
+preserved under `results/mixed/reverse/`. The cnr2000 full real panel was not run.
+
+## WP1 continuation evidence
+
+The prepared `real2` panel contains four Geom-GCN label partitions, Email-Eu-core
+department labels, OGBN-Arxiv subject labels, and Stanford/NotreDame SNAP web
+graphs with proxy partitions. BerkStan was excluded by the 400,000-node /
+5-million-arc cap. Six new graphs completed the locked Stage 2 outcome. H1 has
+mean gain `-0.00537` (2/6 wins, exact `p = 0.5625`, percentile range
+`[-0.03173, 0.01136]`); H2 is `+0.06868` (6/6, `p = 0.03125`); H3b is
+`-0.00475` (1/6, `p = 0.15625`). The six-graph subgroup is underpowered by
+Amendment 1. The Stanford run produced no output after 32.9 minutes and
+NotreDame was not started.
+
+## WP2 continuation evidence
+
+The calibration surface run took 1,489 s, test 336 s, topology 324 s, and the
+five-graph real panel 2,233 s; cnr2000 alone took 1,854 s. Anchor reproduction
+errors were exactly 0.0 at both 0.85 and 0.95. The fitted constant discount is
+0.05592 with linear slope -0.05790, supported only on the registered 0.50--0.97
+range. Held-out gains are mixed, including losses on the existing real panel, so
+no broader operational claim is made.
+
+## WP4 continuation evidence
+
+The reduced B1 panel produced nine rows in 3.0 s and mean gain +0.00506 over the
+constant. B2 evolved baselines and B3 policies were not run; baseline use remains
+disabled.
 
 ## Runtime and deviations
 
 The preregistration and WP0 asset generation completed in seconds once the local Python environment
-was restored. The full extension experiment budgets were not spent because SNAP, LAW and OGB hosts were
-unreachable by DNS; graph2gauss PubMed and DBLP raw URLs were reachable but have not yet been
-prepared into `real2`. XeLaTeX, Pandoc and FreeSerif were installed and the rebuilt documents passed
-the new error/overfull/reference checks. This remains a reduced implementation, not evidence for
-the skipped hypotheses.
+was restored. The first large real2 Stage 1 attempt produced no graph output after 59 minutes and was
+stopped; the Stanford real2 Stage 2 attempt likewise produced no output after 32.9 minutes. XeLaTeX,
+Pandoc and FreeSerif remain available. The new WP1/WP2/WP3/WP4 numbers have not been integrated into
+the papers, so this remains a reduced implementation for the unrun large-graph and baseline work.
 
 ## WP1 candidate verification
 
@@ -80,10 +105,10 @@ failed at DNS resolution, so they were not substituted or symmetrised.
 ## What the evidence now supports and what it still does not
 
 The evidence supports the existing locked defaults, the clarification that A and B are mixtures,
-anchor-conditional damping language, and a tested single-snapshot tool limited to the validated
-0.85 and 0.95 anchors. It does not support a claim of generalisation to more real networks, a
-validated operational discount over the full reference-damping range, a promoted mixture-aware
-baseline rule, or a dangling-page sensitivity conclusion.
+the completed synthetic mixed-damage surfaces, and a reproducible NCD(a) surface driver whose
+anchor checks pass. It does not support generalisation to more real networks, a promoted
+operational discount, a promoted mixture-aware or realistic-baseline rule, or a dangling-page
+sensitivity conclusion. The new results are not yet wired into either manuscript.
 
 ## Review corrections (applied after the first agent run)
 

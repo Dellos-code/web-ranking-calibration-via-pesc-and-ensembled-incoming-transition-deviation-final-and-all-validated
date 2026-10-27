@@ -55,3 +55,24 @@ reduced synthetic run (one base each in `calib`, `test`, `topo`) took 53.1 s
 (102 instances).  The one-cell `cnr2000` reduced run took 347.1 s.  The latter
 is intentionally limited to one of the four required cnr2000 cells; no
 full-panel extrapolation is claimed.  Reverse-order sensitivity was not run.
+
+WP1/WP2/WP4 continuation (2026-10-27):
+
+```bash
+~/venv/bin/python prepare_real2.py
+~/venv/bin/python real2_analysis.py
+~/venv/bin/python stage2x_analysis.py
+~/venv/bin/python baseline_experiment.py
+```
+
+`data/real2/` contains eight prepared sources. The completed real2 Stage 2
+outcomes cover Cornell, Texas, Wisconsin, Film, Email-Eu-core, and OGBN-Arxiv;
+the six-graph subgroup is underpowered by Amendment 1. Stanford was stopped
+after 32.9 minutes without an output and NotreDame was not run. The first
+large real2 Stage 1 attempt was stopped after 59 minutes without an output.
+
+`stage2x.py` completed `calib`, `test`, `topo`, and `real` in
+`results/stage2x/`; `stage2x_analysis.py` records exact zero anchor errors and
+the supported range `[0.50, 0.97]`. The full synthetic Experiment C run
+completed in 623.5 seconds and wrote the complete mixed outputs. The reduced
+WP4 B1 run wrote nine rows in 3.0 seconds; B2 and B3 remain outstanding.
