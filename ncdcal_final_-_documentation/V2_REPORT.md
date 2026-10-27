@@ -44,7 +44,7 @@ unavailable). This is a reduced implementation, not evidence for the skipped hyp
 - [x] Negative and null results are reported with the same prominence as positive ones.
 - [x] WP0 corrections were applied to the source documentation and manuscripts.
 - [x] Claims about unrun real2, mixture and baseline experiments are explicitly limited.
-- [ ] Top-level copies are byte-identical to the subfolder files; synchronization remains the final step.
+- [x] Top-level copies are byte-identical to the subfolder files.
 
 ## What the evidence now supports and what it still does not
 

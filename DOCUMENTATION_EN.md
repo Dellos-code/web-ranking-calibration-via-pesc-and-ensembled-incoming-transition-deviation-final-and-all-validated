@@ -39,6 +39,8 @@ from the *total damping* $\alpha$. The study tests a zero-cost, two-stage calibr
 | Locked Stage 1 rule | $r=\mathrm{clip}(0.242-0.143\,\bar P,\,0.01,\,0.99)$; best constant $r=0.18$ |
 | Locked Stage 2 rule | the $\tau$-optimised rule on $h$ collapses to the constant $\alpha=0.810$ ($0.930$ under NCD95) |
 | Two-stage vs. canonical $(r,\alpha)=(0.118,0.85)$ | `test` $+0.0110$ Kendall $\tau$ (31/32 graphs, $p=9.3\times10^{-10}$); `scale` $+0.0102$; `topo` $+0.0036$; `real` $+0.0017$ ($p=0.812$, n.s.) |
+| Two-stage vs. [NG13] ranking setting $(r,\alpha)=(0.105,0.95)$ | Anchor-conditional comparison; the generated pipeline table reports the held-out difference against this setting. |
+| Anchor-matched constants | Use $\alpha=0.81$ for a reference at $0.85$ and $\alpha=0.93$ for a reference at $0.95$. The reference damping is a methodological choice, not an observable graph property. |
 | Predictive value of $\bar P$, $h$, $h_v$ | none out of sample; $h$ falls under link removal and rises under the newly-added-pages perturbation, while $\alpha^*$ falls under both |
 | Non-monotone and dangling-deconfounded $g$ | none of 127 deployable rules (tents, quadratic, Gaussian bump, steps, splines on $h$, $h_v$, $h_{\mathrm{raw}}$, $\delta$, $\zeta$; bivariate $g(h,\delta)$, $g(h,\zeta)$) passes the pre-registered held-out test; the $\tau$-optimised tent on $h$ changes $\tau$ by $-0.0001$ out of sample; with the graph's own unperturbed $h_0$ (not observable) a tent in $h-h_0$ gains $+0.0018$ in CV and $+0.0006$ out of sample, so $\alpha=0.810$ stays locked |
 | Anchoring | oracle $\alpha^*$ equals the damping of the reference ranking minus a 0.03–0.06 noise discount; dose-response slope 0.950 |
@@ -236,9 +238,11 @@ solves along a grid of $r$, warm-starting each solve from the previous solution 
   for dangling pages), `inter_arc_frac`, `mean_outdeg`, `log_mean_outdeg`, `dangling_frac`,
   `zero_in_frac` (pages without in-links), `n`, `N`, `m`, `mean_block_size`, `log_n`.
 
-**5. Perturbations** ([NG13, §4.2]). `sparsify_arcs(g, keep_frac, rng)` keeps a uniformly random
-fraction of the arcs (Experiment A). `newly_added_pages(g, page_frac, rng, remove=0.9)` chooses a
-fraction of the pages and deletes each of their incoming arcs with probability 0.9 (Experiment B).
+**5. Perturbations** ([NG13, §4.2]). A and B are mixtures, not pure mechanisms:
+`sparsify_arcs(g, keep_frac, rng)` changes danglingness and zero-in-link pages, while
+`newly_added_pages(g, page_frac, rng, remove=0.9)` can also create dangling sources. The generated
+`V2_WP0_mixture_table.md` reports $\delta$, $\zeta$, $h$ and $h_{\rm raw}$ from the unperturbed graph
+to the most severe level; `h_raw` alone is nearly blind to A.
 
 **6. Synthetic generators.**
 
@@ -271,6 +275,17 @@ $\pi(\alpha;r)$ for all 67 values of $\alpha$ and all requested $r$ from one Neu
 $\mathbb E[\pi(A;r)]$, $A\sim\mathrm{Beta}(a,b)$, with weights $w_k=B(a+k,b+1)/B(a,b)$;
 $a=b=1$ is TotalRank, $w_k=1/((k+1)(k+2))$.
 
+The additive `mixed_damage(g, keep_frac, page_frac, rng, order)` helper composes the existing
+Experiment B and A primitives in a fixed order for the preregistered mixture sensitivity; it does
+not alter either primitive.
+
+### 5.2a `ncd_autotune.py` (practical single-snapshot tool)
+
+`tune(src, dst, block, alpha_ref=0.85, baseline=None)` returns the locked Stage 1 $r$, the
+validated anchor-matched alpha, and $O(|E|+n)$ diagnostics. Only references at 0.85 and 0.95 are
+currently supported; unsupported values raise an error and a baseline is ignored with an explicit
+warning until WP3/WP4 validate a deployable baseline rule.
+
 ## 5.3 `decode_cnr2000.py` and `prepare_real_graphs.py`
 
 `decode_cnr2000.py [raw_dir]` opens the BVGraph files of cnr-2000 (Laboratory for Web Algorithmics)
@@ -299,6 +314,12 @@ where $e_{ab}+e_{ba}$ counts the arcs between the two segments (a priority queue
 merges, with lazy invalidation of stale entries); pages without arcs join the segment on their left.
 The topic-label partitions follow the "category of its content" criterion that [NG13, §5] lists as an
 admissible decomposition.
+
+[NG13] Table 2 compares $(\eta,\mu)=(0.75,0.10)$ with PageRank at $0.85$ and
+$(0.85,0.10)$ with PageRank at $0.95$. Its ranking experiments run NCDawareRank at total damping
+$0.95$ against PageRank at $0.85$; they do not compare $0.85$ with $0.95$ for ranking quality.
+The SELF protocol makes the reference move with the candidate. Exact two-sided Wilcoxon tests have
+a p-value floor of $0.0625$ for $n=5$ and $0.0078$ for $n=8$.
 
 ## 5.4 `run_experiments.py` (driver)
 
@@ -459,6 +480,10 @@ its slopes vanish and that the tent is unimodal with a clipped apex; the identit
 deconfounded column sums and the column sums of $(1-r)H_{\mathrm{raw}}+rM$ (mean
 $1-(1-r)n_{\mathrm d}/n$); and that the replay of one calibration graph reproduces its stored $h$,
 $r$ and dangling fraction.
+
+`python3 tests/test_autotune.py` checks formula equality, consistency with the core library and the
+unsupported-anchor and baseline-warning paths. `python3 verify_v2.py` independently checks the new
+generated mixture and pipeline inputs without importing the analysis modules.
 
 # 6. Complexity and solver mechanics
 

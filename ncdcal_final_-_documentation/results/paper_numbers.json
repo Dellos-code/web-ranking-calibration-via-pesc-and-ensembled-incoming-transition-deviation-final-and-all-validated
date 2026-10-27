@@ -448,10 +448,6 @@
  "TwoTopoLo": "0.0026",
  "TwoTopoP": "$2.4\\times10^{-7}$",
  "TwoTopoWins": "23/24",
- "WpZeroNcdVsCanonical": "$+$0.0110",
- "WpZeroNcdVsNg": "$+$0.0743",
- "WpZeroNfMatched": "$+$0.0011",
- "WpZeroNfMatchedP": "0.062",
  "nCalibGraphs": "64",
  "nInstTotal": "3\\,007"
 }

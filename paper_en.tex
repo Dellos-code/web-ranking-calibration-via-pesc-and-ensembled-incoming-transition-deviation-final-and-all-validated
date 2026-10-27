@@ -196,6 +196,12 @@ perturbed graph is compared, with Kendall's $\tau$, to \emph{the same method's} 
 graph. This protocol measures stability. We show in Section~\ref{sec:res1-truth} that, as a target for
 choosing parameters, it is degenerate.
 
+For clarity, [NG13] Table~2 compares $(\eta,\mu)=(0.75,0.10)$ with PageRank at $0.85$ and
+$(0.85,0.10)$ with PageRank at $0.95$; its ranking experiments use total damping $0.95$ against
+PageRank at $0.85$. They do not test $0.85$ versus $0.95$ as a ranking-quality comparison, and
+the SELF protocol moves the reference with the candidate. The exact two-sided Wilcoxon p-value
+floor is $0.0625$ for $n=5$ and $0.0078$ for $n=8$.
+
 \subsection{Related work}
 \paragraph{Choosing the damping factor.} Boldi, Santini and Vigna study PageRank as a function of
 $\alpha$, give closed-form derivatives and show that $\alpha\to1$ concentrates rank on irrelevant
@@ -728,6 +734,13 @@ whereas every observable statistic together recovers only \STwoDecObs.
 
 \input{generated/en/tab_stage2_dec.tex}
 
+\input{generated/en/tab_mixture.tex}
+
+Experiments A and B are mixtures of dangling-page creation, zero-in-link pages and altered
+transition mass, with different proportions. The generated table makes this composition explicit.
+In particular, $h_{\rm raw}$ alone is nearly blind to A, so it is not a general-purpose severity
+measure for both perturbation protocols.
+
 \paragraph{Non-monotone and dangling-deconfounded rules.}
 Because $\alpha^*$ falls under both perturbations while $h$ moves in opposite directions, within one
 graph $\alpha^*$ is an inverted V in $h$ around the graph's unperturbed value $h_0$ (the joined series in
@@ -830,6 +843,12 @@ to \STwoConstAlpha{} under NCD is exactly this effect. Under NCD95 the correspon
 \texttt{real}.
 
 \input{generated/en/tab_rapr.tex}
+
+The anchor-matched operational claim is conditional on the reference: use $\alpha=0.81$ when the
+reference is defined at $0.85$, and $\alpha=0.93$ when it is defined at $0.95$. The first changes
+the NCD comparison by \WpZeroNcdVsCanonical{}, while the matched NCD95 comparison changes by
+\WpZeroNfMatched{} ($p=\WpZeroNfMatchedP$). The reference damping is a methodological decision;
+mismatched-anchor losses are shown in Table~\ref{tab:pipe}.
 
 \begin{figure}[t]
 \centering
