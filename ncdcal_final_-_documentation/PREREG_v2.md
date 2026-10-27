@@ -76,3 +76,22 @@ and does not promote a rule.
 If downloads, licences, or compute prevent a target panel from finishing, the run is labelled
 `reduced` or `skipped`, exact commands and wall-clock time are recorded in `RESUME.md`, and no
 unobserved graphs or levels are extrapolated.
+
+## Amendment 1 — 2026-10-27
+
+This amendment is appended before any `real2` outcome is computed.
+
+1. WP1 hypothesis 2 (two-stage versus `(0.105, 0.95)` under NCD) is anchor-mismatched by
+   construction. It remains descriptive, is excluded from the Holm family, and cannot support
+   a method claim.
+2. Hypothesis 3b is added: Stage 1 rule `r` with `alpha = 0.93` versus `(0.105, 0.95)` under
+   NCD95, which is the tool's validated 0.95-anchor pairing. The WP1 Holm family is now
+   `{H1, H3, H3b}`, of size 3.
+3. The smallest two-sided exact Wilcoxon p-value with `n` graphs is `2^(1-n)`: 0.0156 for
+   `n = 7`, 0.0313 for `n = 6`, and 0.0625 for `n = 5`. In a family of three, the smallest
+   p-value must be at most 0.0167 for Holm significance. Thus fewer than 7 verified new graphs
+   cannot establish the claim; if fewer than 7 are obtained, generalisation is declared
+   untestable in advance and reported as `reduced`.
+4. Pooled old-plus-new analyses use `n = 5 + new` base graphs and the same per-graph means,
+   paired exact tests, bootstrap intervals, and Holm family. The old `real` panel is never
+   re-fitted; it is only combined with the locked old outcomes for the declared pooled analysis.
