@@ -5,7 +5,7 @@
 | WP | Status | Outcome |
 |---|---|---|
 | WP0 | done | Corrections and generated A/B mixture and anchor-matching outputs added to both manuscripts and both documentation sources. |
-| WP1 | skipped | No verified additional real-network downloads were available in the session; no `real2` outcome is claimed. |
+| WP1 | reduced | PubMed and DBLP raw files were reachable and verified, but both are essentially symmetric (reverse-arc fraction 1.000) and were dropped as unsuitable directed candidates; SNAP, LAW and OGB hosts were unreachable by DNS, so no `real2` outcome is claimed. |
 | WP2 | skipped | The new `NCD(a)` sweep was not run; the existing results support only the already validated 0.85/0.95 anchors. |
 | WP3 | reduced | `mixed_damage` was implemented and unit-tested, but no Experiment C held-out outcome was computed. |
 | WP4 | skipped | No baseline outcome was computed; baseline use remains disabled. |
@@ -37,6 +37,22 @@ unreachable by DNS; graph2gauss PubMed and DBLP raw URLs were reachable but have
 prepared into `real2`. XeLaTeX, Pandoc and FreeSerif were installed and the rebuilt documents passed
 the new error/overfull/reference checks. This remains a reduced implementation, not evidence for
 the skipped hypotheses.
+
+## WP1 candidate verification
+
+The reachable graph2gauss raw files were downloaded only to ignored `raw_data/`:
+
+| Candidate | SHA-256 | n | arcs | reverse-arc fraction | labels | outcome |
+|---|---|---:|---:|---:|---:|---|
+| CitationFull DBLP | `46da600a15c0680d967b3c9ac83979e3c44dfe5a0ef86e1c42a94d8dee1c1da4` | 17,716 | 105,734 | 1.000 | 4 | dropped: essentially symmetric |
+| CitationFull PubMed | `7e671409fd689d45ef0715b75be43cacbf416e14d4d84beadb5965ef2e5d028f` | 19,717 | 88,648 | 1.000 | 3 | dropped: essentially symmetric |
+
+Source URLs were `https://raw.githubusercontent.com/abojchevski/graph2gauss/master/data/dblp.npz`
+and `https://raw.githubusercontent.com/abojchevski/graph2gauss/master/data/pubmed.npz`.
+Both files contain topic labels with no empty ids; the graph2gauss repository is MIT-licensed.
+The source URLs, access date (2026-10-27), hashes and directedness check are recorded here rather
+than treating these symmetric matrices as directed citation networks. SNAP, LAW and OGB probes
+failed at DNS resolution, so they were not substituted or symmetrised.
 
 ## Acceptance checklist
 

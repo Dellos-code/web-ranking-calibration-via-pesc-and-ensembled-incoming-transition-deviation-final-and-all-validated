@@ -34,3 +34,6 @@ Continuation pass status:
   undefined references/citations, and paper-asset writer collisions.
 - Toolchain/network probe: XeLaTeX, Pandoc, and FreeSerif are available; graph2gauss PubMed/DBLP
   raw URLs are reachable, while SNAP, LAW, and OGB hosts were unreachable by DNS.
+- WP1 candidate check is reduced: graph2gauss DBLP/PubMed were downloaded to ignored `raw_data/`,
+  both had reverse-arc fraction 1.000 and were dropped; no `real2` graph or held-out outcome was
+  computed. Continue with WP2 only if time remains.
