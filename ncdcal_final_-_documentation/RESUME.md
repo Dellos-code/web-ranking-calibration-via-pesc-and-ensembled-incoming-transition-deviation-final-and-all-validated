@@ -11,6 +11,7 @@ python3 -m venv .venv
 .venv/bin/python tests/test_nonmono.py
 .venv/bin/python tests/test_autotune.py
 .venv/bin/python verify_v2.py
+.venv/bin/python check_build.py
 ```
 
 Before any new held-out outcome, keep the committed `PREREG_v2.md`. If verified raw datasets are
@@ -22,3 +23,14 @@ The paper build currently requires `xelatex`, and the documentation build requir
 Use `PATH="$PWD/.venv/bin:$PATH" bash build_papers.sh` after installing the TeX toolchain, then
 `bash build_docs.sh`. Finally copy changed canonical files to the repository root and verify each
 with `diff -u`.
+
+Continuation pass status:
+- WP5 strengthening is complete in the working tree: independent dense-statistics tests, anchor
+  validation, cleaning/degenerate cases, CLI coverage, and the 200,000-arc timing smoke test.
+- `verify_v2.py` now recomputes per-base-graph comparisons from stage2 NPZ files and checks the
+  generated mismatch/mixture tables, macros, and documentation headline rows without importing
+  analysis modules.
+- Build checks fail on LaTeX errors, overfull boxes, duplicate labels, multiply-defined labels,
+  undefined references/citations, and paper-asset writer collisions.
+- Toolchain/network probe: XeLaTeX, Pandoc, and FreeSerif are available; graph2gauss PubMed/DBLP
+  raw URLs are reachable, while SNAP, LAW, and OGB hosts were unreachable by DNS.

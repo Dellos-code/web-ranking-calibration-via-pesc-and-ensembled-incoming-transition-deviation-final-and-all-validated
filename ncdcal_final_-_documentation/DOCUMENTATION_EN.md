@@ -722,6 +722,8 @@ trivial recovery problem.
 | 14 `tab:stage1truth` | Stage 1 under the four Stage 1 truths (appendix) | `stage1_truth_table` |
 | 15 `tab:sens` | Stage 2 rules refitted per sensitivity truth (appendix) | `stage2` |
 | 16 `tab:realdetail` | real panel per network (appendix) | `real_detail` |
+| 17 `tab:mixture` | mixture mechanisms for Experiments A and B | `nonmono_summary` |
+| 18 `tab:mismatch` | anchor-matched and mismatched held-out comparisons | `pipelines` |
 
 # 11. Step-by-step reproduction
 
@@ -731,7 +733,7 @@ All commands run from the `ncdcal/` directory.
    for the manuscripts, a TeX distribution with XeLaTeX and the FreeSerif font; for this
    documentation, pandoc.
 2. **Unit tests** (a few seconds):
-   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py`.
+   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py && python3 tests/test_autotune.py && python3 check_build.py && python3 verify_v2.py`.
 3. **Raw data** into `../data/`: the cnr-2000 BVGraph files (`cnr-2000.graph`, `.offsets`,
    `.properties`) from the Laboratory for Web Algorithmics (https://law.di.unimi.it/webdata/cnr-2000/)
    into `../data/cnr2000/`; the WikiCS file `dataset/data.json` of

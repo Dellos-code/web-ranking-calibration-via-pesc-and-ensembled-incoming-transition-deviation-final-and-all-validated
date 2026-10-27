@@ -9,7 +9,7 @@
 | WP2 | skipped | The new `NCD(a)` sweep was not run; the existing results support only the already validated 0.85/0.95 anchors. |
 | WP3 | reduced | `mixed_damage` was implemented and unit-tested, but no Experiment C held-out outcome was computed. |
 | WP4 | skipped | No baseline outcome was computed; baseline use remains disabled. |
-| WP5 | done | `ncd_autotune.py`, tests, README recipe and independent v2 verification added. |
+| WP5 | done | `ncd_autotune.py`, strengthened independent tests, build checks, README recipe and independent v2 verification added. |
 | WP6 | skipped | No dangling-treatment re-run was performed. |
 
 ## WP0 headline evidence
@@ -23,17 +23,20 @@ reference-free discount is claimed.
 ## WP5 validation
 
 The locked Stage 1 formula, supported anchor values, diagnostics, baseline warning, mixed-damage
-primitive and all existing tests were executed successfully. `verify_v2.py` reads the aggregated
-JSON/CSV outputs without importing the analysis modules; it does not recompute them from per-instance
-data (a stronger version is still to be written), and `tests/test_autotune.py` checks the tool against
-the library it wraps rather than against an independent computation.
+primitive and all existing tests were executed successfully. The strengthened autotune test includes
+an independent dense NumPy implementation, duplicate/self-loop and degenerate cases, CLI coverage,
+and a 200,000-arc timing smoke test. `verify_v2.py` reads each stage2 NPZ directly, rebuilds
+per-graph means, recomputes exact Wilcoxon comparisons, and checks the generated mismatch/mixture
+tables, macros and documentation headline rows without importing the analysis modules.
 
 ## Runtime and deviations
 
 The preregistration and WP0 asset generation completed in seconds once the local Python environment
-was restored. The full extension experiment budgets were not spent because the session lacked
-verified real2 source files and the TeX/Pandoc build toolchain (`xelatex` and `pandoc` were
-unavailable). This is a reduced implementation, not evidence for the skipped hypotheses.
+was restored. The full extension experiment budgets were not spent because SNAP, LAW and OGB hosts were
+unreachable by DNS; graph2gauss PubMed and DBLP raw URLs were reachable but have not yet been
+prepared into `real2`. XeLaTeX, Pandoc and FreeSerif were installed and the rebuilt documents passed
+the new error/overfull/reference checks. This remains a reduced implementation, not evidence for
+the skipped hypotheses.
 
 ## Acceptance checklist
 

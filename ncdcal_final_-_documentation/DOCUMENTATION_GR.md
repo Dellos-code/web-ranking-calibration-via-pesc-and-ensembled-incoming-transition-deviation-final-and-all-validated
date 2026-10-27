@@ -770,6 +770,8 @@ TOT, όπου αποτελεί τετριμμένο πρόβλημα ανάκτ�
 | 14 `tab:stage1truth` | το Στάδιο 1 υπό τις τέσσερις αλήθειες του Σταδίου 1 (παράρτημα) | `stage1_truth_table` |
 | 15 `tab:sens` | κανόνες Σταδίου 2 επαναπροσαρμοσμένοι ανά αλήθεια ευαισθησίας (παράρτημα) | `stage2` |
 | 16 `tab:realdetail` | πραγματικά δίκτυα ανά δίκτυο (παράρτημα) | `real_detail` |
+| 17 `tab:mixture` | μηχανισμοί μειγμάτων για τα Πειράματα Α και Β | `nonmono_summary` |
+| 18 `tab:mismatch` | συγκρίσεις με και χωρίς αντιστοίχιση άγκυρας | `pipelines` |
 
 # 11. Αναπαραγωγή βήμα προς βήμα
 
@@ -779,7 +781,7 @@ TOT, όπου αποτελεί τετριμμένο πρόβλημα ανάκτ�
    για τα κείμενα, διανομή TeX με XeLaTeX και τη γραμματοσειρά FreeSerif· για αυτή την τεκμηρίωση,
    pandoc.
 2. **Έλεγχοι μονάδας** (λίγα δευτερόλεπτα):
-   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py`.
+   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py && python3 tests/test_autotune.py && python3 check_build.py && python3 verify_v2.py`.
 3. **Πρωτογενή δεδομένα** στο `../data/`: τα αρχεία BVGraph του cnr-2000 (`cnr-2000.graph`,
    `.offsets`, `.properties`) από το Laboratory for Web Algorithmics
    (https://law.di.unimi.it/webdata/cnr-2000/) στο `../data/cnr2000/`· το αρχείο `dataset/data.json`

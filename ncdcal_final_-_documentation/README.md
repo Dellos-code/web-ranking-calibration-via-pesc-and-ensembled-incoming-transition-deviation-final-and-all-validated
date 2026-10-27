@@ -15,6 +15,7 @@ Oracle Damping*.
 | Technical documentation and thesis guide | `DOCUMENTATION_EN.md` / `.pdf`, `DOCUMENTATION_GR.md` / `.pdf` |
 | Method disclosure (English and Greek) | `METHOD_DISCLOSURE_EN_GR.md` / `.txt` |
 | Code | `*.py`, `*.sh`, `tests/` |
+| Practical autotune tool | `ncd_autotune.py` (validated anchors 0.85 and 0.95) |
 | Results, figures, logs | `results/`, `figures/`, `figures_gr/`, `logs/` |
 | Prepared real graphs | `data/real/` |
 
@@ -25,6 +26,7 @@ python3 tests/test_lib.py          # unit tests (seconds)
 python3 tests/test_stage2.py
 python3 tests/test_nonmono.py
 python3 tests/test_autotune.py
+python3 check_build.py
 python3 verify_stage2.py           # recompute headline numbers
 python3 verify_v2.py               # independently verify v2 headline inputs
 bash build_papers.sh               # regenerate tables/macros, compile papers
