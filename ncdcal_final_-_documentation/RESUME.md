@@ -39,3 +39,19 @@ Continuation pass status:
   computed. Continue with WP2 only if time remains.
 - WP3 primitive checks are complete: endpoint equivalence, deterministic replay, and small
   expectation checks pass. Experiment C itself was not run; WP2 and WP4 remain skipped.
+
+WP3 continuation (2026-10-27):
+
+```bash
+.venv/bin/python mixed_experiment.py --panel calib,test,topo --limit 1
+.venv/bin/python mixed_experiment.py --panel real --limit 1 --cnr-cells 1
+```
+
+`mixed_experiment.py` is the additive Experiment C driver.  It writes
+`results/mixed/{instances.csv,surfaces.npz,rule_results.csv,group_results.csv,contrast_results.csv,summary.json}`
+and preserves panel-specific reduced outputs in `results/mixed/synthetic/` and
+`results/mixed/real/`.  The measured `calib_000` one-cell probe was 0.74 s; the
+reduced synthetic run (one base each in `calib`, `test`, `topo`) took 53.1 s
+(102 instances).  The one-cell `cnr2000` reduced run took 347.1 s.  The latter
+is intentionally limited to one of the four required cnr2000 cells; no
+full-panel extrapolation is claimed.  Reverse-order sensitivity was not run.

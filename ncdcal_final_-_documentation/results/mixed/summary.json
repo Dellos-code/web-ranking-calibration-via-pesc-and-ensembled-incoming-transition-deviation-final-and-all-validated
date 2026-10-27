@@ -1,0 +1,27 @@
+{
+  "panels": [
+    "calib",
+    "test",
+    "topo"
+  ],
+  "rules": [
+    "C0",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "single_h_raw_rel",
+    "single_h_raw_rel_delta",
+    "single_h_raw_rel_zeta"
+  ],
+  "n_instances": 102,
+  "n_base_graphs": 3,
+  "runtime_seconds": 53.123780727386475,
+  "order": "B_then_A",
+  "pre_registered_contrast": "C4/C5/C6/C7 versus C1 when |dh|<0.02 and oracle_NCD<0.80",
+  "status": "reduced"
+}

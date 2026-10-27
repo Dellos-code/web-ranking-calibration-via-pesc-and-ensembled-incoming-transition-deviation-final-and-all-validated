@@ -7,7 +7,7 @@
 | WP0 | done | Corrections and generated A/B mixture and anchor-matching outputs added to both manuscripts and both documentation sources. |
 | WP1 | reduced | PubMed and DBLP raw files were reachable and verified, but both are essentially symmetric (reverse-arc fraction 1.000) and were dropped as unsuitable directed candidates; SNAP, LAW and OGB hosts were unreachable by DNS, so no `real2` outcome is claimed. |
 | WP2 | skipped | The new `NCD(a)` sweep and its required 0.85/0.95 surface reproduction check were not run; the existing results support only the already validated 0.85/0.95 anchors. |
-| WP3 | reduced | `mixed_damage` endpoint semantics and deterministic/statistical unit tests were added, but no Experiment C held-out outcome or preregistered mixture contrast was computed. |
+| WP3 | reduced | Additive `mixed_experiment.py` now runs Experiment C, records the requested features and NCD/NCD95/TOT oracle surfaces, fits C0-C8 and single-snapshot counterparts, and writes pure-A/B/mixed grouped outputs plus the preregistered contrast filter. One synthetic base per `calib`, `test`, and `topo` (102 instances) and one reduced `cnr2000` cell were run; this is not a full held-out outcome. |
 | WP4 | skipped | No baseline outcome was computed; baseline use remains disabled. |
 | WP5 | done | `ncd_autotune.py`, strengthened independent tests, build checks, README recipe and independent v2 verification added. |
 | WP6 | skipped | No dangling-treatment re-run was performed. |
@@ -28,6 +28,16 @@ an independent dense NumPy implementation, duplicate/self-loop and degenerate ca
 and a 200,000-arc timing smoke test. `verify_v2.py` reads each stage2 NPZ directly, rebuilds
 per-graph means, recomputes exact Wilcoxon comparisons, and checks the generated mismatch/mixture
 tables, macros and documentation headline rows without importing the analysis modules.
+
+## WP3 continuation evidence
+
+The one-cell `calib_000` probe took 0.74 s. The reduced synthetic command
+`mixed_experiment.py --panel calib,test,topo --limit 1` took 53.1 s and
+produced 102 Experiment C instances. The reduced `cnr2000` command with
+`--cnr-cells 1` took 347.1 s. Outputs are under `results/mixed/`, with
+copies under `results/mixed/synthetic/` and `results/mixed/real/`.
+`contrast_results.csv` applies the preregistered filter; the reduced sample
+does not support promotion or a generalisation claim.
 
 ## Runtime and deviations
 
