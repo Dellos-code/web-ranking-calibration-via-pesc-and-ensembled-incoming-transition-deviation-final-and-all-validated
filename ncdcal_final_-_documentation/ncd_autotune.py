@@ -17,6 +17,11 @@ def tune(src, dst, block, alpha_ref=0.85, baseline=None):
     """Return the locked single-snapshot calibration and diagnostics.
 
     The arrays describe directed arcs ``src -> dst`` and a block id per page.
+    At ``alpha_ref=0.85`` the validated pairing is the Stage 1 rule ``r`` with
+    ``alpha=0.81``.  At ``alpha_ref=0.95`` it is that same Stage 1 ``r`` with
+    ``alpha=0.93``; the calibration-optimal constant for this pairing is 0.920,
+    only 0.0002 tau above 0.93.  The tool deliberately returns the Stage 1
+    rule's ``r`` rather than the reference's own ``r=0.10/alpha_ref``.
     ``baseline`` is accepted for API compatibility but is intentionally ignored until
     a baseline rule passes the preregistered WP3/WP4 tests.
     """

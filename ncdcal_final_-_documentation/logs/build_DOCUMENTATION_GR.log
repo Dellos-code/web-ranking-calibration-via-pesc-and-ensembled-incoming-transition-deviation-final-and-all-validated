@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.10.27)  27 OCT 2026 16:13
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.10.27)  27 OCT 2026 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1294,7 +1294,7 @@ rams, rng) \TU/FreeSerif(2)/m/n/10 κατασκευάζει τον γράφο κ
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
 (Font)              scaled to size 8.20007pt on input line 633.
 [7]
-Underfull \hbox (badness 6876) in paragraph at lines 654--660
+Underfull \hbox (badness 6876) in paragraph at lines 664--670
 []\TU/FreeSerif(2)/m/n/10 Το \TU/DejaVuSansMono(0)/m/n/10 prepare_real_graphs.p
 y [names…] \TU/FreeSerif(2)/m/n/10 γράφει τα \TU/DejaVuSansMono(0)/m/n/10 data/
 real/<name>.npz \TU/FreeSerif(2)/m/n/10 (\TU/DejaVuSansMono(0)/m/n/10 n\TU/Free
@@ -1304,21 +1304,21 @@ n/10 block\TU/FreeSerif(2)/m/n/10 ) και το
  []
 
 
-Underfull \hbox (badness 1038) in paragraph at lines 724--728
+Underfull \hbox (badness 1038) in paragraph at lines 734--738
 []\TU/FreeSerif(2)/m/n/10 Η \TU/DejaVuSansMono(0)/m/n/10 panel_specs(panel) \TU
 /FreeSerif(2)/m/n/10 απαριθμεί τους γράφους βάσης ενός συνόλου με τους σπόρους 
 τους (Ενότητα 8)· η
  []
 
 [8]
-Underfull \hbox (badness 4168) in paragraph at lines 834--839
+Underfull \hbox (badness 4168) in paragraph at lines 844--849
 []\TU/DejaVuSansMono(0)/b/n/10 stage1_crosstruth.py\TU/FreeSerif(2)/b/n/10 . \T
 U/FreeSerif(2)/m/n/10 Αξιολογεί κανόνες προσαρμοσμένους υπό μία αλήθεια έναντι 
 κάθε άλλης
  []
 
 [9]
-Underfull \hbox (badness 1292) in paragraph at lines 881--885
+Underfull \hbox (badness 1292) in paragraph at lines 891--895
 []\TU/DejaVuSansMono(0)/b/n/10 stage2_upper_check.py [n_graphs=8]\TU/FreeSerif(
 2)/b/n/10 . \TU/FreeSerif(2)/m/n/10 Αξιολογεί το $[]$ έναντι της Q για $[] [] [
 ][][][][][] [][][][][][] [][][][][][]$
@@ -1326,11 +1326,11 @@ Underfull \hbox (badness 1292) in paragraph at lines 881--885
 
 [10]
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 1038.
+(Font)              scaled to size 12.0pt on input line 1048.
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 1038.
+(Font)              scaled to size 8.0pt on input line 1048.
  [11] [12] [13] [14] [15] [16]
-Underfull \hbox (badness 3826) in paragraph at lines 1564--1576
+Underfull \hbox (badness 3826) in paragraph at lines 1574--1586
 []\TU/FreeSerif(2)/b/n/10 Πρωτογενή δεδομένα \TU/FreeSerif(2)/m/n/10 στο \TU/De
 jaVuSansMono(0)/m/n/10 ../data/\TU/FreeSerif(2)/m/n/10 : τα αρχεία BVGraph του 
 cnr-2000 (\TU/DejaVuSansMono(0)/m/n/10 cnr-2000.graph\TU/FreeSerif(2)/m/n/10 , 
@@ -1338,20 +1338,20 @@ cnr-2000 (\TU/DejaVuSansMono(0)/m/n/10 cnr-2000.graph\TU/FreeSerif(2)/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1564--1576
+Underfull \hbox (badness 10000) in paragraph at lines 1574--1586
 \TU/DejaVuSansMono(0)/m/n/10 .properties\TU/FreeSerif(2)/m/n/10 ) από το Labora
 tory for Web Algorithmics (https://law.di.unimi.it/webdata/cnr-2000/) στο
  []
 
 
-Underfull \hbox (badness 2951) in paragraph at lines 1564--1576
+Underfull \hbox (badness 2951) in paragraph at lines 1574--1586
 \TU/DejaVuSansMono(0)/m/n/10 ../data/cnr2000/\TU/FreeSerif(2)/m/n/10 · το αρχεί
 ο \TU/DejaVuSansMono(0)/m/n/10 dataset/data.json \TU/FreeSerif(2)/m/n/10 του ht
 tps://github.com/pmernyei/wiki-cs-dataset (αποθη-
  []
 
 
-Underfull \hbox (badness 2351) in paragraph at lines 1564--1576
+Underfull \hbox (badness 2351) in paragraph at lines 1574--1586
 \TU/FreeSerif(2)/m/n/10 κευμένο ως \TU/DejaVuSansMono(0)/m/n/10 wikics_data.jso
 n\TU/FreeSerif(2)/m/n/10 ) και τα αρχεία CitationFull \TU/DejaVuSansMono(0)/m/n
 /10 cora.npz\TU/FreeSerif(2)/m/n/10 , \TU/DejaVuSansMono(0)/m/n/10 cora_ml.npz\
@@ -1360,7 +1360,7 @@ f(2)/m/n/10 του
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 1586--1592
+Underfull \hbox (badness 5105) in paragraph at lines 1596--1602
 []\TU/FreeSerif(2)/b/n/10 Ανάλυση Σταδίου 1\TU/FreeSerif(2)/m/n/10 : \TU/DejaVu
 SansMono(0)/m/n/10 python3 stage1_analysis.py\TU/FreeSerif(2)/m/n/10 , \TU/Deja
 VuSansMono(0)/m/n/10 python3 stage1_decomposition.py\TU/FreeSerif(2)/m/n/10 , \
@@ -1368,7 +1368,7 @@ TU/DejaVuSansMono(0)/m/n/10 python3
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 1595--1605
+Underfull \hbox (badness 5105) in paragraph at lines 1605--1615
 []\TU/FreeSerif(2)/b/n/10 Ανάλυση Σταδίου 2\TU/FreeSerif(2)/m/n/10 : \TU/DejaVu
 SansMono(0)/m/n/10 python3 stage2_analysis.py\TU/FreeSerif(2)/m/n/10 , \TU/Deja
 VuSansMono(0)/m/n/10 python3 stage2_decomposition.py\TU/FreeSerif(2)/m/n/10 , \
@@ -1376,7 +1376,7 @@ TU/DejaVuSansMono(0)/m/n/10 python3
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1595--1605
+Underfull \hbox (badness 10000) in paragraph at lines 1605--1615
 \TU/DejaVuSansMono(0)/m/n/10 stage2_rapr_anchor.py\TU/FreeSerif(2)/m/n/10 , \TU
 /DejaVuSansMono(0)/m/n/10 python3 stage2_upper_check.py\TU/FreeSerif(2)/m/n/10 
 , \TU/DejaVuSansMono(0)/m/n/10 python3 convergence_check.py\TU/FreeSerif(2)/m/n
@@ -1384,7 +1384,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1595--1605
  []
 
 
-Underfull \hbox (badness 7451) in paragraph at lines 1595--1605
+Underfull \hbox (badness 7451) in paragraph at lines 1605--1615
 \TU/DejaVuSansMono(0)/m/n/10 python3 bound_check.py\TU/FreeSerif(2)/m/n/10 , \T
 U/DejaVuSansMono(0)/m/n/10 python3 verify_stage2.py\TU/FreeSerif(2)/m/n/10 , \T
 U/DejaVuSansMono(0)/m/n/10 python3 stage2_tables.py \TU/FreeSerif(2)/m/n/10 και
@@ -1392,7 +1392,7 @@ U/DejaVuSansMono(0)/m/n/10 python3 stage2_tables.py \TU/FreeSerif(2)/m/n/10 κα
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1609--1614
+Underfull \hbox (badness 10000) in paragraph at lines 1619--1624
 []\TU/FreeSerif(2)/b/n/10 Κείμενα\TU/FreeSerif(2)/m/n/10 : το \TU/DejaVuSansMon
 o(0)/m/n/10 bash build_papers.sh \TU/FreeSerif(2)/m/n/10 εκτελεί το \TU/DejaVuS
 ansMono(0)/m/n/10 make_paper_assets.py \TU/FreeSerif(2)/m/n/10 και μεταγλωττίζε

@@ -178,6 +178,11 @@ def check_documentation_headlines():
         missing = expected - set(re.findall(r"[+-]\d+\.\d{4}", joined))
         if missing:
             raise AssertionError(f"{lang} headline values missing: {sorted(missing)}")
+        if "0.920" not in text or "0.0002" not in text:
+            raise AssertionError(f"{lang} practical recipe values missing")
+    readme = open(os.path.join(HERE, "README.md"), encoding="utf-8").read()
+    if "0.920" not in readme or "0.0002" not in readme:
+        raise AssertionError("README practical recipe values missing")
 
 
 def main():

@@ -286,6 +286,13 @@ validated anchor-matched alpha, and $O(|E|+n)$ diagnostics. Only references at 0
 currently supported; unsupported values raise an error and a baseline is ignored with an explicit
 warning until WP3/WP4 validate a deployable baseline rule.
 
+**Practical recipe.** For a reference at $0.85$, call the tool with `alpha_ref=0.85`: it returns the
+Stage 1 rule $r$ and $\alpha=0.81$. For a reference at $0.95$, use `alpha_ref=0.95`: it returns
+the same Stage 1 rule $r$ and $\alpha=0.93$. The calibration optimum for that pairing is
+0.920, only 0.0002 $\tau$ above 0.93. The tool deliberately does
+not return the reference's own $r=0.10/\alpha_{\rm ref}$; it returns Stage 1's $r$. A supplied
+`baseline` is ignored with a warning because no baseline rule is validated.
+
 ## 5.3 `decode_cnr2000.py` and `prepare_real_graphs.py`
 
 `decode_cnr2000.py [raw_dir]` opens the BVGraph files of cnr-2000 (Laboratory for Web Algorithmics)
