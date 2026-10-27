@@ -309,6 +309,14 @@ $w_k=B(a+k,b+1)/B(a,b)$· για $a=b=1$ προκύπτει το TotalRank, $w_k
 Υποστηρίζονται μόνο αναφορές στο 0.85 και στο 0.95· άλλες τιμές απορρίπτονται και το baseline
 αγνοείται με σαφή προειδοποίηση έως ότου επικυρωθεί κανόνας στα WP3/WP4.
 
+**Πρακτική συνταγή.** Για αναφορά στο $0.85$, καλέστε το εργαλείο με `alpha_ref=0.85`: επιστρέφει
+τον κανόνα $r$ του Σταδίου 1 και $\alpha=0.81$. Για αναφορά στο $0.95$, χρησιμοποιήστε
+`alpha_ref=0.95`: επιστρέφει τον ίδιο κανόνα $r$ του Σταδίου 1 και $\alpha=0.93$. Η βέλτιστη
+σταθερά γι' αυτόν τον συνδυασμό είναι 0.920, μόνο 0.0002 $\tau$
+πάνω από το 0.93. Το εργαλείο σκόπιμα δεν επιστρέφει το ίδιο $r$ της αναφοράς
+$r=0.10/\alpha_{\rm ref}$· επιστρέφει το $r$ του Σταδίου 1. Το `baseline` αγνοείται με προειδοποίηση,
+επειδή δεν έχει επικυρωθεί κανένας κανόνας baseline.
+
 ## 5.3 `decode_cnr2000.py` και `prepare_real_graphs.py`
 
 Το `decode_cnr2000.py [raw_dir]` ανοίγει τα αρχεία BVGraph του cnr-2000 (Laboratory for Web
@@ -770,6 +778,8 @@ TOT, όπου αποτελεί τετριμμένο πρόβλημα ανάκτ�
 | 14 `tab:stage1truth` | το Στάδιο 1 υπό τις τέσσερις αλήθειες του Σταδίου 1 (παράρτημα) | `stage1_truth_table` |
 | 15 `tab:sens` | κανόνες Σταδίου 2 επαναπροσαρμοσμένοι ανά αλήθεια ευαισθησίας (παράρτημα) | `stage2` |
 | 16 `tab:realdetail` | πραγματικά δίκτυα ανά δίκτυο (παράρτημα) | `real_detail` |
+| 17 `tab:mixture` | μηχανισμοί μειγμάτων για τα Πειράματα Α και Β | `nonmono_summary` |
+| 18 `tab:mismatch` | συγκρίσεις με και χωρίς αντιστοίχιση άγκυρας | `pipelines` |
 
 # 11. Αναπαραγωγή βήμα προς βήμα
 
@@ -779,7 +789,7 @@ TOT, όπου αποτελεί τετριμμένο πρόβλημα ανάκτ�
    για τα κείμενα, διανομή TeX με XeLaTeX και τη γραμματοσειρά FreeSerif· για αυτή την τεκμηρίωση,
    pandoc.
 2. **Έλεγχοι μονάδας** (λίγα δευτερόλεπτα):
-   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py`.
+   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py && python3 tests/test_autotune.py && python3 check_build.py && python3 verify_v2.py`.
 3. **Πρωτογενή δεδομένα** στο `../data/`: τα αρχεία BVGraph του cnr-2000 (`cnr-2000.graph`,
    `.offsets`, `.properties`) από το Laboratory for Web Algorithmics
    (https://law.di.unimi.it/webdata/cnr-2000/) στο `../data/cnr2000/`· το αρχείο `dataset/data.json`

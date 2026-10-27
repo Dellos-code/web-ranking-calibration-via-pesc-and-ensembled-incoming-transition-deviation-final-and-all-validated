@@ -1,0 +1,10 @@
+
+.venv/
+raw_data/
+__pycache__/
+*.pyc
+node_modules/
+paper/*.aux
+paper/*.out
+paper/paper_*.log
+paper/build_paper_*.log

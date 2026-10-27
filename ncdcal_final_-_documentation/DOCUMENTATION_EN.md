@@ -286,6 +286,13 @@ validated anchor-matched alpha, and $O(|E|+n)$ diagnostics. Only references at 0
 currently supported; unsupported values raise an error and a baseline is ignored with an explicit
 warning until WP3/WP4 validate a deployable baseline rule.
 
+**Practical recipe.** For a reference at $0.85$, call the tool with `alpha_ref=0.85`: it returns the
+Stage 1 rule $r$ and $\alpha=0.81$. For a reference at $0.95$, use `alpha_ref=0.95`: it returns
+the same Stage 1 rule $r$ and $\alpha=0.93$. The calibration optimum for that pairing is
+0.920, only 0.0002 $\tau$ above 0.93. The tool deliberately does
+not return the reference's own $r=0.10/\alpha_{\rm ref}$; it returns Stage 1's $r$. A supplied
+`baseline` is ignored with a warning because no baseline rule is validated.
+
 ## 5.3 `decode_cnr2000.py` and `prepare_real_graphs.py`
 
 `decode_cnr2000.py [raw_dir]` opens the BVGraph files of cnr-2000 (Laboratory for Web Algorithmics)
@@ -722,6 +729,8 @@ trivial recovery problem.
 | 14 `tab:stage1truth` | Stage 1 under the four Stage 1 truths (appendix) | `stage1_truth_table` |
 | 15 `tab:sens` | Stage 2 rules refitted per sensitivity truth (appendix) | `stage2` |
 | 16 `tab:realdetail` | real panel per network (appendix) | `real_detail` |
+| 17 `tab:mixture` | mixture mechanisms for Experiments A and B | `nonmono_summary` |
+| 18 `tab:mismatch` | anchor-matched and mismatched held-out comparisons | `pipelines` |
 
 # 11. Step-by-step reproduction
 
@@ -731,7 +740,7 @@ All commands run from the `ncdcal/` directory.
    for the manuscripts, a TeX distribution with XeLaTeX and the FreeSerif font; for this
    documentation, pandoc.
 2. **Unit tests** (a few seconds):
-   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py`.
+   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py && python3 tests/test_autotune.py && python3 check_build.py && python3 verify_v2.py`.
 3. **Raw data** into `../data/`: the cnr-2000 BVGraph files (`cnr-2000.graph`, `.offsets`,
    `.properties`) from the Laboratory for Web Algorithmics (https://law.di.unimi.it/webdata/cnr-2000/)
    into `../data/cnr2000/`; the WikiCS file `dataset/data.json` of
