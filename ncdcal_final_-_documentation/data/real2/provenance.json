@@ -1,0 +1,145 @@
+{
+  "cornell": {
+    "access_date": "2026-10-27",
+    "arcs": 295,
+    "blocks": 5,
+    "dangling_fraction": 0.4808743169398907,
+    "intra_block_arc_fraction": 0.12203389830508475,
+    "licence": "WebKB data; Geom-GCN repository/paper provenance",
+    "mean_outdegree": 1.6120218579234973,
+    "n": 183,
+    "partition": "label partition by page category (weaker proxy than a website)",
+    "partition_type": "label",
+    "raw_sha256": {
+      "cornell_edges.txt": "12dc60defc4f8a1f18499e3695bfd62ef0421f9b722297276e7f02dec7ae3dca",
+      "cornell_labels.txt": "38561ad44e29199a826ccef7f94f469b94a912076f83fbc453a69b8ac2b4b858"
+    },
+    "reverse_arc_fraction": 0.12203389830508475,
+    "source_url": "https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/new_data/cornell/"
+  },
+  "email-Eu-core": {
+    "access_date": "2026-10-27",
+    "arcs": 24929,
+    "blocks": 42,
+    "dangling_fraction": 0.18009950248756218,
+    "intra_block_arc_fraction": 0.3467848690280396,
+    "licence": "SNAP dataset, Stanford Network Analysis Project",
+    "mean_outdegree": 24.80497512437811,
+    "n": 1005,
+    "partition": "42 department labels",
+    "partition_type": "label",
+    "raw_sha256": {
+      "email-Eu-core-department-labels.txt.gz": "e5abe5b4581a480032a63adcf2576c161785f45692642c6ebb0b1276f0f33669",
+      "email-Eu-core.txt.gz": "4b47acdb80197b085fe63c819c357ae488131ee904ed93d1b219a68b0f9e245f"
+    },
+    "reverse_arc_fraction": 0.7112198644149385,
+    "source_url": "https://snap.stanford.edu/data/email-Eu-core.html"
+  },
+  "film": {
+    "access_date": "2026-10-27",
+    "arcs": 29926,
+    "blocks": 5,
+    "dangling_fraction": 0.08460526315789474,
+    "intra_block_arc_fraction": 0.2163336229365769,
+    "licence": "WebKB data; Geom-GCN repository/paper provenance",
+    "mean_outdegree": 3.9376315789473684,
+    "n": 7600,
+    "partition": "label partition by page category (weaker proxy than a website)",
+    "partition_type": "label",
+    "raw_sha256": {
+      "film_edges.txt": "997cdce67ea9c29257d3ffe796328391931901cf823830affa453178b60e2c3e",
+      "film_labels.txt": "1d5cdd094f8b91e770f6decfca85b35cf42f75d1efb51055fd6af16e11820ff8"
+    },
+    "reverse_arc_fraction": 0.21833856846888994,
+    "source_url": "https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/new_data/film/"
+  },
+  "ogbn-arxiv": {
+    "access_date": "2026-10-27",
+    "arcs": 1166243,
+    "blocks": 40,
+    "dangling_fraction": 0.102986246848113,
+    "intra_block_arc_fraction": 0.655083031580897,
+    "licence": "Open Graph Benchmark data and paper",
+    "mean_outdegree": 6.886868663009395,
+    "n": 169343,
+    "partition": "subject-area node labels",
+    "partition_type": "label",
+    "raw_sha256": {
+      "edge.csv.gz": "47629e986116407d27eff4c9d2e923f06bf5da5c85cbae93b660f530bc9355df",
+      "node-label.csv.gz": "b06e7cf75d909de66ce49bc4188a6dc525224f85dd6dcb36137de3d9321830d1",
+      "num-node-list.csv.gz": "9aa60a342efd209408933ace51e6b0a814e81c2894a993c44f9b173e477e2e82"
+    },
+    "reverse_arc_fraction": 0.014480687129526179,
+    "source_url": "https://ogb.stanford.edu/docs/nodeprop/#ogbn-arxiv"
+  },
+  "texas": {
+    "access_date": "2026-10-27",
+    "arcs": 309,
+    "blocks": 5,
+    "dangling_fraction": 0.4262295081967213,
+    "intra_block_arc_fraction": 0.061488673139158574,
+    "licence": "WebKB data; Geom-GCN repository/paper provenance",
+    "mean_outdegree": 1.6885245901639345,
+    "n": 183,
+    "partition": "label partition by page category (weaker proxy than a website)",
+    "partition_type": "label",
+    "raw_sha256": {
+      "texas_edges.txt": "0fe85183243a78cbee9b85a684f8240963d04d1020d10e9cd2b8cfb25e33b476",
+      "texas_labels.txt": "cf5a3ca346cdd1210b8342e22517fcbbdae658065b7a3145f59350e50e6236a3"
+    },
+    "reverse_arc_fraction": 0.1941747572815534,
+    "source_url": "https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/new_data/texas/"
+  },
+  "web-NotreDame": {
+    "access_date": "2026-10-27",
+    "arcs": 1469679,
+    "blocks": 267666,
+    "dangling_fraction": 0.5796075879028272,
+    "intra_block_arc_fraction": 0.41759799248679474,
+    "licence": "SNAP dataset, Stanford Network Analysis Project",
+    "mean_outdegree": 4.511968538263403,
+    "n": 325729,
+    "partition": "contiguity-constrained greedy directed-modularity segmentation (58063 merges), host proxy",
+    "partition_type": "proxy",
+    "raw_sha256": {
+      "web-NotreDame.txt.gz": "d4f4916db2b45060d4dde21fca2d6d757f245f4397528f72230eff3bb57e499e"
+    },
+    "reverse_arc_fraction": 0.5165359238309862,
+    "source_url": "https://snap.stanford.edu/data/web-NotreDame.txt.gz"
+  },
+  "web-Stanford": {
+    "access_date": "2026-10-27",
+    "arcs": 2312497,
+    "blocks": 281889,
+    "dangling_fraction": 0.0006136840910380838,
+    "intra_block_arc_fraction": 6.918927894825377e-06,
+    "licence": "SNAP dataset, Stanford Network Analysis Project",
+    "mean_outdegree": 8.203136528747375,
+    "n": 281904,
+    "partition": "contiguity-constrained greedy directed-modularity segmentation (14 merges), host proxy",
+    "partition_type": "proxy",
+    "raw_sha256": {
+      "web-Stanford.txt.gz": "49bfc0e366c3028dbd84e8557b09287cbd61051bde29d160c277688c727cb679"
+    },
+    "reverse_arc_fraction": 0.2766368994208425,
+    "source_url": "https://snap.stanford.edu/data/web-Stanford.txt.gz"
+  },
+  "wisconsin": {
+    "access_date": "2026-10-27",
+    "arcs": 499,
+    "blocks": 5,
+    "dangling_fraction": 0.3386454183266932,
+    "intra_block_arc_fraction": 0.17034068136272545,
+    "licence": "WebKB data; Geom-GCN repository/paper provenance",
+    "mean_outdegree": 1.9880478087649402,
+    "n": 251,
+    "partition": "label partition by page category (weaker proxy than a website)",
+    "partition_type": "label",
+    "raw_sha256": {
+      "wisconsin_edges.txt": "ebd213511c88fce1eda450c2f920600c4b8cbb38f02384856bcc47c6ec1807ae",
+      "wisconsin_labels.txt": "a32b0aa38d42f0d36841e8a8cb646d197f0ff33a182ac75a2b4476aeed3c7e4b"
+    },
+    "reverse_arc_fraction": 0.1963927855711423,
+    "source_url": "https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/new_data/wisconsin/"
+  }
+}

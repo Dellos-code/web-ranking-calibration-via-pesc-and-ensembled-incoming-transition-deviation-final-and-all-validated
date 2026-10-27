@@ -54,6 +54,8 @@ GTS = ["NCD", "PR", "SELF", "POP"]
 LEVELS = [("A", p) for p in (1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2)] + \
          [("B", f) for f in (0.1, 0.2, 0.3, 0.4, 0.5, 0.6)]
 REAL = ["cora_ml", "citeseer", "cora_full", "wikics", "cnr2000"]
+REAL2 = ["cornell", "texas", "wisconsin", "film", "email-Eu-core",
+         "web-NotreDame", "web-Stanford", "ogbn-arxiv"]
 
 
 def panel_specs(panel):
@@ -72,6 +74,10 @@ def panel_specs(panel):
     if panel == "real":
         return [dict(panel="real", base=name, kind="real", n=None, seed=17000 + j,
                      reps=1 if name == "cnr2000" else 2) for j, name in enumerate(REAL)]
+    if panel == "real2":
+        return [dict(panel="real2", base=name, kind="real2", n=None, seed=17100 + j,
+                     reps=10 if name in {"cornell", "texas", "wisconsin"} else 2)
+                for j, name in enumerate(REAL2)]
     raise ValueError(panel)
 
 
@@ -85,7 +91,8 @@ def make_base(spec):
         params = L.sample_growth_params(rng, spec["n"])
         g = L.generate_growth_web(params, rng)
     else:
-        z = np.load(os.path.join(HERE, "data", "real", f"{spec['base']}.npz"))
+        folder = "real2" if spec["kind"] == "real2" else "real"
+        z = np.load(os.path.join(HERE, "data", folder, f"{spec['base']}.npz"))
         g = L.Graph(int(z["n"]), z["src"], z["dst"], z["block"], name=spec["base"])
         params = {"dataset": spec["base"]}
     return g, pop, params, rng
@@ -262,13 +269,16 @@ def main():
     ap.add_argument("--panel", default="calib")
     ap.add_argument("--workers", type=int, default=2)
     a = ap.parse_args()
-    panels = ["calib", "test", "topo", "scale", "real"] if a.panel == "all" else a.panel.split(",")
+    panels = ["calib", "test", "topo", "scale", "real", "real2"] if a.panel == "all" else a.panel.split(",")
     specs = [s for p in panels for s in panel_specs(p)]
     # largest jobs first so the pool stays busy
     real_n = {}
     summ = os.path.join(HERE, "data", "real", "summary.json")
     if os.path.exists(summ):
         real_n = {k: v["n"] for k, v in json.load(open(summ)).items()}
+    summ2 = os.path.join(HERE, "data", "real2", "provenance.json")
+    if os.path.exists(summ2):
+        real_n.update({k: v["n"] for k, v in json.load(open(summ2)).items()})
     specs.sort(key=lambda s: -(s["n"] or real_n.get(s["base"], 1e6)))   # largest graphs first
     t0 = time.time()
     job = run_base if a.cmd == "stage1" else run_base_stage2

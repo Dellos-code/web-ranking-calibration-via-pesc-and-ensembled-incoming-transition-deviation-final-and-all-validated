@@ -71,6 +71,16 @@ The CLI supports only alpha references validated by WP2; otherwise it raises a c
 Baseline use is optional only if the WP3/WP4 decision rules pass. WP6, if run, is descriptive
 and does not promote a rule.
 
+## Amendment 2 — 2026-10-27
+
+For `real2`, graphs with fewer than 1,000 nodes use `reps = 10`; all other graphs use
+`reps = 2`. Seeds are `17100 + j`. The four newly reachable Geom-GCN graphs are a descriptive
+subgroup because the four-graph subgroup cannot test the three-family Holm claim in advance.
+The pooled old-plus-new analysis (`n = 9`) is the only inferential analysis for the reduced
+four-graph case; when the conditional raw sources are included, all eight new graphs are
+analysed under the original three-family tests, with label and proxy partitions reported
+separately.
+
 ## Compute contingencies
 
 If downloads, licences, or compute prevent a target panel from finishing, the run is labelled
