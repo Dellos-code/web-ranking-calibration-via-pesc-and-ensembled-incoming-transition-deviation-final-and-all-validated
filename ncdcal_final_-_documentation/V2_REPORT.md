@@ -6,8 +6,8 @@
 |---|---|---|
 | WP0 | done | Corrections and generated A/B mixture and anchor-matching outputs added to both manuscripts and both documentation sources. |
 | WP1 | reduced | PubMed and DBLP raw files were reachable and verified, but both are essentially symmetric (reverse-arc fraction 1.000) and were dropped as unsuitable directed candidates; SNAP, LAW and OGB hosts were unreachable by DNS, so no `real2` outcome is claimed. |
-| WP2 | skipped | The new `NCD(a)` sweep was not run; the existing results support only the already validated 0.85/0.95 anchors. |
-| WP3 | reduced | `mixed_damage` was implemented and unit-tested, but no Experiment C held-out outcome was computed. |
+| WP2 | skipped | The new `NCD(a)` sweep and its required 0.85/0.95 surface reproduction check were not run; the existing results support only the already validated 0.85/0.95 anchors. |
+| WP3 | reduced | `mixed_damage` endpoint semantics and deterministic/statistical unit tests were added, but no Experiment C held-out outcome or preregistered mixture contrast was computed. |
 | WP4 | skipped | No baseline outcome was computed; baseline use remains disabled. |
 | WP5 | done | `ncd_autotune.py`, strengthened independent tests, build checks, README recipe and independent v2 verification added. |
 | WP6 | skipped | No dangling-treatment re-run was performed. |

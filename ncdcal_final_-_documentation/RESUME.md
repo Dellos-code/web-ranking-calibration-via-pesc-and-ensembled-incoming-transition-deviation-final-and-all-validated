@@ -37,3 +37,5 @@ Continuation pass status:
 - WP1 candidate check is reduced: graph2gauss DBLP/PubMed were downloaded to ignored `raw_data/`,
   both had reverse-arc fraction 1.000 and were dropped; no `real2` graph or held-out outcome was
   computed. Continue with WP2 only if time remains.
+- WP3 primitive checks are complete: endpoint equivalence, deterministic replay, and small
+  expectation checks pass. Experiment C itself was not run; WP2 and WP4 remain skipped.
