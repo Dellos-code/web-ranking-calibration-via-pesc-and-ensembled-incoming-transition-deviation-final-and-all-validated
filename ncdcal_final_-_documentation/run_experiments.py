@@ -53,6 +53,7 @@ RES = os.path.join(HERE, "results", "stage1")
 GTS = ["NCD", "PR", "SELF", "POP"]
 LEVELS = [("A", p) for p in (1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2)] + \
          [("B", f) for f in (0.1, 0.2, 0.3, 0.4, 0.5, 0.6)]
+INSTANCE_OUT = os.environ.get("V2_INSTANCE_OUT")
 REAL = ["cora_ml", "citeseer", "cora_full", "wikics", "cnr2000"]
 REAL2 = ["cornell", "texas", "wisconsin", "film", "email-Eu-core",
          "web-NotreDame", "web-Stanford", "ogbn-arxiv"]
@@ -254,6 +255,17 @@ def run_base_stage2(spec):
                              rep=rep, keep_frac=go.m / g.m, **feats,
                              h_H=ext["h_r0.0"]["h"], h_M=ext["h_r1.0"]["h"],
                              hv_H=ext["h_r0.0"]["h_v"], hv_M=ext["h_r1.0"]["h_v"]))
+            if INSTANCE_OUT:
+                os.makedirs(INSTANCE_OUT, exist_ok=True)
+                tag = f"{spec['base']}_{exp}_{lvl}_{rep}".replace(".", "p")
+                np.savez_compressed(
+                    os.path.join(INSTANCE_OUT, f"{tag}.npz"),
+                    tau=tau[-1][None, ...], rho=rho[-1][None, ...],
+                    r=rv[None, ...], h=hh[None, ...], h_v=hv[None, ...],
+                    mean_sigma=ms[None, ...],
+                    meta=json.dumps(dict(spec=spec, r_names=R_NAMES, truths=TRUTHS2,
+                                         pairs=PAIRS, alpha_grid=L.ALPHA_GRID.tolist(),
+                                         rows=[rows[-1]], tot_tail=tot_tail)))
     os.makedirs(os.path.dirname(out), exist_ok=True)
     meta = dict(spec=spec, params=params, r_names=R_NAMES, truths=TRUTHS2, pairs=PAIRS,
                 alpha_grid=L.ALPHA_GRID.tolist(), rule_ncd=RULE_NCD, rule_pop_ls=RULE_POP_LS,

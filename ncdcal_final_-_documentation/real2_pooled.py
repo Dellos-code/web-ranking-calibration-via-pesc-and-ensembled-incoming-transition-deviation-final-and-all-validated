@@ -117,7 +117,9 @@ def main():
         "new_graphs": len(groups["new"]),
         "holm_family_size": 3,
         "holm_testable": len(groups["new"]) >= 7,
-        "note": "The three-family Holm claim is untestable with six new graphs.",
+        "note": ("The three-family Holm claim is testable with at least seven new graphs."
+                 if len(groups["new"]) >= 7 else
+                 "The three-family Holm claim is untestable with fewer than seven new graphs."),
     }
     with open(os.path.join(OUT, "pooled.json"), "w") as fh:
         json.dump(pooled, fh, indent=2)

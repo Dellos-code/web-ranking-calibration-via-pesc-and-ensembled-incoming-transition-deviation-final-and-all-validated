@@ -20,10 +20,10 @@ as are the non-monotone and dangling-deconfounded hypotheses for the Stage 2 rul
 Section 8.2.
 
 For this extension, the AI system assisted with the mixed-damage generator, WP0, pooled and
-per-graph real2 analysis, the WP2 anchor verdict, the completed WP3 panels, the reduced WP4 B1
+per-graph real2 analysis, the WP2 anchor verdict, the completed WP3 panels, the full synthetic WP4 B1-B3
 run, the practical tool and its tests, verification, build checks, documentation and manuscript
 integration, and verification of two candidate raw files. The candidates were dropped as
-essentially symmetric; Stanford and NotreDame were not completed. The statistical criteria are
+essentially symmetric; Stanford and NotreDame were completed with per-instance checkpoints. The statistical criteria are
 those written in PREREG_v2.md; their interpretation and any decision to adopt the tool or its
 constants rest with the author.
 
@@ -39,7 +39,7 @@ constants rest with the author.
 
 Για την παρούσα επέκταση, το σύστημα τεχνητής νοημοσύνης βοήθησε με τη γεννήτρια μικτής βλάβης,
 τις αναλύσεις WP0, την pooled και ανά γράφο ανάλυση real2, την απόφαση WP2, τα πλήρη πάνελ
-WP3, τη μειωμένη δοκιμή B1 του WP4, το πρακτικό εργαλείο και τα tests του, την επαλήθευση,
+WP3, τα πλήρη συνθετικά πάνελ B1-B3 του WP4, το πρακτικό εργαλείο και τα tests του, την επαλήθευση,
 τους ελέγχους build, την τεκμηρίωση και την ενσωμάτωση στα κείμενα, καθώς και τον έλεγχο δύο
 υποψήφιων ακατέργαστων αρχείων. Τα αρχεία απορρίφθηκαν ως ουσιαστικά συμμετρικά· τα Stanford
 και NotreDame δεν ολοκληρώθηκαν. Τα στατιστικά κριτήρια είναι όσα αναγράφονται στο

@@ -260,10 +260,15 @@ def check_mixed_and_baseline():
             item = summary["rules_vs_C1"][f"{panel}_all"][rule]
             _assert_close(float(diffs.mean()), item["mean_gain_vs_C1"],
                           f"mixed {panel} {rule}")
-    baseline = np.loadtxt(os.path.join(HERE, "results", "baselines", "b1_reduced.csv"),
+    baseline = np.loadtxt(os.path.join(HERE, "results", "baselines_v2", "b1_test.csv"),
                           delimiter=",", skiprows=1, usecols=6)
-    if not np.isfinite(baseline).all():
-        raise AssertionError("B1 contains non-finite gains")
+    if len(baseline) != 192 or not np.isfinite(baseline).all():
+        raise AssertionError("B1 test panel is incomplete or contains non-finite gains")
+    for name in ("b2", "b3"):
+        with open(os.path.join(HERE, "results", "baselines_v2", f"{name}.csv"), newline="") as fh:
+            data = list(csv.DictReader(fh))
+        if not data:
+            raise AssertionError(f"{name} has no rows")
 
 
 def main():

@@ -48,11 +48,12 @@ optimum for the Stage 1 rule is 0.920, only 0.0002 $\tau$ above 0.93. The tool
 returns the Stage 1 rule's `r` by design, not the reference's own `r`; `baseline` is currently
 ignored with a warning because no baseline rule passed the preregistered WP3/WP4 checks.
 
-The pooled old-plus-new real2 analysis has 11 graphs: H1 mean -0.00214 (4/11, exact
-$p=0.4648$), H2 mean +0.07601 (11/11, anchor-mismatched and descriptive), and H3b mean
--0.00372 (2/11, exact $p=0.1016$). The evidence does not support generalisation of the
+The pooled old-plus-new real2 analysis has 13 graphs: H1 mean -0.00342 (5/13, exact
+$p=0.3396$), H2 mean +0.06343 (12/13, anchor-mismatched and descriptive), and H3b mean
+-0.00384 (3/13, exact $p=0.0803$). The evidence does not support generalisation of the
 gain to new real networks. The fitted WP2 anchor discount is not promoted; WP3 mixed-damage
-rules are not promoted; the available WP4 result is a reduced B1 smoke run.
+rules are not promoted; the full synthetic WP4 B1--B3 results are under
+`results/baselines_v2/`.
 
 ## Ελληνικά
 

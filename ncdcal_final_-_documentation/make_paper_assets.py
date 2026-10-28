@@ -1239,8 +1239,12 @@ def v2_tables():
     macro("VTwoAnchorTest", sgn4(verdict["held_out"]["test"]["fitted_discount"]["mean"]))
     macro("VTwoAnchorTopo", sgn4(verdict["held_out"]["topo"]["fitted_discount"]["mean"]))
     macro("VTwoAnchorReal", sgn4(verdict["held_out"]["real"]["fitted_discount"]["mean"]))
-    b1 = pd.read_csv(os.path.join(HERE, "results", "baselines", "b1_reduced.csv"))
-    macro("VTwoBOneMean", sgn4(float(b1["gain_over_constant"].mean())))
+    b1 = json.load(open(os.path.join(HERE, "results", "baselines_v2", "b1_summary.json")))
+    b2 = json.load(open(os.path.join(HERE, "results", "baselines_v2", "b2_summary.json")))
+    b3 = json.load(open(os.path.join(HERE, "results", "baselines_v2", "b3_summary.json")))
+    macro("VTwoBOneMean", sgn4(float(b1["mean_gain"])))
+    macro("VTwoBTwoMean", sgn4(float(b2["mean_gain"])))
+    macro("VTwoBThreeMean", sgn4(float(b3["mean_gain"])))
     rows_en = ["graph & cohort & partition & H1 & H2 & H3b \\\\", "\\midrule"]
     rows_gr = ["γράφος & ομάδα & διαμέριση & H1 & H2 & H3b \\\\", "\\midrule"]
     for _, r in graphs.iterrows():

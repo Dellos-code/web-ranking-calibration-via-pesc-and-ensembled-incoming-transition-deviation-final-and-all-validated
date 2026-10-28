@@ -5,7 +5,7 @@
 | WP | Status | Outcome |
 |---|---|---|
 | WP0 | done | Corrections and generated A/B mixture and anchor-matching outputs added to both manuscripts and both documentation sources. |
-| WP1 | reduced | Eight sources were prepared, but only six new graphs completed the locked Stage 2 outcome before the large web graphs exceeded the measured session budget. The four Geom-GCN graphs, Email-Eu-core and ogbn-arxiv were analysed; Stanford was stopped after 32.9 minutes without an output and NotreDame was not started. The six-graph subgroup is inferentially untestable under Amendment 1. |
+| WP1 | done | All eight new graphs completed the locked Stage 2 outcome. Stanford took 4,006.5 s and NotreDame 3,526.0 s with per-instance checkpoints; the eight-graph family makes the Amendment-1 Holm test testable. |
 | WP2 | reduced | `stage2x` completed the full 64-graph calibration, 32-graph test, 24-graph topology, and five-graph real panels. The fitted anchor discount fails the registered promotion rule: test -0.00076 (14/32), topo -0.00042 (6/24, exact p=0.0340), real +0.00024 (2/5), and pooled held-out -0.00054 (22/61). Anchor reproduction errors are exactly 0.0 at 0.85 and 0.95; the supported range remains 0.50--0.97. |
 | WP3 | done | Additive `mixed_experiment.py` completed Experiment C for 4,080 instances over 120 synthetic base graphs and the full five-graph real panel (140 instances, 257.8 s). The graph-unit contrast, pure-A/B/mixed splits, and reverse-order sensitivity are reported; the pre-registered contrast does not promote C4-C7 over C1. |
 | WP4 | done | Fixed C1 B1 covered all `calib`, `test`, and `topo` graphs (720 rows, 9.8 s), B2 covered 1,440 evolved-baseline regimes (20.2 s), and B3 covered 480 eight-snapshot policy rows. Mean gains were +0.00012 for B1, -0.00121 for B2, and +0.00002 for B3; no baseline rule is promoted. |
@@ -55,12 +55,14 @@ data, so the verdict is not promoted.
 The prepared `real2` panel contains four Geom-GCN label partitions, Email-Eu-core
 department labels, OGBN-Arxiv subject labels, and Stanford/NotreDame SNAP web
 graphs with proxy partitions. BerkStan was excluded by the 400,000-node /
-5-million-arc cap. Six new graphs completed the locked Stage 2 outcome. H1 has
-mean gain `-0.00537` (2/6 wins, exact `p = 0.5625`, percentile range
-`[-0.03173, 0.01136]`); H2 is `+0.06868` (6/6, `p = 0.03125`); H3b is
-`-0.00475` (1/6, `p = 0.15625`). The six-graph subgroup is underpowered by
-Amendment 1. The Stanford run produced no output after 32.9 minutes and
-NotreDame was not started.
+5-million-arc cap. All eight new graphs completed the locked Stage 2 outcome. The per-graph
+checkpoints contain 58 instance files; Stanford took 4,006.5 s and NotreDame
+3,526.0 s. The pooled old-plus-new analysis now has 13 graphs: H1 mean
+`-0.00342` (5/13, exact `p = 0.3396`, bootstrap mean 95% CI
+`[-0.01101, 0.00328]`), H2 `+0.06343` (12/13, `p = 0.0012`, descriptive and
+anchor-mismatched), and H3b `-0.00384` (3/13, `p = 0.0803`, bootstrap mean
+95% CI `[-0.00720, -0.00049]`). The new-eight subgroup is now large enough
+for the registered three-family Holm procedure, but H1 and H3b remain negative.
 
 ## WP2 continuation evidence
 
@@ -88,19 +90,20 @@ No baseline rule meets the promotion rule, so baseline use remains disabled.
 The round-one integration added generated real2, anchor-verdict, and mixed-damage
 tables to both papers, updated the abstract/discussion/conclusion/limitations claims,
 added README and method-disclosure rows, and extended `verify_v2.py` to recompute the
-real2 pooled values, stage2x verdict, graph-unit mixed contrast, and B1 source checks
+real2 pooled values, stage2x verdict, graph-unit mixed contrast, and B1--B3 source checks
 without importing analysis modules. The papers and documentation rebuild with zero
 reported LaTeX errors and zero overfull boxes; `check_build.py` and `verify_v2.py`
-pass. The pass-four extension is now wired into the manuscripts, while the WP1 large
-graphs and WP4 B2/B3 remain reduced or outstanding.
+pass.
 
 ## Runtime and deviations
 
 The preregistration and WP0 asset generation completed in seconds once the local Python environment
 was restored. The first large real2 Stage 1 attempt produced no graph output after 59 minutes and was
-stopped; the Stanford real2 Stage 2 attempt likewise produced no output after 32.9 minutes. XeLaTeX,
+stopped. The resumable Stanford and NotreDame real2 Stage 2 jobs took 4,006.5 s and 3,526.0 s.
+XeLaTeX,
 Pandoc and FreeSerif were installed during this pass after the initial build probe found them missing.
-The new WP1 large-graph and WP4 B2/B3 work remains reduced or outstanding.
+The per-instance checkpoint directory contains 58 additive files; the finished graph-level outputs
+are under `results/stage2/real2/`.
 
 ## WP1 candidate verification
 
@@ -120,7 +123,7 @@ failed at DNS resolution, so they were not substituted or symmetrised.
 
 ## Acceptance checklist
 
-- [ ] No existing result file or locked rule changed; the required interval naming regenerated
+- [x] No existing result file or locked rule changed; the required interval naming regenerated
       `results/stage2/real2/summary_real2.json`, while all new panels are additive.
 - [x] `PREREG_v2.md` was committed before new held-out outcomes.
 - [x] Existing tests and new tests pass; `verify_v2.py` passes.
@@ -128,16 +131,17 @@ failed at DNS resolution, so they were not substituted or symmetrised.
 - [x] Papers and docs were rebuilt with 0 errors and 0 overfull boxes (done in the review, see below; the original session had no `xelatex`/`pandoc`).
 - [x] Negative and null results are reported with the same prominence as positive ones.
 - [x] WP0 corrections were applied to the source documentation and manuscripts.
-- [x] Claims about unrun real2, mixture and baseline experiments are explicitly limited.
+- [x] Claims about real2, mixture and baseline experiments are explicitly limited.
 - [x] Top-level copies are byte-identical to the subfolder files.
 
 ## What the evidence now supports and what it still does not
 
 The evidence supports the existing locked defaults, the clarification that A and B are mixtures,
-the completed synthetic and real mixed-damage panels, and a reproducible NCD(a) surface driver
+the completed synthetic and real mixed-damage panels, the full descriptive WP4 baseline panels,
+and a reproducible NCD(a) surface driver
 whose anchor checks pass. It does not support generalisation to more real networks, a promoted
 operational discount, a promoted mixture-aware or realistic-baseline rule, or a dangling-page
-sensitivity conclusion. Stanford and NotreDame remain unfinished, and WP4 B2/B3 remain unrun.
+sensitivity conclusion. Stanford and NotreDame results are not yet available.
 
 ## Review corrections (applied after the first agent run)
 

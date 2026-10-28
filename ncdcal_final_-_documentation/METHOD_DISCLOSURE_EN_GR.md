@@ -20,10 +20,10 @@ tested in Section 8.2.
 
 For this extension, the AI system assisted with the mixed-damage generator, the WP0 mixture and
 anchor-matching analyses, the pooled and per-graph real2 analysis, the WP2 anchor verdict, the
-completed WP3 synthetic and real panels, the reduced WP4 B1 run, the practical tool and its
+completed WP3 synthetic and real panels, the full synthetic WP4 B1--B3 panels, the practical tool and its
 independent tests, verification script, build checks, documentation and manuscript integration,
 and the verification of two candidate raw files. The candidate files were dropped as essentially
-symmetric; Stanford and NotreDame were not completed. The statistical criteria are those written
+symmetric; Stanford and NotreDame were completed with resumable per-instance checkpoints. The statistical criteria are those written
 in `PREREG_v2.md`; their interpretation and any decision to adopt the tool or its constants rest
 with the author.
 
@@ -39,9 +39,10 @@ Neumann και τα πειράματα αγκύρωσης. Το πλαίσιο �
 
 Για την παρούσα επέκταση, το σύστημα τεχνητής νοημοσύνης βοήθησε με τη γεννήτρια μικτής βλάβης,
 τις αναλύσεις WP0, την pooled και ανά γράφο ανάλυση real2, την απόφαση WP2, τα πλήρη συνθετικά
-και πραγματικά πάνελ του WP3, τη μειωμένη δοκιμή B1 του WP4, το πρακτικό εργαλείο και τα
+και πραγματικά πάνελ του WP3, τα πλήρη συνθετικά πάνελ B1--B3 του WP4, το πρακτικό εργαλείο και τα
 ανεξάρτητα tests του, το script επαλήθευσης, τους ελέγχους build, την τεκμηρίωση και την
 ενσωμάτωση στα κείμενα, καθώς και τον έλεγχο δύο υποψήφιων ακατέργαστων αρχείων. Τα αρχεία
-απορρίφθηκαν ως ουσιαστικά συμμετρικά· τα Stanford και NotreDame δεν ολοκληρώθηκαν. Τα
+απορρίφθηκαν ως ουσιαστικά συμμετρικά· τα Stanford και NotreDame ολοκληρώθηκαν με
+επαναλήψιμα checkpoints ανά στιγμιότυπο. Τα
 στατιστικά κριτήρια είναι όσα αναγράφονται στο `PREREG_v2.md`· η ερμηνεία τους και η απόφαση
 υιοθέτησης του εργαλείου ή των σταθερών του ανήκουν στον συγγραφέα.

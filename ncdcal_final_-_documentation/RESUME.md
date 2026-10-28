@@ -67,16 +67,17 @@ WP1/WP2/WP4 continuation (2026-10-27):
 ```
 
 `data/real2/` contains eight prepared sources. The completed real2 Stage 2
-outcomes cover Cornell, Texas, Wisconsin, Film, Email-Eu-core, and OGBN-Arxiv;
-the six-graph subgroup is underpowered by Amendment 1. Stanford was stopped
-after 32.9 minutes without an output and NotreDame was not run. The first
+outcomes cover all eight new graphs. Stanford took 4,006.5 seconds and
+NotreDame 3,526.0 seconds; 58 per-instance checkpoints were written under
+`results/stage2/real2_instances/`. The first
 large real2 Stage 1 attempt was stopped after 59 minutes without an output.
 
 `stage2x.py` completed `calib`, `test`, `topo`, and `real` in
 `results/stage2x/`; `stage2x_analysis.py` records exact zero anchor errors and
 the supported range `[0.50, 0.97]`. The full synthetic Experiment C run
-completed in 623.5 seconds and wrote the complete mixed outputs. The reduced
-WP4 B1 run wrote nine rows in 3.0 seconds; B2 and B3 remain outstanding.
+completed in 623.5 seconds and wrote the complete mixed outputs. The full WP4
+B1--B3 panels wrote 720, 1,440 and 480 rows respectively; no baseline rule is
+promoted.
 
 Pass 4 completed items (2026-10-28):
 
