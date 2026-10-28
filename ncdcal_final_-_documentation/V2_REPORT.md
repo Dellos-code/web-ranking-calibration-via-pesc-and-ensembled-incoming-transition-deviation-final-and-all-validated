@@ -7,7 +7,7 @@
 | WP0 | done | Corrections and generated A/B mixture and anchor-matching outputs added to both manuscripts and both documentation sources. |
 | WP1 | reduced | Eight sources were prepared, but only six new graphs completed the locked Stage 2 outcome before the large web graphs exceeded the measured session budget. The four Geom-GCN graphs, Email-Eu-core and ogbn-arxiv were analysed; Stanford was stopped after 32.9 minutes without an output and NotreDame was not started. The six-graph subgroup is inferentially untestable under Amendment 1. |
 | WP2 | reduced | `stage2x` completed the full 64-graph calibration, 32-graph test, 24-graph topology, and five-graph real panels. Anchor reproduction errors were exactly 0.0 at both 0.85 and 0.95. The fitted discount is supported only on 0.50--0.97; the sensitivity and panel-best-constant comparisons are not yet integrated into the manuscripts. |
-| WP3 | reduced | Additive `mixed_experiment.py` now runs Experiment C, records the requested features and NCD/NCD95/TOT oracle surfaces, fits C0-C8 and single-snapshot counterparts, and writes pure-A/B/mixed grouped outputs plus the preregistered contrast filter. One synthetic base per `calib`, `test`, and `topo` (102 instances) and one reduced `cnr2000` cell were run; this is not a full held-out outcome. |
+| WP3 | reduced | Additive `mixed_experiment.py` completed Experiment C for 4,080 instances over 120 synthetic base graphs in `calib`, `test`, and `topo`. The `real` panel contains exactly one reduced `cnr2000` instance; the four small real graphs were not run. This is not a full real held-out outcome. |
 | WP4 | reduced | A B1 damaged-baseline smoke panel (three calibration graphs, three independent baseline keep levels, nine rows) ran using the fixed WP3 C1 fit. B2 evolved baselines and B3 policies were not run, so no baseline rule is promoted. |
 | WP5 | done | `ncd_autotune.py`, strengthened independent tests, build checks, README recipe and independent v2 verification added. |
 | WP6 | skipped | No dangling-treatment re-run was performed. |
@@ -36,7 +36,9 @@ The one-cell `calib_000` probe took 0.74 s. The complete synthetic command
 produced 4,080 Experiment C instances over 120 base graphs. Outputs are under
 `results/mixed/`; `contrast_results.csv` applies the preregistered filter.
 The reverse-order sensitivity on 12 calibration graphs took 60.0 s and is
-preserved under `results/mixed/reverse/`. The cnr2000 full real panel was not run.
+preserved under `results/mixed/reverse/`. The `real` output under
+`results/mixed/real/` is reduced to exactly one `cnr2000` instance
+(`n_instances = 1`); the four small real graphs were not run.
 
 ## WP1 continuation evidence
 
@@ -95,7 +97,7 @@ failed at DNS resolution, so they were not substituted or symmetrised.
 - [x] `PREREG_v2.md` was committed before new held-out outcomes.
 - [x] Existing tests and new tests pass; `verify_v2.py` passes.
 - [ ] No number in any `.tex`/`.md` was typed by hand. Existing legacy text predates this extension;
-      new manuscript numbers use generated macros/tables.
+      this remains to be checked after integration.
 - [x] Papers and docs were rebuilt with 0 errors and 0 overfull boxes (done in the review, see below; the original session had no `xelatex`/`pandoc`).
 - [x] Negative and null results are reported with the same prominence as positive ones.
 - [x] WP0 corrections were applied to the source documentation and manuscripts.

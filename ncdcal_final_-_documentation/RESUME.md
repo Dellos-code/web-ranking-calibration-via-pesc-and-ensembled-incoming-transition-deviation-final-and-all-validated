@@ -50,11 +50,12 @@ WP3 continuation (2026-10-27):
 `mixed_experiment.py` is the additive Experiment C driver.  It writes
 `results/mixed/{instances.csv,surfaces.npz,rule_results.csv,group_results.csv,contrast_results.csv,summary.json}`
 and preserves panel-specific reduced outputs in `results/mixed/synthetic/` and
-`results/mixed/real/`.  The measured `calib_000` one-cell probe was 0.74 s; the
-reduced synthetic run (one base each in `calib`, `test`, `topo`) took 53.1 s
-(102 instances).  The one-cell `cnr2000` reduced run took 347.1 s.  The latter
-is intentionally limited to one of the four required cnr2000 cells; no
-full-panel extrapolation is claimed.  Reverse-order sensitivity was not run.
+`results/mixed/real/`. The measured `calib_000` one-cell probe was 0.74 s; the
+complete synthetic run took 623.5 s and produced 4,080 instances over 120 base
+graphs. The `real` output contains exactly one reduced `cnr2000` instance and
+took 348.5 s; the four small real graphs were not run. Reverse-order sensitivity
+took 60.0 s on 12 calibration graphs and is preserved under
+`results/mixed/reverse/`.
 
 WP1/WP2/WP4 continuation (2026-10-27):
 
