@@ -1220,6 +1220,70 @@ def mismatch_table():
     macro("MisRuleBestCalibGap", sgn4(float(gmean[jb] - gmean[J[0.93]])))
 
 
+def v2_tables():
+    """Generate additive pass-four tables from the completed extension analyses."""
+    pooled = json.load(open(os.path.join(R2, "real2", "pooled.json")))
+    verdict = json.load(open(os.path.join(HERE, "results", "stage2x", "verdict.json")))
+    mixed = json.load(open(os.path.join(HERE, "results", "mixed", "contrast_per_graph_summary.json")))
+    graphs = pd.read_csv(os.path.join(R2, "real2", "pooled_per_graph.csv"))
+    for key, label in (("h1", "VTwoRealHone"), ("h2", "VTwoRealHtwo"), ("h3b", "VTwoRealHthree")):
+        macro(label, sgn4(pooled["pooled"][key]["mean"]))
+        macro(label + "P", pv(pooled["pooled"][key]["p_exact"]))
+        macro(label + "Wins", f"{pooled['pooled'][key]['wins']}/{pooled['pooled']['n']}")
+    macro("VTwoRealN", str(pooled["pooled"]["n"]))
+    cornell = graphs[graphs["base"] == "cornell"].iloc[0]
+    macro("VTwoCornellN", str(int(json.load(open(os.path.join(HERE, "data", "real2", "provenance.json")))["cornell"]["n"])))
+    macro("VTwoCornellM", str(int(json.load(open(os.path.join(HERE, "data", "real2", "provenance.json")))["cornell"]["arcs"])))
+    macro("VTwoCornellDang", f"{json.load(open(os.path.join(HERE, 'data', 'real2', 'provenance.json')))['cornell']['dangling_fraction']:.0f}\\%")
+    macro("VTwoCornellHone", f3(cornell["h1"]))
+    macro("VTwoAnchorTest", sgn4(verdict["held_out"]["test"]["fitted_discount"]["mean"]))
+    macro("VTwoAnchorTopo", sgn4(verdict["held_out"]["topo"]["fitted_discount"]["mean"]))
+    macro("VTwoAnchorReal", sgn4(verdict["held_out"]["real"]["fitted_discount"]["mean"]))
+    b1 = pd.read_csv(os.path.join(HERE, "results", "baselines", "b1_reduced.csv"))
+    macro("VTwoBOneMean", sgn4(float(b1["gain_over_constant"].mean())))
+    rows_en = ["graph & cohort & partition & H1 & H2 & H3b \\\\", "\\midrule"]
+    rows_gr = ["γράφος & ομάδα & διαμέριση & H1 & H2 & H3b \\\\", "\\midrule"]
+    for _, r in graphs.iterrows():
+        cells = ([str(r[c]).replace("_", r"\_") for c in ("base", "cohort", "partition_type")]
+                 + [f"{r[c]:+.4f}" for c in ("h1", "h2", "h3b")])
+        line = " & ".join(cells) + " \\\\"
+        rows_en.append(line); rows_gr.append(line)
+    for lang, rows in (("en", rows_en), ("gr", rows_gr)):
+        cap_en = ("Pooled real2 per-graph means for H1, H2 and H3b. H2 is anchor-mismatched and descriptive; "
+                  "the pooled inferential analysis has 11 graphs.")
+        cap_gr = ("Μέσοι όροι ανά γράφο για H1, H2 και H3b στη συνενωμένη real2 ανάλυση. Η H2 έχει ασυμφωνία "
+                  "άγκυρας και είναι περιγραφική· η συνενωμένη επαγωγική ανάλυση έχει 11 γράφους.")
+        body = "\\begin{tabular}{@{}lllrrr@{}}\\toprule\n" + "\n".join(rows) + "\n\\bottomrule\\end{tabular}"
+        write(os.path.join(OUT, lang, "tab_v2real2.tex"),
+              table_env("tab:v2real2", cap_en, cap_gr, body, lang, "\\scriptsize", star=True))
+    stage_rows = [("calib CV", verdict["table"][0]), ("pooled held-out", verdict["table"][1])]
+    for panel in ("test", "topo", "real"):
+        stage_rows.append((panel, verdict["held_out"][panel]["fitted_discount"]))
+    en = ["comparison & mean gain & wins/n & exact $p$ & bootstrap 95\\% CI \\\\", "\\midrule"]
+    for name, row in stage_rows:
+        en.append(f"{name} & {row['mean']:+.4f} & {row['wins']}/{row['n']} & {row['p_exact']:.4f} & "
+                  f"[{row['bootstrap_mean_ci95'][0]:+.4f}, {row['bootstrap_mean_ci95'][1]:+.4f}] \\\\")
+    for lang in ("en", "gr"):
+        cap_en = "Formal decision-rule results for the fitted anchor discount versus no discount."
+        cap_gr = "Τυπικά αποτελέσματα του κανόνα απόφασης για την έκπτωση άγκυρας έναντι μηδενικής έκπτωσης."
+        head = en[0] if lang == "en" else "σύγκριση & μέση διαφορά & νίκες/$n$ & ακριβές $p$ & bootstrap 95\\% ΔΕ \\\\"
+        body = "\\begin{tabular}{@{}lrrrr@{}}\\toprule\n" + head + "\n" + "\n".join(en[1:]) + "\n\\bottomrule\\end{tabular}"
+        write(os.path.join(OUT, lang, "tab_v2anchor.tex"),
+              table_env("tab:v2anchor", cap_en, cap_gr, body, lang, "\\small"))
+    mix = mixed["pooled_held_out"]
+    en = ["rule & graphs & mean vs C1 & wins & exact $p$ \\\\", "\\midrule"]
+    for rule in ("C4", "C5", "C6", "C7"):
+        r = mix[rule]
+        en.append(f"{rule} & {r['n_graphs']} & {r['mean_gain_vs_C1']:+.4f} & {r['wins']} & {r['p_exact']:.4f} \\\\")
+    for lang in ("en", "gr"):
+        cap_en = "Graph-unit pooled held-out mixed-damage contrast versus C1; no rule is promoted."
+        cap_gr = "Αντίθεση μικτής ζημιάς ανά γράφο στα σύνολα εκτός δείγματος έναντι του C1· κανένας κανόνας δεν προάγεται."
+        head = en[0] if lang == "en" else "κανόνας & γράφοι & μέση διαφορά έναντι C1 & νίκες & ακριβές $p$ \\\\"
+        body = "\\begin{tabular}{@{}lrrrr@{}}\\toprule\n" + head + "\n" + "\n".join(en[1:]) + "\n\\bottomrule\\end{tabular}"
+        write(os.path.join(OUT, lang, "tab_v2mixed.tex"),
+              table_env("tab:v2mixed", cap_en, cap_gr, body, lang, "\\small"))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     real_dataset_table()
@@ -1243,6 +1307,7 @@ def main():
     real_detail()
     wp0_tables()
     mismatch_table()
+    v2_tables()
     lines = ["% generated by make_paper_assets.py -- do not edit",
              "% every value is mode-agnostic: signed numbers and powers of ten are wrapped in",
              "% \\ensuremath, so a macro can be used both in running text and inside $...$"]

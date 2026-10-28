@@ -18,6 +18,9 @@ Oracle Damping*.
 | Practical autotune tool | `ncd_autotune.py` (validated anchors 0.85 and 0.95) |
 | Results, figures, logs | `results/`, `figures/`, `figures_gr/`, `logs/` |
 | Prepared real graphs | `data/real/` |
+| V2 real2 outputs | `results/stage2/real2/pooled.json`, per-graph CSV and leave-one-out CSV |
+| V2 mixed-damage outputs | `results/mixed/contrast_per_graph_summary.json`, `results/mixed/real_full/` |
+| V2 anchor verdict | `results/stage2x/verdict.json` (discount not promoted) |
 
 Quick start (from this directory):
 
@@ -44,6 +47,12 @@ and `alpha=0.81`, or use `alpha_ref=0.95` for `alpha=0.93`. At the 0.95 anchor t
 optimum for the Stage 1 rule is 0.920, only 0.0002 $\tau$ above 0.93. The tool
 returns the Stage 1 rule's `r` by design, not the reference's own `r`; `baseline` is currently
 ignored with a warning because no baseline rule passed the preregistered WP3/WP4 checks.
+
+The pooled old-plus-new real2 analysis has 11 graphs: H1 mean -0.00214 (4/11, exact
+$p=0.4648$), H2 mean +0.07601 (11/11, anchor-mismatched and descriptive), and H3b mean
+-0.00372 (2/11, exact $p=0.1016$). The evidence does not support generalisation of the
+gain to new real networks. The fitted WP2 anchor discount is not promoted; WP3 mixed-damage
+rules are not promoted; the available WP4 result is a reduced B1 smoke run.
 
 ## Ελληνικά
 

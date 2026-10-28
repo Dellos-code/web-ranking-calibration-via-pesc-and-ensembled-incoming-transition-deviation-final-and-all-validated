@@ -939,6 +939,36 @@ and \TotHReal{} on \texttt{real}, so it does not transfer.
 
 \FloatBarrier
 % =============================================================================
+\section{V2 extension: external real networks and operational checks}
+\label{sec:v2extension}
+
+The preregistered pooled real2 analysis combines the five old real graphs with the six
+new graphs, using graphs rather than perturbations as the replication units
+($n=\VTwoRealN$). H1 is \VTwoRealHone{} (\VTwoRealHoneWins{}, $p=\VTwoRealHoneP$)
+and H3b is \VTwoRealHthree{} (\VTwoRealHthreeWins{}, $p=\VTwoRealHthreeP$).
+H2 is \VTwoRealHtwo{} (\VTwoRealHtwoWins{}, $p=\VTwoRealHtwoP$), but it compares
+different reference anchors and is descriptive only. The six-new-graph Holm family
+is untestable under Amendment~1. Cornell is influential (\VTwoCornellN{} nodes,
+\VTwoCornellM{} arcs, \VTwoCornellDang{} dangling; H1 gain \VTwoCornellHone{}).
+The labels are proxies for topical or department
+structure, and the SNAP partitions are host proxies, so generalisation of the gain
+to new real networks is not supported.
+
+\input{generated/en/tab_v2real2.tex}
+
+The fitted operational anchor discount is not promoted. It gains
+\VTwoAnchorTest{} on \texttt{test}, \VTwoAnchorTopo{} on \texttt{topo}, and
+\VTwoAnchorReal{} on \texttt{real}; the topology loss is significant and the pooled
+held-out result fails the preregistered threshold.
+\input{generated/en/tab_v2anchor.tex}
+
+The graph-unit mixed-damage contrast does not promote C4--C7 over C1.
+\input{generated/en/tab_v2mixed.tex}
+The reduced B1 baseline smoke run remains descriptive only (mean gain
+\VTwoBOneMean{}; B2 and B3 were not run).
+
+\FloatBarrier
+% =============================================================================
 \section{Discussion}
 \label{sec:discussion}
 
@@ -946,9 +976,10 @@ and \TotHReal{} on \texttt{real}, so it does not transfer.
 amounts to re-tuning two constants: more weight on the proximity matrix ($r\approx0.2$, $\mu\approx0.17$
 instead of $0.10$) and slightly less damping ($\alpha=\STwoConstAlpha$ instead of $0.85$). On held-out
 synthetic graphs, including larger graphs and a different generative mechanism, the gain is
-$0.004$--$0.011$ in Kendall's $\tau$, consistent across graphs, plus a modest acceleration. On five real networks
-the gain is not distinguishable from zero. These are honest, if modest, results for a zero-cost
-procedure. They are not the adaptive, structure-driven calibration that motivated the study.
+$0.004$--$0.011$ in Kendall's $\tau$, consistent across graphs, plus a modest acceleration. On the
+pooled old-plus-new real networks, H1 is near zero and H3b is slightly negative; generalisation
+of the gain to new real networks is not supported. These are honest, if modest, results for a
+zero-cost procedure. They are not the adaptive, structure-driven calibration that motivated the study.
 
 \paragraph{Why structural statistics fail here.} The oracle parameters depend on two quantities: how
 severely the observed graph is perturbed relative to the reference, and the latent quality structure
@@ -982,7 +1013,8 @@ whether the damping matters at all for a given graph. The empirical results show
 calibration statistics.
 
 \paragraph{Limitations.} The synthetic generators, however varied, are our own. The partition of
-cnr-2000 is a host proxy and the citation graphs use topic labels, not hosts. Dangling pages are handled
+cnr-2000 is a host proxy, the citation graphs use topic labels, and the new labels and SNAP partitions
+are proxies rather than external relevance judgements. Cornell materially affects H1. Dangling pages are handled
 by uniform rows, not by the block-confined strategy of~\cite{ng20}. Stage~1 is anchored at
 $\alpha_0=0.85$, and the Stage~2 grid stops at $0.99$, which censors the oracle under Q (we checked that
 the optimum does not lie beyond it). We evaluate rank correlations only, against references derived from
@@ -999,7 +1031,7 @@ stochasticity. We proved identities and a displacement bound that give these sta
 meaning. A large, cluster-aware evaluation shows that the statistics do not predict the optimal
 parameters. The calibration reduces to two constants, $r\approx0.2$ and $\alpha=\STwoConstAlpha$, that
 improve the recovery of the canonical ranking on synthetic graphs by $0.004$--$0.011$ in Kendall's $\tau$
-and leave real networks unchanged. The optimal damping is anchored to the damping of the reference ranking,
+and do not generalise as a gain to the pooled real networks. The optimal damping is anchored to the damping of the reference ranking,
 minus a noise discount. The choice of ground truth therefore decides which parameter setting wins, and
 we recommend that future comparisons of link-analysis parameters report results under several
 references.

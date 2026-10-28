@@ -46,8 +46,15 @@ def main():
     summary = {}
     for panel in ("calib", "test", "topo"):
         for group in ("pure_A", "pure_B", "mixed", "all"):
-            subset = [r for r in graph_rows if r["panel"] == panel and
-                      (group == "all" or r["group"] == group)]
+            if group == "all":
+                raw = [r for r in rows if r["panel"] == panel]
+                all_grouped = {}
+                for r in raw:
+                    all_grouped.setdefault((r["base"], r["rule"]), []).append(float(r["gain"]))
+                subset = [{"base": base, "rule": rule, "mean_gain": float(np.mean(values))}
+                          for (base, rule), values in all_grouped.items()]
+            else:
+                subset = [r for r in graph_rows if r["panel"] == panel and r["group"] == group]
             by_graph = {}
             for r in subset:
                 by_graph.setdefault(r["base"], {})[r["rule"]] = r["mean_gain"]

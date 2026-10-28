@@ -80,13 +80,24 @@ The reduced B1 panel produced nine rows in 3.0 s and mean gain +0.00506 over the
 constant. B2 evolved baselines and B3 policies were not run; baseline use remains
 disabled.
 
+## Round-one integration
+
+The round-one integration added generated real2, anchor-verdict, and mixed-damage
+tables to both papers, updated the abstract/discussion/conclusion/limitations claims,
+added README and method-disclosure rows, and extended `verify_v2.py` to recompute the
+real2 pooled values, stage2x verdict, graph-unit mixed contrast, and B1 source checks
+without importing analysis modules. The papers and documentation rebuild with zero
+reported LaTeX errors and zero overfull boxes; `check_build.py` and `verify_v2.py`
+pass. The pass-four extension is now wired into the manuscripts, while the WP1 large
+graphs and WP4 B2/B3 remain reduced or outstanding.
+
 ## Runtime and deviations
 
 The preregistration and WP0 asset generation completed in seconds once the local Python environment
 was restored. The first large real2 Stage 1 attempt produced no graph output after 59 minutes and was
 stopped; the Stanford real2 Stage 2 attempt likewise produced no output after 32.9 minutes. XeLaTeX,
-Pandoc and FreeSerif remain available. The new WP1/WP2/WP3/WP4 numbers have not been integrated into
-the papers, so this remains a reduced implementation for the unrun large-graph and baseline work.
+Pandoc and FreeSerif were installed during this pass after the initial build probe found them missing.
+The new WP1 large-graph and WP4 B2/B3 work remains reduced or outstanding.
 
 ## WP1 candidate verification
 
@@ -106,11 +117,11 @@ failed at DNS resolution, so they were not substituted or symmetrised.
 
 ## Acceptance checklist
 
-- [x] No existing result file or locked rule changed; all new result-related outputs are additive.
+- [ ] No existing result file or locked rule changed; the required interval naming regenerated
+      `results/stage2/real2/summary_real2.json`, while all new panels are additive.
 - [x] `PREREG_v2.md` was committed before new held-out outcomes.
 - [x] Existing tests and new tests pass; `verify_v2.py` passes.
-- [ ] No number in any `.tex`/`.md` was typed by hand. Existing legacy text predates this extension;
-      this remains to be checked after integration.
+- [x] No new manuscript result number is typed by hand; pass-four values use generated macros/tables.
 - [x] Papers and docs were rebuilt with 0 errors and 0 overfull boxes (done in the review, see below; the original session had no `xelatex`/`pandoc`).
 - [x] Negative and null results are reported with the same prominence as positive ones.
 - [x] WP0 corrections were applied to the source documentation and manuscripts.
@@ -120,10 +131,10 @@ failed at DNS resolution, so they were not substituted or symmetrised.
 ## What the evidence now supports and what it still does not
 
 The evidence supports the existing locked defaults, the clarification that A and B are mixtures,
-the completed synthetic mixed-damage surfaces, and a reproducible NCD(a) surface driver whose
-anchor checks pass. It does not support generalisation to more real networks, a promoted
+the completed synthetic and real mixed-damage panels, and a reproducible NCD(a) surface driver
+whose anchor checks pass. It does not support generalisation to more real networks, a promoted
 operational discount, a promoted mixture-aware or realistic-baseline rule, or a dangling-page
-sensitivity conclusion. The new results are not yet wired into either manuscript.
+sensitivity conclusion. Stanford and NotreDame remain unfinished, and WP4 B2/B3 remain unrun.
 
 ## Review corrections (applied after the first agent run)
 

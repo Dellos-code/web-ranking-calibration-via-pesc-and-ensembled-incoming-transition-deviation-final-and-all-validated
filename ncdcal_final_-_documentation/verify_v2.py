@@ -185,11 +185,95 @@ def check_documentation_headlines():
         raise AssertionError("README practical recipe values missing")
 
 
+def _real2_records():
+    records = []
+    for folder in ("real", "real2"):
+        root = os.path.join(STAGE2, folder)
+        for path in sorted(glob.glob(os.path.join(root, "*.npz"))):
+            with np.load(path, allow_pickle=False) as z:
+                meta = json.loads(str(z["meta"]))
+                grid = np.asarray(meta["alpha_grid"], float)
+                idx = {a: int(np.argmin(abs(grid - a))) for a in (.81, .85, .93, .95)}
+                rows = meta["rows"]
+                keep = np.array([not (r["exp"] == "A" and float(r["level"]) == 1.0)
+                                for r in rows])
+                tau = z["tau"]
+                records.append({
+                    "base": os.path.splitext(os.path.basename(path))[0],
+                    "h1": float(np.mean(tau[keep, 3, 0, idx[.81]] - tau[keep, 0, 0, idx[.85]])),
+                    "h2": float(np.mean(tau[keep, 3, 0, idx[.81]] - tau[keep, 1, 0, idx[.95]])),
+                    "h3b": float(np.mean(tau[keep, 3, 1, idx[.93]] - tau[keep, 1, 1, idx[.95]])),
+                })
+    return records
+
+
+def check_real2_pooled():
+    records = _real2_records()
+    expected = json.load(open(os.path.join(STAGE2, "real2", "pooled.json"), encoding="utf-8"))
+    if len(records) != expected["pooled"]["n"]:
+        raise AssertionError("real2 pooled graph count mismatch")
+    for key in ("h1", "h2", "h3b"):
+        values = np.asarray([r[key] for r in records])
+        p = float(stats.wilcoxon(values, method="exact").pvalue)
+        item = expected["pooled"][key]
+        _assert_close(float(values.mean()), item["mean"], f"real2 {key} mean")
+        if int(np.sum(values > 0)) != item["wins"] or abs(p - item["p_exact"]) > TOL:
+            raise AssertionError(f"real2 {key} inference mismatch")
+
+
+def check_stage2x_verdict():
+    verdict = json.load(open(os.path.join(HERE, "results", "stage2x", "verdict.json"),
+                              encoding="utf-8"))
+    summary = json.load(open(os.path.join(HERE, "results", "stage2x", "summary.json"),
+                              encoding="utf-8"))
+    for panel in ("test", "topo", "real"):
+        values = np.asarray([r["mean_gain_discount_vs_no_discount"]
+                             for r in summary["held_out"][panel]], dtype=float)
+        item = verdict["held_out"][panel]["fitted_discount"]
+        _assert_close(float(values.mean()), item["mean"], f"stage2x {panel} mean")
+        if int(np.sum(values > 0)) != item["wins"]:
+            raise AssertionError(f"stage2x {panel} wins mismatch")
+    if verdict["decision_rule"]["verdict"] != "not promoted":
+        raise AssertionError("stage2x verdict is not negative")
+
+
+def check_mixed_and_baseline():
+    root = os.path.join(HERE, "results", "mixed")
+    rows = []
+    with open(os.path.join(root, "rule_results.csv"), newline="") as fh:
+        rows = list(csv.DictReader(fh))
+    rows = [r for r in rows if r["contrast_case"].lower() == "true"]
+    for panel in ("calib", "test", "topo"):
+        for rule in ("C4", "C5", "C6", "C7"):
+            by = {}
+            for row in rows:
+                if row["panel"] == panel:
+                    by.setdefault((row["base"], row["rule"]), []).append(float(row["gain"]))
+            c1 = {base: float(np.mean(values)) for (base, name), values in by.items()
+                  if name == "C1"}
+            diffs = np.asarray([
+                float(np.mean(by[(base, rule)])) - c1[base]
+                for base in {base for base, name in by if name == rule}
+                if base in c1
+            ])
+            summary = json.load(open(os.path.join(root, "contrast_per_graph_summary.json")))
+            item = summary["rules_vs_C1"][f"{panel}_all"][rule]
+            _assert_close(float(diffs.mean()), item["mean_gain_vs_C1"],
+                          f"mixed {panel} {rule}")
+    baseline = np.loadtxt(os.path.join(HERE, "results", "baselines", "b1_reduced.csv"),
+                          delimiter=",", skiprows=1, usecols=6)
+    if not np.isfinite(baseline).all():
+        raise AssertionError("B1 contains non-finite gains")
+
+
 def main():
     check_mismatch_table()
     check_test_macros()
     check_mixture_table()
     check_documentation_headlines()
+    check_real2_pooled()
+    check_stage2x_verdict()
+    check_mixed_and_baseline()
     print("v2 independent verification passed")
 
 
