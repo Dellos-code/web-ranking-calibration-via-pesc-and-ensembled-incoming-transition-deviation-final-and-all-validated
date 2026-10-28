@@ -1,0 +1,449 @@
+{
+  "decision_rule": {
+    "gain_threshold": 0.0005,
+    "p_threshold": 0.05,
+    "no_significant_loss": true,
+    "supported_a_range": [
+      0.5,
+      0.97
+    ],
+    "verdict": "not promoted"
+  },
+  "anchor_checks": {
+    "max_085": 0.0,
+    "max_095": 0.0
+  },
+  "fitted_discount": {
+    "bases": [
+      "calib_000",
+      "calib_001",
+      "calib_002",
+      "calib_003",
+      "calib_004",
+      "calib_005",
+      "calib_006",
+      "calib_007",
+      "calib_008",
+      "calib_009",
+      "calib_010",
+      "calib_011",
+      "calib_012",
+      "calib_013",
+      "calib_014",
+      "calib_015",
+      "calib_016",
+      "calib_017",
+      "calib_018",
+      "calib_019",
+      "calib_020",
+      "calib_021",
+      "calib_022",
+      "calib_023",
+      "calib_024",
+      "calib_025",
+      "calib_026",
+      "calib_027",
+      "calib_028",
+      "calib_029",
+      "calib_030",
+      "calib_031",
+      "calib_032",
+      "calib_033",
+      "calib_034",
+      "calib_035",
+      "calib_036",
+      "calib_037",
+      "calib_038",
+      "calib_039",
+      "calib_040",
+      "calib_041",
+      "calib_042",
+      "calib_043",
+      "calib_044",
+      "calib_045",
+      "calib_046",
+      "calib_047",
+      "calib_048",
+      "calib_049",
+      "calib_050",
+      "calib_051",
+      "calib_052",
+      "calib_053",
+      "calib_054",
+      "calib_055",
+      "calib_056",
+      "calib_057",
+      "calib_058",
+      "calib_059",
+      "calib_060",
+      "calib_061",
+      "calib_062",
+      "calib_063"
+    ],
+    "d_by_anchor": [
+      0.056928879310344856,
+      0.06918103448275861,
+      0.06875538793103446,
+      0.06643857758620693,
+      0.06275323275862074,
+      0.057219827586206855,
+      0.050134698275862075,
+      0.03921874999999996,
+      0.03263469827586206
+    ],
+    "constant": 0.05591834291187739,
+    "linear_slope": -0.057898738777800454,
+    "linear_intercept": 0.05186543119743136
+  },
+  "table": [
+    {
+      "comparison": "calib_grouped_cv_discount_vs_no_discount",
+      "n": 64,
+      "mean": 0.00308338613763226,
+      "wins": 45,
+      "p_exact": 1.792609383599597e-06,
+      "bootstrap_mean_ci95": [
+        0.0020289925743384174,
+        0.00422674041806772
+      ]
+    },
+    {
+      "comparison": "pooled_held_out_discount_vs_no_discount",
+      "n": 61,
+      "mean": -0.000540633684216968,
+      "wins": 22,
+      "p_exact": 0.064622430195817,
+      "bootstrap_mean_ci95": [
+        -0.0017937412090252678,
+        0.000768846769070016
+      ]
+    }
+  ],
+  "held_out": {
+    "test": {
+      "fitted_discount": {
+        "comparison": "fitted_discount_vs_no_discount",
+        "n": 32,
+        "mean": -0.0007561831348539272,
+        "wins": 14,
+        "p_exact": 0.32171454932540655,
+        "bootstrap_mean_ci95": [
+          -0.0026362125585251304,
+          0.0012541553381993247
+        ]
+      },
+      "panel_best_constant": {
+        "discount": 0.025,
+        "comparison": "panel_best_constant_vs_no_discount",
+        "n": 32,
+        "mean": 0.003010633976373356,
+        "wins": 28,
+        "p_exact": 9.476207196712494e-07,
+        "bootstrap_mean_ci95": [
+          0.001979753095747583,
+          0.004172580920658219
+        ]
+      },
+      "per_graph": [
+        {
+          "base": "test_000",
+          "mean_gain": -0.0027256058529019356
+        },
+        {
+          "base": "test_001",
+          "mean_gain": 0.007449520751833916
+        },
+        {
+          "base": "test_002",
+          "mean_gain": 0.00253338273614645
+        },
+        {
+          "base": "test_003",
+          "mean_gain": 0.00017411810404155403
+        },
+        {
+          "base": "test_004",
+          "mean_gain": 0.003982081077992916
+        },
+        {
+          "base": "test_005",
+          "mean_gain": 0.01471361331641674
+        },
+        {
+          "base": "test_006",
+          "mean_gain": 0.0003994838916696608
+        },
+        {
+          "base": "test_007",
+          "mean_gain": -0.0010599050438031554
+        },
+        {
+          "base": "test_008",
+          "mean_gain": -0.0036422035191208124
+        },
+        {
+          "base": "test_009",
+          "mean_gain": 0.004333302844315767
+        },
+        {
+          "base": "test_010",
+          "mean_gain": -0.0017187823541462421
+        },
+        {
+          "base": "test_011",
+          "mean_gain": 0.012545507401227951
+        },
+        {
+          "base": "test_012",
+          "mean_gain": -0.0007827149238437414
+        },
+        {
+          "base": "test_013",
+          "mean_gain": -0.009203128516674042
+        },
+        {
+          "base": "test_014",
+          "mean_gain": -0.008994005620479584
+        },
+        {
+          "base": "test_015",
+          "mean_gain": -0.005944134201854467
+        },
+        {
+          "base": "test_016",
+          "mean_gain": -0.00854033324867487
+        },
+        {
+          "base": "test_017",
+          "mean_gain": -0.0001301570882787928
+        },
+        {
+          "base": "test_018",
+          "mean_gain": -0.00029606439056806266
+        },
+        {
+          "base": "test_019",
+          "mean_gain": 0.0024993394035845995
+        },
+        {
+          "base": "test_020",
+          "mean_gain": 0.0007458702311851084
+        },
+        {
+          "base": "test_021",
+          "mean_gain": -0.00372255383990705
+        },
+        {
+          "base": "test_022",
+          "mean_gain": -0.0030280379578471184
+        },
+        {
+          "base": "test_023",
+          "mean_gain": 0.00037654387415386736
+        },
+        {
+          "base": "test_024",
+          "mean_gain": -0.006628366187214851
+        },
+        {
+          "base": "test_025",
+          "mean_gain": -0.003774473210796714
+        },
+        {
+          "base": "test_026",
+          "mean_gain": -0.010280328802764416
+        },
+        {
+          "base": "test_027",
+          "mean_gain": -0.0002540999266784638
+        },
+        {
+          "base": "test_028",
+          "mean_gain": 0.000128737956401892
+        },
+        {
+          "base": "test_029",
+          "mean_gain": 0.001286413986235857
+        },
+        {
+          "base": "test_030",
+          "mean_gain": 0.0020638674031943083
+        },
+        {
+          "base": "test_031",
+          "mean_gain": -0.00670474860817194
+        }
+      ]
+    },
+    "topo": {
+      "fitted_discount": {
+        "comparison": "fitted_discount_vs_no_discount",
+        "n": 24,
+        "mean": -0.0004162797595199663,
+        "wins": 6,
+        "p_exact": 0.033985137939453125,
+        "bootstrap_mean_ci95": [
+          -0.00127915506050158,
+          0.0006740057145937799
+        ]
+      },
+      "panel_best_constant": {
+        "discount": 0.015,
+        "comparison": "panel_best_constant_vs_no_discount",
+        "n": 24,
+        "mean": 0.002184678384594463,
+        "wins": 22,
+        "p_exact": 8.344650268554688e-06,
+        "bootstrap_mean_ci95": [
+          0.0012145028252452525,
+          0.0033544345441219045
+        ]
+      },
+      "per_graph": [
+        {
+          "base": "topo_000",
+          "mean_gain": 0.0006448118947446346
+        },
+        {
+          "base": "topo_001",
+          "mean_gain": -0.0009952015243470669
+        },
+        {
+          "base": "topo_002",
+          "mean_gain": -0.0004955446347594261
+        },
+        {
+          "base": "topo_003",
+          "mean_gain": -0.0008075034711509943
+        },
+        {
+          "base": "topo_004",
+          "mean_gain": -0.0008826057310216129
+        },
+        {
+          "base": "topo_005",
+          "mean_gain": 0.0032378186006098986
+        },
+        {
+          "base": "topo_006",
+          "mean_gain": -0.00012288799916859716
+        },
+        {
+          "base": "topo_007",
+          "mean_gain": -0.0017300331965088844
+        },
+        {
+          "base": "topo_008",
+          "mean_gain": 0.008748630061745644
+        },
+        {
+          "base": "topo_009",
+          "mean_gain": -0.0004464219673536718
+        },
+        {
+          "base": "topo_010",
+          "mean_gain": -0.0033309399150311947
+        },
+        {
+          "base": "topo_011",
+          "mean_gain": -0.0006230464787222445
+        },
+        {
+          "base": "topo_012",
+          "mean_gain": -0.0015988623490557075
+        },
+        {
+          "base": "topo_013",
+          "mean_gain": -0.0034584852401167154
+        },
+        {
+          "base": "topo_014",
+          "mean_gain": -0.002812142251059413
+        },
+        {
+          "base": "topo_015",
+          "mean_gain": 0.00013785446935798973
+        },
+        {
+          "base": "topo_016",
+          "mean_gain": -0.001279170042835176
+        },
+        {
+          "base": "topo_017",
+          "mean_gain": 0.0004215410153847188
+        },
+        {
+          "base": "topo_018",
+          "mean_gain": -0.0014610211364924908
+        },
+        {
+          "base": "topo_019",
+          "mean_gain": -0.0007598585216328502
+        },
+        {
+          "base": "topo_020",
+          "mean_gain": 0.002622006693854928
+        },
+        {
+          "base": "topo_021",
+          "mean_gain": -0.0019082730868831277
+        },
+        {
+          "base": "topo_022",
+          "mean_gain": -0.0021991566754877567
+        },
+        {
+          "base": "topo_023",
+          "mean_gain": -0.000892222742550075
+        }
+      ]
+    },
+    "real": {
+      "fitted_discount": {
+        "comparison": "fitted_discount_vs_no_discount",
+        "n": 5,
+        "mean": 0.00024198396131396293,
+        "wins": 2,
+        "p_exact": 1.0,
+        "bootstrap_mean_ci95": [
+          -0.008603377360850572,
+          0.009087345283478498
+        ]
+      },
+      "panel_best_constant": {
+        "discount": 0.025,
+        "comparison": "panel_best_constant_vs_no_discount",
+        "n": 5,
+        "mean": 0.0056985910050570965,
+        "wins": 3,
+        "p_exact": 0.3125,
+        "bootstrap_mean_ci95": [
+          -0.0009542149491608143,
+          0.012351396959275007
+        ]
+      },
+      "per_graph": [
+        {
+          "base": "citeseer",
+          "mean_gain": 0.00811745785176754
+        },
+        {
+          "base": "cnr2000",
+          "mean_gain": 0.01555653102695942
+        },
+        {
+          "base": "cora_full",
+          "mean_gain": -0.0019112513400614262
+        },
+        {
+          "base": "cora_ml",
+          "mean_gain": -0.010468943044543266
+        },
+        {
+          "base": "wikics",
+          "mean_gain": -0.010083874687552452
+        }
+      ]
+    }
+  }
+}

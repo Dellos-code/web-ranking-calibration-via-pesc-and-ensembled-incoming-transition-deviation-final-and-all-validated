@@ -6,8 +6,8 @@
 |---|---|---|
 | WP0 | done | Corrections and generated A/B mixture and anchor-matching outputs added to both manuscripts and both documentation sources. |
 | WP1 | reduced | Eight sources were prepared, but only six new graphs completed the locked Stage 2 outcome before the large web graphs exceeded the measured session budget. The four Geom-GCN graphs, Email-Eu-core and ogbn-arxiv were analysed; Stanford was stopped after 32.9 minutes without an output and NotreDame was not started. The six-graph subgroup is inferentially untestable under Amendment 1. |
-| WP2 | reduced | `stage2x` completed the full 64-graph calibration, 32-graph test, 24-graph topology, and five-graph real panels. Anchor reproduction errors were exactly 0.0 at both 0.85 and 0.95. The fitted discount is supported only on 0.50--0.97; the sensitivity and panel-best-constant comparisons are not yet integrated into the manuscripts. |
-| WP3 | reduced | Additive `mixed_experiment.py` completed Experiment C for 4,080 instances over 120 synthetic base graphs in `calib`, `test`, and `topo`. The `real` panel contains exactly one reduced `cnr2000` instance; the four small real graphs were not run. This is not a full real held-out outcome. |
+| WP2 | reduced | `stage2x` completed the full 64-graph calibration, 32-graph test, 24-graph topology, and five-graph real panels. The fitted anchor discount fails the registered promotion rule: test -0.00076 (14/32), topo -0.00042 (6/24, exact p=0.0340), real +0.00024 (2/5), and pooled held-out -0.00054 (22/61). Anchor reproduction errors are exactly 0.0 at 0.85 and 0.95; the supported range remains 0.50--0.97. |
+| WP3 | done | Additive `mixed_experiment.py` completed Experiment C for 4,080 instances over 120 synthetic base graphs and the full five-graph real panel (140 instances, 257.8 s). The graph-unit contrast, pure-A/B/mixed splits, and reverse-order sensitivity are reported; the pre-registered contrast does not promote C4-C7 over C1. |
 | WP4 | reduced | A B1 damaged-baseline smoke panel (three calibration graphs, three independent baseline keep levels, nine rows) ran using the fixed WP3 C1 fit. B2 evolved baselines and B3 policies were not run, so no baseline rule is promoted. |
 | WP5 | done | `ncd_autotune.py`, strengthened independent tests, build checks, README recipe and independent v2 verification added. |
 | WP6 | skipped | No dangling-treatment re-run was performed. |
@@ -36,9 +36,19 @@ The one-cell `calib_000` probe took 0.74 s. The complete synthetic command
 produced 4,080 Experiment C instances over 120 base graphs. Outputs are under
 `results/mixed/`; `contrast_results.csv` applies the preregistered filter.
 The reverse-order sensitivity on 12 calibration graphs took 60.0 s and is
-preserved under `results/mixed/reverse/`. The `real` output under
-`results/mixed/real/` is reduced to exactly one `cnr2000` instance
-(`n_instances = 1`); the four small real graphs were not run.
+preserved under `results/mixed/reverse/`. The earlier `results/mixed/real/`
+output remains a reduced one-instance `cnr2000` result; the complete additive
+panel is under `results/mixed/real_full/` with 140 instances over five graphs
+and runtime 257.8 s. The four small real graphs and all four required
+`cnr2000` cells are included there.
+
+The instance-level filtered contrast remains the preregistered file:
+test mixed (52 instances) has C1 0.00515, C4 0.00579, C6 0.00580,
+C7 0.00543, C5 0.00285; topo mixed (30 instances) has C1 0.00372,
+C4 0.00341, C6 0.00376, C7 0.00076. The new graph-unit analysis is in
+`results/mixed/contrast_per_graph_summary.json`; no C4-C7 rule meets the
+registered mean/p-value requirements in both calibration and pooled held-out
+data, so the verdict is not promoted.
 
 ## WP1 continuation evidence
 
@@ -58,8 +68,11 @@ The calibration surface run took 1,489 s, test 336 s, topology 324 s, and the
 five-graph real panel 2,233 s; cnr2000 alone took 1,854 s. Anchor reproduction
 errors were exactly 0.0 at both 0.85 and 0.95. The fitted constant discount is
 0.05592 with linear slope -0.05790, supported only on the registered 0.50--0.97
-range. Held-out gains are mixed, including losses on the existing real panel, so
-no broader operational claim is made.
+range. The formal table is in `results/stage2x/verdict.json`: calibration CV
+mean +0.00308 (45/64, p<0.00001), while held-out test is -0.00076 (14/32),
+topo is -0.00042 (6/24, p=0.0340), real is +0.00024 (2/5), and pooled
+held-out is -0.00054 (22/61). The discount is not promoted because it fails
+the required held-out gain/p-value rule and has a significant topo loss.
 
 ## WP4 continuation evidence
 
