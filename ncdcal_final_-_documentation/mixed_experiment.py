@@ -177,6 +177,7 @@ def fit_rules(rows):
 
 
 def main():
+    global OUT
     ap = argparse.ArgumentParser()
     ap.add_argument("--panel", default="calib,test,topo,real")
     ap.add_argument("--limit", type=int, default=2)
@@ -184,7 +185,9 @@ def main():
     ap.add_argument("--order", default="B_then_A", choices=("B_then_A", "A_then_B"))
     ap.add_argument("--cnr-cells", type=int, default=4,
                     help="number of reduced cnr2000 cells (1-4)")
+    ap.add_argument("--output-dir", default=OUT)
     a = ap.parse_args()
+    OUT = os.path.abspath(a.output_dir)
     global CNR_CELL_LIMIT
     CNR_CELL_LIMIT = max(1, min(4, a.cnr_cells))
     os.makedirs(OUT, exist_ok=True)

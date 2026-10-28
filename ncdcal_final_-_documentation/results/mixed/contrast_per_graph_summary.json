@@ -1,0 +1,350 @@
+{
+  "contrast_filter": "|dh| < 0.02 and oracle_NCD < 0.80",
+  "rules_vs_C1": {
+    "calib_pure_A": {
+      "C4": {
+        "n_graphs": 7,
+        "mean_gain_vs_C1": -0.00012450609684199515,
+        "wins": 3,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 7,
+        "mean_gain_vs_C1": -0.0037070337272734183,
+        "wins": 3,
+        "p_exact": 0.375
+      },
+      "C6": {
+        "n_graphs": 7,
+        "mean_gain_vs_C1": 3.5113360792490435e-05,
+        "wins": 1,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 7,
+        "mean_gain_vs_C1": 0.001057668385921798,
+        "wins": 4,
+        "p_exact": 0.375
+      }
+    },
+    "calib_pure_B": {
+      "C4": {
+        "n_graphs": 12,
+        "mean_gain_vs_C1": -0.0014376616280324314,
+        "wins": 5,
+        "p_exact": 0.4697265625
+      },
+      "C5": {
+        "n_graphs": 12,
+        "mean_gain_vs_C1": -0.006598506069712649,
+        "wins": 4,
+        "p_exact": 0.04248046875
+      },
+      "C6": {
+        "n_graphs": 12,
+        "mean_gain_vs_C1": 6.678243688987825e-05,
+        "wins": 2,
+        "p_exact": 0.625
+      },
+      "C7": {
+        "n_graphs": 12,
+        "mean_gain_vs_C1": 0.0005874296994314484,
+        "wins": 8,
+        "p_exact": 0.5693359375
+      }
+    },
+    "calib_mixed": {
+      "C4": {
+        "n_graphs": 40,
+        "mean_gain_vs_C1": 0.00038661602560837414,
+        "wins": 18,
+        "p_exact": 0.8057269839482615
+      },
+      "C5": {
+        "n_graphs": 40,
+        "mean_gain_vs_C1": -0.003395846905379807,
+        "wins": 15,
+        "p_exact": 0.017831046616265667
+      },
+      "C6": {
+        "n_graphs": 40,
+        "mean_gain_vs_C1": 0.0007719033393948839,
+        "wins": 23,
+        "p_exact": 0.0005905693396925926
+      },
+      "C7": {
+        "n_graphs": 40,
+        "mean_gain_vs_C1": 0.0007733497721590603,
+        "wins": 26,
+        "p_exact": 0.019245540157498908
+      }
+    },
+    "calib_all": {
+      "C4": {
+        "n_graphs": 48,
+        "mean_gain_vs_C1": -0.0009294594760067519,
+        "wins": 19,
+        "p_exact": 0.10221510996308325
+      },
+      "C5": {
+        "n_graphs": 48,
+        "mean_gain_vs_C1": -0.00542834107420347,
+        "wins": 15,
+        "p_exact": 5.4308813680847834e-05
+      },
+      "C6": {
+        "n_graphs": 48,
+        "mean_gain_vs_C1": 0.0002936021910586926,
+        "wins": 20,
+        "p_exact": 0.010578293353319168
+      },
+      "C7": {
+        "n_graphs": 48,
+        "mean_gain_vs_C1": 0.0008280035398729634,
+        "wins": 33,
+        "p_exact": 0.0023640481784568124
+      }
+    },
+    "test_pure_A": {
+      "C4": {
+        "n_graphs": 5,
+        "mean_gain_vs_C1": 0.001442254641553653,
+        "wins": 4,
+        "p_exact": 0.1875
+      },
+      "C5": {
+        "n_graphs": 5,
+        "mean_gain_vs_C1": 0.00046275304037595165,
+        "wins": 2,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 5,
+        "mean_gain_vs_C1": 0.0,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 5,
+        "mean_gain_vs_C1": -0.0007872459202720617,
+        "wins": 2,
+        "p_exact": 0.625
+      }
+    },
+    "test_pure_B": {
+      "C4": {
+        "n_graphs": 3,
+        "mean_gain_vs_C1": 0.00045647517617221817,
+        "wins": 2,
+        "p_exact": 0.5
+      },
+      "C5": {
+        "n_graphs": 3,
+        "mean_gain_vs_C1": -0.005730768196290487,
+        "wins": 1,
+        "p_exact": 0.5
+      },
+      "C6": {
+        "n_graphs": 3,
+        "mean_gain_vs_C1": 0.00028106943756284197,
+        "wins": 2,
+        "p_exact": 0.5
+      },
+      "C7": {
+        "n_graphs": 3,
+        "mean_gain_vs_C1": -0.0029553292885514115,
+        "wins": 0,
+        "p_exact": 0.25
+      }
+    },
+    "test_mixed": {
+      "C4": {
+        "n_graphs": 17,
+        "mean_gain_vs_C1": 0.00018110096584990153,
+        "wins": 9,
+        "p_exact": 0.7819061279296875
+      },
+      "C5": {
+        "n_graphs": 17,
+        "mean_gain_vs_C1": -0.003044175995577857,
+        "wins": 4,
+        "p_exact": 0.0983734130859375
+      },
+      "C6": {
+        "n_graphs": 17,
+        "mean_gain_vs_C1": 0.0005174737551504173,
+        "wins": 8,
+        "p_exact": 0.10986328125
+      },
+      "C7": {
+        "n_graphs": 17,
+        "mean_gain_vs_C1": -8.490156498622015e-05,
+        "wins": 7,
+        "p_exact": 0.677703857421875
+      }
+    },
+    "test_all": {
+      "C4": {
+        "n_graphs": 20,
+        "mean_gain_vs_C1": -0.0002365023060334059,
+        "wins": 12,
+        "p_exact": 0.6215133666992188
+      },
+      "C5": {
+        "n_graphs": 20,
+        "mean_gain_vs_C1": -0.003827328893226159,
+        "wins": 6,
+        "p_exact": 0.03623390197753906
+      },
+      "C6": {
+        "n_graphs": 20,
+        "mean_gain_vs_C1": 0.0002848022661415859,
+        "wins": 8,
+        "p_exact": 0.06396484375
+      },
+      "C7": {
+        "n_graphs": 20,
+        "mean_gain_vs_C1": -0.0007023114876118319,
+        "wins": 8,
+        "p_exact": 0.3299827575683594
+      }
+    },
+    "topo_pure_A": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "topo_pure_B": {
+      "C4": {
+        "n_graphs": 6,
+        "mean_gain_vs_C1": -0.0015898813886665588,
+        "wins": 3,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 6,
+        "mean_gain_vs_C1": -0.0017252116752576197,
+        "wins": 3,
+        "p_exact": 0.84375
+      },
+      "C6": {
+        "n_graphs": 6,
+        "mean_gain_vs_C1": 1.980095628312865e-05,
+        "wins": 2,
+        "p_exact": 0.5
+      },
+      "C7": {
+        "n_graphs": 6,
+        "mean_gain_vs_C1": -0.003427216960825227,
+        "wins": 2,
+        "p_exact": 0.3125
+      }
+    },
+    "topo_mixed": {
+      "C4": {
+        "n_graphs": 14,
+        "mean_gain_vs_C1": -0.00018269456649765405,
+        "wins": 9,
+        "p_exact": 0.267578125
+      },
+      "C5": {
+        "n_graphs": 14,
+        "mean_gain_vs_C1": -0.0003340614907593299,
+        "wins": 8,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 14,
+        "mean_gain_vs_C1": 4.0307536188369494e-05,
+        "wins": 4,
+        "p_exact": 0.125
+      },
+      "C7": {
+        "n_graphs": 14,
+        "mean_gain_vs_C1": -0.0021070883646447094,
+        "wins": 4,
+        "p_exact": 0.0166015625
+      }
+    },
+    "topo_all": {
+      "C4": {
+        "n_graphs": 16,
+        "mean_gain_vs_C1": -0.00047719645324827327,
+        "wins": 10,
+        "p_exact": 0.375457763671875
+      },
+      "C5": {
+        "n_graphs": 16,
+        "mean_gain_vs_C1": -0.0006364564139661032,
+        "wins": 9,
+        "p_exact": 0.820892333984375
+      },
+      "C6": {
+        "n_graphs": 16,
+        "mean_gain_vs_C1": 3.834496214761364e-05,
+        "wins": 5,
+        "p_exact": 0.0625
+      },
+      "C7": {
+        "n_graphs": 16,
+        "mean_gain_vs_C1": -0.0018996980281828972,
+        "wins": 5,
+        "p_exact": 0.01824951171875
+      }
+    }
+  },
+  "pooled_held_out": {
+    "C4": {
+      "n_graphs": 36,
+      "mean_gain_vs_C1": -0.0003434774825733469,
+      "wins": 22,
+      "p_exact": 0.307420506287599
+    },
+    "C5": {
+      "n_graphs": 36,
+      "mean_gain_vs_C1": -0.002409163346888356,
+      "wins": 15,
+      "p_exact": 0.10794601368252188
+    },
+    "C6": {
+      "n_graphs": 36,
+      "mean_gain_vs_C1": 0.00017526568658870933,
+      "wins": 13,
+      "p_exact": 0.0395355224609375
+    },
+    "C7": {
+      "n_graphs": 36,
+      "mean_gain_vs_C1": -0.001234483283421194,
+      "wins": 13,
+      "p_exact": 0.03343982470687479
+    }
+  },
+  "decision_rule": {
+    "mean_gain_at_least": 0.0005,
+    "p_cv_below": 0.05,
+    "p_pooled_held_out_below": 0.05,
+    "holm_significant_loss_forbidden": true,
+    "verdict": "not promoted"
+  }
+}

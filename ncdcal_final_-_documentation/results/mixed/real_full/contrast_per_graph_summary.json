@@ -1,0 +1,350 @@
+{
+  "contrast_filter": "|dh| < 0.02 and oracle_NCD < 0.80",
+  "rules_vs_C1": {
+    "calib_pure_A": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "calib_pure_B": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "calib_mixed": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "calib_all": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "test_pure_A": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "test_pure_B": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "test_mixed": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "test_all": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "topo_pure_A": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "topo_pure_B": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "topo_mixed": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    },
+    "topo_all": {
+      "C4": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C5": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C6": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      },
+      "C7": {
+        "n_graphs": 0,
+        "mean_gain_vs_C1": null,
+        "wins": 0,
+        "p_exact": 1.0
+      }
+    }
+  },
+  "pooled_held_out": {
+    "C4": {
+      "n_graphs": 0,
+      "mean_gain_vs_C1": NaN,
+      "wins": 0,
+      "p_exact": 1.0
+    },
+    "C5": {
+      "n_graphs": 0,
+      "mean_gain_vs_C1": NaN,
+      "wins": 0,
+      "p_exact": 1.0
+    },
+    "C6": {
+      "n_graphs": 0,
+      "mean_gain_vs_C1": NaN,
+      "wins": 0,
+      "p_exact": 1.0
+    },
+    "C7": {
+      "n_graphs": 0,
+      "mean_gain_vs_C1": NaN,
+      "wins": 0,
+      "p_exact": 1.0
+    }
+  },
+  "decision_rule": {
+    "mean_gain_at_least": 0.0005,
+    "p_cv_below": 0.05,
+    "p_pooled_held_out_below": 0.05,
+    "holm_significant_loss_forbidden": true,
+    "verdict": "not promoted"
+  }
+}

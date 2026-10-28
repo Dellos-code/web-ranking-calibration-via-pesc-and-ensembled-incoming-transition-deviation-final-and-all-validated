@@ -93,3 +93,20 @@ exact p=0.1016). It writes `results/stage2/real2/pooled.json`,
 Holm family remains untestable under Amendment 1. `real2_analysis.py` now
 labels the six-graph percentile range separately and adds a 10,000-resample
 bootstrap CI of the mean with fixed seed 17100.
+
+WP3/WP2 pass 4 completion (2026-10-28):
+
+```bash
+~/venv/bin/python mixed_contrast_analysis.py
+~/venv/bin/python mixed_experiment.py --panel real --limit 0 --cnr-cells 4 \
+  --output-dir results/mixed/real_full
+~/venv/bin/python stage2x_verdict.py
+```
+
+The graph-unit mixed contrast writes `results/mixed/contrast_per_graph.csv`
+and `contrast_per_graph_summary.json`, with pure-A/pure-B/mixed per-graph
+rows and exact Wilcoxon tests for C4/C5/C6/C7 versus C1. The full real panel
+took 257.8 s and produced 140 instances over `cnr2000`, `cora_ml`, `citeseer`,
+`cora_full`, and `wikics` in the additive `real_full` directory. The fitted
+anchor discount verdict is not promoted; its held-out means are test -0.00076
+(14/32), topo -0.00042 (6/24), and real +0.00024 (2/5).
