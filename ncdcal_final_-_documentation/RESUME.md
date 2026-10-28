@@ -77,3 +77,19 @@ large real2 Stage 1 attempt was stopped after 59 minutes without an output.
 the supported range `[0.50, 0.97]`. The full synthetic Experiment C run
 completed in 623.5 seconds and wrote the complete mixed outputs. The reduced
 WP4 B1 run wrote nine rows in 3.0 seconds; B2 and B3 remain outstanding.
+
+Pass 4 completed items (2026-10-28):
+
+```bash
+~/venv/bin/python real2_pooled.py
+~/venv/bin/python real2_analysis.py
+```
+
+The pooled real2 analysis reproduces the reviewer values from the raw NPZ files:
+H1 -0.00214 (4/11, exact p=0.4648), H2 +0.07601 (11/11, exact
+p=0.0010; anchor-mismatched descriptive), and H3b -0.00372 (2/11,
+exact p=0.1016). It writes `results/stage2/real2/pooled.json`,
+`pooled_per_graph.csv`, and `pooled_leave_one_out.csv`. The six-new-graph
+Holm family remains untestable under Amendment 1. `real2_analysis.py` now
+labels the six-graph percentile range separately and adds a 10,000-resample
+bootstrap CI of the mean with fixed seed 17100.

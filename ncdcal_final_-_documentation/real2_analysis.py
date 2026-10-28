@@ -13,6 +13,14 @@ RES = os.path.join(HERE, "results", "stage2", "real2")
 GRID = np.round(np.concatenate([np.arange(.05, .40, .05), np.arange(.40, 1., .01)]), 2)
 
 
+def bootstrap_mean_ci(values, seed=17100, n_resamples=10_000):
+    values = np.asarray(values, dtype=float)
+    rng = np.random.default_rng(seed)
+    samples = rng.choice(values, size=(n_resamples, len(values)), replace=True)
+    means = samples.mean(axis=1)
+    return [float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5))]
+
+
 def main():
     provenance = json.load(open(DATA))
     records = []
@@ -44,7 +52,9 @@ def main():
             p = 1.0
         out[key] = {"n": int(len(x)), "mean": float(x.mean()), "median": float(np.median(x)),
                     "wins": int(np.sum(x > 0)), "p_exact": p,
-                    "ci95": [float(np.percentile(x, 2.5)), float(np.percentile(x, 97.5))]}
+                    "percentile_range95": [float(np.percentile(x, 2.5)),
+                                           float(np.percentile(x, 97.5))],
+                    "bootstrap_mean_ci95": bootstrap_mean_ci(x)}
     out["graphs"] = records
     with open(os.path.join(RES, "summary_real2.json"), "w") as fh:
         json.dump(out, fh, indent=2)
