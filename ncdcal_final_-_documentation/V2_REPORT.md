@@ -8,7 +8,7 @@
 | WP1 | reduced | Eight sources were prepared, but only six new graphs completed the locked Stage 2 outcome before the large web graphs exceeded the measured session budget. The four Geom-GCN graphs, Email-Eu-core and ogbn-arxiv were analysed; Stanford was stopped after 32.9 minutes without an output and NotreDame was not started. The six-graph subgroup is inferentially untestable under Amendment 1. |
 | WP2 | reduced | `stage2x` completed the full 64-graph calibration, 32-graph test, 24-graph topology, and five-graph real panels. The fitted anchor discount fails the registered promotion rule: test -0.00076 (14/32), topo -0.00042 (6/24, exact p=0.0340), real +0.00024 (2/5), and pooled held-out -0.00054 (22/61). Anchor reproduction errors are exactly 0.0 at 0.85 and 0.95; the supported range remains 0.50--0.97. |
 | WP3 | done | Additive `mixed_experiment.py` completed Experiment C for 4,080 instances over 120 synthetic base graphs and the full five-graph real panel (140 instances, 257.8 s). The graph-unit contrast, pure-A/B/mixed splits, and reverse-order sensitivity are reported; the pre-registered contrast does not promote C4-C7 over C1. |
-| WP4 | reduced | A B1 damaged-baseline smoke panel (three calibration graphs, three independent baseline keep levels, nine rows) ran using the fixed WP3 C1 fit. B2 evolved baselines and B3 policies were not run, so no baseline rule is promoted. |
+| WP4 | done | Fixed C1 B1 covered all `calib`, `test`, and `topo` graphs (720 rows, 9.8 s), B2 covered 1,440 evolved-baseline regimes (20.2 s), and B3 covered 480 eight-snapshot policy rows. Mean gains were +0.00012 for B1, -0.00121 for B2, and +0.00002 for B3; no baseline rule is promoted. |
 | WP5 | done | `ncd_autotune.py`, strengthened independent tests, build checks, README recipe and independent v2 verification added. |
 | WP6 | skipped | No dangling-treatment re-run was performed. |
 
@@ -76,9 +76,12 @@ the required held-out gain/p-value rule and has a significant topo loss.
 
 ## WP4 continuation evidence
 
-The reduced B1 panel produced nine rows in 3.0 s and mean gain +0.00506 over the
-constant. B2 evolved baselines and B3 policies were not run; baseline use remains
-disabled.
+The full B1 panels produced 720 rows in 9.8 s, with mean gain +0.00012 over the
+constant (+0.00043 on `calib`, -0.00054 on `test`, +0.00016 on `topo`). B2
+produced 1,440 rows in 20.2 s across all `gamma` and baseline-keep regimes; the
+overall mean gain was -0.00121. B3 produced 480 rows for reset, best-so-far,
+median-last-k, and exponential policies; the overall mean gain was +0.00002.
+No baseline rule meets the promotion rule, so baseline use remains disabled.
 
 ## Round-one integration
 

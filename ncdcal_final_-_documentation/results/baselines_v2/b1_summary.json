@@ -1,0 +1,10 @@
+{
+  "panels": [
+    "calib",
+    "test",
+    "topo"
+  ],
+  "rows": 720,
+  "mean_gain": 0.00011639195180361017,
+  "runtime_seconds": 9.82
+}

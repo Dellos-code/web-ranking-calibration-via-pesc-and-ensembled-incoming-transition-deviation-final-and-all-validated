@@ -1,0 +1,9 @@
+{
+  "rows": 480,
+  "policies": [
+    "best_so_far",
+    "exponential",
+    "median_last_k",
+    "reset"
+  ]
+}

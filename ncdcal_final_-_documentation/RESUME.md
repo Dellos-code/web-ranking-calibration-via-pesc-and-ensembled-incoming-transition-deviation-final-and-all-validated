@@ -110,3 +110,17 @@ took 257.8 s and produced 140 instances over `cnr2000`, `cora_ml`, `citeseer`,
 `cora_full`, and `wikics` in the additive `real_full` directory. The fitted
 anchor discount verdict is not promoted; its held-out means are test -0.00076
 (14/32), topo -0.00042 (6/24), and real +0.00024 (2/5).
+
+WP4 full baseline pass (2026-10-28):
+
+```bash
+~/venv/bin/python baseline_experiment_v2.py --panels calib,test --output-dir results/baselines_v2
+~/venv/bin/python baseline_experiment_v2.py --panels topo --output-dir results/baselines_v2
+~/venv/bin/python baseline_evolved.py
+~/venv/bin/python baseline_policy.py
+```
+
+B1 covered all synthetic calibration, test, and topology graphs in 9.8 s
+(720 rows); B2 covered 1,440 evolved-baseline regimes in 20.2 s; B3 covered
+480 policy rows. Mean gains were +0.00012, -0.00121, and +0.00002 respectively,
+so no baseline rule is promoted.

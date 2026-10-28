@@ -1,0 +1,9 @@
+{
+  "rows": 1440,
+  "runtime_seconds": 20.204077005386353,
+  "panels": [
+    "calib",
+    "test",
+    "topo"
+  ]
+}
