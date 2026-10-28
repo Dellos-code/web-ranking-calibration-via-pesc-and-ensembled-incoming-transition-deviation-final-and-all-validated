@@ -18,6 +18,15 @@ experiments. The two-stage framework, the block escape probability and the devia
 are the author's, as are the non-monotone and dangling-deconfounded hypotheses for the Stage 2 rule
 tested in Section 8.2.
 
+For this extension, the AI system assisted with the mixed-damage generator and the WP0 mixture and
+anchor-matching analyses (`mixed_damage`, `make_paper_assets.py`), Amendment 1 of the preregistration,
+the practical tool (`ncd_autotune.py`), its independent tests, verification script, build checks,
+documentation and manuscript recipe, and the verification of two candidate raw files. The candidate
+files were dropped as essentially symmetric; no new dataset or `real2` outcome was added. WP2 and WP4
+were not run, and WP3 remained reduced to primitive tests. The statistical criteria are those written
+in `PREREG_v2.md`; their interpretation and any decision to adopt the tool or its constants rest with
+the author.
+
 ## Ελληνικά
 
 **Δήλωση μεθόδου.** Η υλοποίηση, τα πειράματα και η στατιστική ανάλυση πραγματοποιήθηκαν με τη
@@ -27,3 +36,12 @@ Neumann και τα πειράματα αγκύρωσης. Το πλαίσιο �
 στατιστικό απόκλισης $h$ ανήκουν στον συγγραφέα, όπως και οι μη μονότονες υποθέσεις και οι υποθέσεις
 απαλοιφής της επίδρασης των κρεμάμενων σελίδων για τον κανόνα του Σταδίου 2 που ελέγχονται στην
 Ενότητα 8.2.
+
+Για την παρούσα επέκταση, το σύστημα τεχνητής νοημοσύνης βοήθησε με τη γεννήτρια μικτής βλάβης και τις
+αναλύσεις WP0 μείγματος και αντιστοίχισης άγκυρας (`mixed_damage`, `make_paper_assets.py`), την
+Τροποποίηση 1 της προεγγραφής, το πρακτικό εργαλείο (`ncd_autotune.py`), τα ανεξάρτητα tests του,
+το script επαλήθευσης, τους ελέγχους build, την τεκμηρίωση και τη συνταγή των κειμένων, καθώς και τον
+έλεγχο δύο υποψήφιων ακατέργαστων αρχείων. Τα αρχεία απορρίφθηκαν ως ουσιαστικά συμμετρικά· δεν
+προστέθηκε νέο σύνολο δεδομένων ή αποτέλεσμα `real2`. Τα WP2 και WP4 δεν εκτελέστηκαν και το WP3
+παρέμεινε μειωμένο στους ελέγχους των βασικών συναρτήσεων. Τα στατιστικά κριτήρια είναι όσα αναγράφονται
+στο `PREREG_v2.md`· η ερμηνεία τους και η απόφαση υιοθέτησης του εργαλείου ή των σταθερών του ανήκουν στον συγγραφέα.

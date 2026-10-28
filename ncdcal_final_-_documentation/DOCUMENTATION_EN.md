@@ -39,6 +39,8 @@ from the *total damping* $\alpha$. The study tests a zero-cost, two-stage calibr
 | Locked Stage 1 rule | $r=\mathrm{clip}(0.242-0.143\,\bar P,\,0.01,\,0.99)$; best constant $r=0.18$ |
 | Locked Stage 2 rule | the $\tau$-optimised rule on $h$ collapses to the constant $\alpha=0.810$ ($0.930$ under NCD95) |
 | Two-stage vs. canonical $(r,\alpha)=(0.118,0.85)$ | `test` $+0.0110$ Kendall $\tau$ (31/32 graphs, $p=9.3\times10^{-10}$); `scale` $+0.0102$; `topo` $+0.0036$; `real` $+0.0017$ ($p=0.812$, n.s.) |
+| Two-stage vs. [NG13] ranking setting $(r,\alpha)=(0.105,0.95)$, NCD truth | `test` $+0.0743$ (32/32 graphs, $p=4.7\times10^{-10}$); `scale` $+0.0756$ (12/12); `topo` $+0.0515$ (24/24); `real` $+0.0848$ (5/5, $p=0.0625$, the exact floor for $n=5$). **Anchor caveat:** the NCD truth is itself defined at damping 0.85, so this number mostly measures the comparator's anchor mismatch and is not evidence about the method (Table `tab:mismatch`, `V2_WP0_mismatch_table.md`). |
+| Anchor-matched constants | Use $\alpha=0.81$ for a reference at $0.85$ and $\alpha=0.93$ for a reference at $0.95$. The reference damping is a methodological choice, not an observable graph property. Matched gains on `test`: $+0.0110$ (31/32, $p=9.3\times10^{-10}$) under NCD against $(0.118,0.85)$, but only $+0.0011$ (19/32, $p=0.062$, a tie) under NCD95 against $(0.105,0.95)$; on the NCD95 `real` panel the matched difference is $-0.0006$. With the Stage 1 rule $r$ in place of $0.105$ (the pairing used by `ncd_autotune.py` at the 0.95 anchor) the $0.93$ gain against $(0.105,0.95)$ is $+0.0089$ (30/32, $p=5.0\times10^{-7}$) on `test`, $+0.0062$ on `scale`, $+0.0034$ on `topo` and $-0.0025$ on `real`; the calibration-optimal constant for that pairing is $0.920$ ($+0.0002$ $\tau$ over $0.93$). Mismatched pairs change $\tau$ by $-0.03$ to $-0.04$ on `test` (Table `tab:mismatch`). |
 | Predictive value of $\bar P$, $h$, $h_v$ | none out of sample; $h$ falls under link removal and rises under the newly-added-pages perturbation, while $\alpha^*$ falls under both |
 | Non-monotone and dangling-deconfounded $g$ | none of 127 deployable rules (tents, quadratic, Gaussian bump, steps, splines on $h$, $h_v$, $h_{\mathrm{raw}}$, $\delta$, $\zeta$; bivariate $g(h,\delta)$, $g(h,\zeta)$) passes the pre-registered held-out test; the $\tau$-optimised tent on $h$ changes $\tau$ by $-0.0001$ out of sample; with the graph's own unperturbed $h_0$ (not observable) a tent in $h-h_0$ gains $+0.0018$ in CV and $+0.0006$ out of sample, so $\alpha=0.810$ stays locked |
 | Anchoring | oracle $\alpha^*$ equals the damping of the reference ranking minus a 0.03–0.06 noise discount; dose-response slope 0.950 |
@@ -236,9 +238,11 @@ solves along a grid of $r$, warm-starting each solve from the previous solution 
   for dangling pages), `inter_arc_frac`, `mean_outdeg`, `log_mean_outdeg`, `dangling_frac`,
   `zero_in_frac` (pages without in-links), `n`, `N`, `m`, `mean_block_size`, `log_n`.
 
-**5. Perturbations** ([NG13, §4.2]). `sparsify_arcs(g, keep_frac, rng)` keeps a uniformly random
-fraction of the arcs (Experiment A). `newly_added_pages(g, page_frac, rng, remove=0.9)` chooses a
-fraction of the pages and deletes each of their incoming arcs with probability 0.9 (Experiment B).
+**5. Perturbations** ([NG13, §4.2]). A and B are mixtures, not pure mechanisms:
+`sparsify_arcs(g, keep_frac, rng)` changes danglingness and zero-in-link pages, while
+`newly_added_pages(g, page_frac, rng, remove=0.9)` can also create dangling sources. The generated
+`V2_WP0_mixture_table.md` reports $\delta$, $\zeta$, $h$ and $h_{\rm raw}$ from the unperturbed graph
+to the most severe level; `h_raw` alone is nearly blind to A.
 
 **6. Synthetic generators.**
 
@@ -271,6 +275,24 @@ $\pi(\alpha;r)$ for all 67 values of $\alpha$ and all requested $r$ from one Neu
 $\mathbb E[\pi(A;r)]$, $A\sim\mathrm{Beta}(a,b)$, with weights $w_k=B(a+k,b+1)/B(a,b)$;
 $a=b=1$ is TotalRank, $w_k=1/((k+1)(k+2))$.
 
+The additive `mixed_damage(g, keep_frac, page_frac, rng, order)` helper composes the existing
+Experiment B and A primitives in a fixed order for the preregistered mixture sensitivity; it does
+not alter either primitive.
+
+### 5.2a `ncd_autotune.py` (practical single-snapshot tool)
+
+`tune(src, dst, block, alpha_ref=0.85, baseline=None)` returns the locked Stage 1 $r$, the
+validated anchor-matched alpha, and $O(|E|+n)$ diagnostics. Only references at 0.85 and 0.95 are
+currently supported; unsupported values raise an error and a baseline is ignored with an explicit
+warning until WP3/WP4 validate a deployable baseline rule.
+
+**Practical recipe.** For a reference at $0.85$, call the tool with `alpha_ref=0.85`: it returns the
+Stage 1 rule $r$ and $\alpha=0.81$. For a reference at $0.95$, use `alpha_ref=0.95`: it returns
+the same Stage 1 rule $r$ and $\alpha=0.93$. The calibration optimum for that pairing is
+0.920, only 0.0002 $\tau$ above 0.93. The tool deliberately does
+not return the reference's own $r=0.10/\alpha_{\rm ref}$; it returns Stage 1's $r$. A supplied
+`baseline` is ignored with a warning because no baseline rule is validated.
+
 ## 5.3 `decode_cnr2000.py` and `prepare_real_graphs.py`
 
 `decode_cnr2000.py [raw_dir]` opens the BVGraph files of cnr-2000 (Laboratory for Web Algorithmics)
@@ -299,6 +321,12 @@ where $e_{ab}+e_{ba}$ counts the arcs between the two segments (a priority queue
 merges, with lazy invalidation of stale entries); pages without arcs join the segment on their left.
 The topic-label partitions follow the "category of its content" criterion that [NG13, §5] lists as an
 admissible decomposition.
+
+[NG13] Table 2 compares $(\eta,\mu)=(0.75,0.10)$ with PageRank at $0.85$ and
+$(0.85,0.10)$ with PageRank at $0.95$. Its ranking experiments run NCDawareRank at total damping
+$0.95$ against PageRank at $0.85$; they do not compare $0.85$ with $0.95$ for ranking quality.
+The SELF protocol makes the reference move with the candidate. Exact two-sided Wilcoxon tests have
+a p-value floor of $0.0625$ for $n=5$ and $0.0078$ for $n=8$.
 
 ## 5.4 `run_experiments.py` (driver)
 
@@ -459,6 +487,10 @@ its slopes vanish and that the tent is unimodal with a clipped apex; the identit
 deconfounded column sums and the column sums of $(1-r)H_{\mathrm{raw}}+rM$ (mean
 $1-(1-r)n_{\mathrm d}/n$); and that the replay of one calibration graph reproduces its stored $h$,
 $r$ and dangling fraction.
+
+`python3 tests/test_autotune.py` checks formula equality, consistency with the core library and the
+unsupported-anchor and baseline-warning paths. `python3 verify_v2.py` independently checks the new
+generated mixture and pipeline inputs without importing the analysis modules.
 
 # 6. Complexity and solver mechanics
 
@@ -687,14 +719,18 @@ trivial recovery problem.
 | 4 `tab:stage1dec` | variance decomposition of $r^*$ per truth | `stage1` |
 | 5 `tab:stage2` | Stage 2 candidate rules on $h$ and $h_v$, differences vs the locked constant | `stage2` |
 | 6 `tab:stage2dec` | variance decomposition of $\alpha^*$ per truth and $r$-setting | `stage2` |
-| 7 `tab:nonmono` | non-monotone, dangling-deconfounded and bivariate Stage 2 rules vs the locked constant | `nonmono` |
-| 8 `tab:anchor` | anchors: own $\alpha$, $\alpha^*$ on A1.0, mean $\alpha^*$, discount, within/between | `stage2` |
-| 9 `tab:rapr` | dose-response: $\alpha^*$ per Random-$\alpha$ prior | `stage2` |
-| 10 `tab:pipe` | complete pipelines vs static settings, five truths × five panels | `pipelines` |
-| 11 `tab:conv` | power-iteration counts and savings | `convergence` |
-| 12 `tab:stage1truth` | Stage 1 under the four Stage 1 truths (appendix) | `stage1_truth_table` |
-| 13 `tab:sens` | Stage 2 rules refitted per sensitivity truth (appendix) | `stage2` |
-| 14 `tab:realdetail` | real panel per network (appendix) | `real_detail` |
+| 7 `tab:mixture` | mechanism of Experiments A and B: $\delta$, $\zeta$, $h$, $h_{\mathrm{raw}}$ from least to most damaged level | `wp0_tables` |
+| 8 `tab:nonmono` | non-monotone, dangling-deconfounded and bivariate Stage 2 rules vs the locked constant | `nonmono` |
+| 9 `tab:anchor` | anchors: own $\alpha$, $\alpha^*$ on A1.0, mean $\alpha^*$, discount, within/between | `stage2` |
+| 10 `tab:rapr` | dose-response: $\alpha^*$ per Random-$\alpha$ prior | `stage2` |
+| 11 `tab:mismatch` | anchor matching: candidate vs [NG13] comparator on all held-out panels, truths NCD and NCD95 | `mismatch_table` |
+| 12 `tab:pipe` | complete pipelines vs static settings, five truths × five panels | `pipelines` |
+| 13 `tab:conv` | power-iteration counts and savings | `convergence` |
+| 14 `tab:stage1truth` | Stage 1 under the four Stage 1 truths (appendix) | `stage1_truth_table` |
+| 15 `tab:sens` | Stage 2 rules refitted per sensitivity truth (appendix) | `stage2` |
+| 16 `tab:realdetail` | real panel per network (appendix) | `real_detail` |
+| 17 `tab:mixture` | mixture mechanisms for Experiments A and B | `nonmono_summary` |
+| 18 `tab:mismatch` | anchor-matched and mismatched held-out comparisons | `pipelines` |
 
 # 11. Step-by-step reproduction
 
@@ -704,7 +740,7 @@ All commands run from the `ncdcal/` directory.
    for the manuscripts, a TeX distribution with XeLaTeX and the FreeSerif font; for this
    documentation, pandoc.
 2. **Unit tests** (a few seconds):
-   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py`.
+   `python3 tests/test_lib.py && python3 tests/test_stage2.py && python3 tests/test_nonmono.py && python3 tests/test_autotune.py && python3 check_build.py && python3 verify_v2.py`.
 3. **Raw data** into `../data/`: the cnr-2000 BVGraph files (`cnr-2000.graph`, `.offsets`,
    `.properties`) from the Laboratory for Web Algorithmics (https://law.di.unimi.it/webdata/cnr-2000/)
    into `../data/cnr2000/`; the WikiCS file `dataset/data.json` of

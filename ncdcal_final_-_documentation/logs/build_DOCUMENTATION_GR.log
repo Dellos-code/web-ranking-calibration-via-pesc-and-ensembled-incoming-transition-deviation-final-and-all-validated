@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.10.22)  25 OCT 2026 13:14
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2026.10.27)  27 OCT 2026 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1101,36 +1101,36 @@ Package babel Info: The following font families will use the default
 )
 \openout1 = `doc_GR.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 101.
+LaTeX Font Info:    ... okay on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 102.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 101.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 102.
-LaTeX Info: Redefining \microtypecontext on input line 102.
-Package microtype Info: Applying patch `item' on input line 102.
-Package microtype Info: Applying patch `toc' on input line 102.
-Package microtype Info: Applying patch `eqnum' on input line 102.
-Package microtype Info: Applying patch `footnote' on input line 102.
-Package microtype Info: Applying patch `verbatim' on input line 102.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 101.
+LaTeX Info: Redefining \microtypecontext on input line 101.
+Package microtype Info: Applying patch `item' on input line 101.
+Package microtype Info: Applying patch `toc' on input line 101.
+Package microtype Info: Applying patch `eqnum' on input line 101.
+Package microtype Info: Applying patch `footnote' on input line 101.
+Package microtype Info: Applying patch `verbatim' on input line 101.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1175,30 +1175,30 @@ Package microtype Info: Loading generic protrusion settings for font family
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 102.
+Package hyperref Info: Link coloring ON on input line 101.
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 104.
+(Font)              scaled to size 17.28pt on input line 103.
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 104.
+(Font)              scaled to size 12.0pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(1)/m/n' will be
-(Font)              scaled to size 12.52899pt on input line 104.
+(Font)              scaled to size 12.52899pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(1)/m/n' will be
-(Font)              scaled to size 8.35266pt on input line 104.
+(Font)              scaled to size 8.35266pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(1)/m/n' will be
-(Font)              scaled to size 6.2645pt on input line 104.
+(Font)              scaled to size 6.2645pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(2)/m/n' will be
-(Font)              scaled to size 12.53027pt on input line 104.
+(Font)              scaled to size 12.53027pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(2)/m/n' will be
-(Font)              scaled to size 8.35352pt on input line 104.
+(Font)              scaled to size 8.35352pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(2)/m/n' will be
-(Font)              scaled to size 6.26514pt on input line 104.
+(Font)              scaled to size 6.26514pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
-(Font)              scaled to size 12.52771pt on input line 104.
+(Font)              scaled to size 12.52771pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
-(Font)              scaled to size 8.3518pt on input line 104.
+(Font)              scaled to size 8.3518pt on input line 103.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
-(Font)              scaled to size 6.26385pt on input line 104.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 104
+(Font)              scaled to size 6.26385pt on input line 103.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 103
 .
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1206,7 +1206,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 104
+LaTeX Font Info:    Trying to load font information for U+msb on input line 103
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1216,9 +1216,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 109.
+(Font)              scaled to size 14.4pt on input line 108.
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 109.
+(Font)              scaled to size 14.4pt on input line 108.
  (./doc_GR.toc
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/b/n' will be
 (Font)              scaled to size 10.0pt on input line 2.
@@ -1246,45 +1246,55 @@ LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
 \openout4 = `doc_GR.toc'.
 
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 119.
+(Font)              scaled to size 10.0pt on input line 118.
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 131.
+(Font)              scaled to size 12.0pt on input line 130.
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 147.
+(Font)              scaled to size 10.0pt on input line 146.
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 147.
+(Font)              scaled to size 7.0pt on input line 146.
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 147.
+(Font)              scaled to size 5.0pt on input line 146.
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 164.
+(Font)              scaled to size 9.0pt on input line 163.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(1)/m/n' will be
-(Font)              scaled to size 9.39674pt on input line 178.
+(Font)              scaled to size 9.39674pt on input line 177.
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 178.
+(Font)              scaled to size 9.0pt on input line 177.
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 178.
+(Font)              scaled to size 6.0pt on input line 177.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(2)/m/n' will be
-(Font)              scaled to size 9.3977pt on input line 178.
+(Font)              scaled to size 9.3977pt on input line 177.
 LaTeX Font Info:    Font shape `TU/LatinModernMath(3)/m/n' will be
-(Font)              scaled to size 9.39578pt on input line 178.
+(Font)              scaled to size 9.39578pt on input line 177.
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
-(Font)              scaled to size 7.38007pt on input line 184.
- [2] [3] [4]
+(Font)              scaled to size 7.38007pt on input line 183.
+LaTeX Font Info:    Font shape `TU/FreeSerif(2)/b/n' will be
+(Font)              scaled to size 9.0pt on input line 191.
+ [2] [3] [4] [5]
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 436.
+(Font)              scaled to size 7.0pt on input line 461.
 LaTeX Font Info:    Font shape `TU/FreeSerif(2)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 436.
+(Font)              scaled to size 5.0pt on input line 461.
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
-(Font)              scaled to size 9.84009pt on input line 441.
- [5]
-Underfull \hbox (badness 5302) in paragraph at lines 555--562
+(Font)              scaled to size 9.84009pt on input line 466.
+ [6]
+Underfull \hbox (badness 2762) in paragraph at lines 558--567
+\TU/DejaVuSansMono(0)/m/n/10 keep_frac, rng) \TU/FreeSerif(2)/m/n/10 μεταβάλλει
+ τις κρεμάμενες σελίδες και τις σελίδες χωρίς εισερχόμενη σύνδεση, ενώ η
+ []
+
+
+Underfull \hbox (badness 5302) in paragraph at lines 583--590
 []\TU/FreeSerif(2)/m/n/10 Η \TU/DejaVuSansMono(0)/m/n/10 generate_static_web(pa
 rams, rng) \TU/FreeSerif(2)/m/n/10 κατασκευάζει τον γράφο και τον επιστρέφει μα
 ζί με ένα
  []
 
-[6]
-Underfull \hbox (badness 6876) in paragraph at lines 609--615
+LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
+(Font)              scaled to size 8.20007pt on input line 633.
+[7]
+Underfull \hbox (badness 6876) in paragraph at lines 664--670
 []\TU/FreeSerif(2)/m/n/10 Το \TU/DejaVuSansMono(0)/m/n/10 prepare_real_graphs.p
 y [names…] \TU/FreeSerif(2)/m/n/10 γράφει τα \TU/DejaVuSansMono(0)/m/n/10 data/
 real/<name>.npz \TU/FreeSerif(2)/m/n/10 (\TU/DejaVuSansMono(0)/m/n/10 n\TU/Free
@@ -1293,39 +1303,34 @@ Serif(2)/m/n/10 , \TU/DejaVuSansMono(0)/m/n/10 src\TU/FreeSerif(2)/m/n/10 , \TU
 n/10 block\TU/FreeSerif(2)/m/n/10 ) και το
  []
 
-[7]
-Underfull \hbox (badness 1038) in paragraph at lines 671--675
+
+Underfull \hbox (badness 1038) in paragraph at lines 734--738
 []\TU/FreeSerif(2)/m/n/10 Η \TU/DejaVuSansMono(0)/m/n/10 panel_specs(panel) \TU
 /FreeSerif(2)/m/n/10 απαριθμεί τους γράφους βάσης ενός συνόλου με τους σπόρους 
 τους (Ενότητα 8)· η
  []
 
-LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/b/n' will be
-(Font)              scaled to size 8.20007pt on input line 676.
 [8]
-Underfull \hbox (badness 4168) in paragraph at lines 781--786
+Underfull \hbox (badness 4168) in paragraph at lines 844--849
 []\TU/DejaVuSansMono(0)/b/n/10 stage1_crosstruth.py\TU/FreeSerif(2)/b/n/10 . \T
 U/FreeSerif(2)/m/n/10 Αξιολογεί κανόνες προσαρμοσμένους υπό μία αλήθεια έναντι 
 κάθε άλλης
  []
 
-
-Underfull \hbox (badness 1292) in paragraph at lines 828--832
+[9]
+Underfull \hbox (badness 1292) in paragraph at lines 891--895
 []\TU/DejaVuSansMono(0)/b/n/10 stage2_upper_check.py [n_graphs=8]\TU/FreeSerif(
 2)/b/n/10 . \TU/FreeSerif(2)/m/n/10 Αξιολογεί το $[]$ έναντι της Q για $[] [] [
 ][][][][][] [][][][][][] [][][][][][]$
  []
 
-[9]
+[10]
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 979.
+(Font)              scaled to size 12.0pt on input line 1048.
 LaTeX Font Info:    Font shape `TU/FreeSerif(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 979.
- [10] [11]
-LaTeX Font Info:    Font shape `TU/FreeSerif(2)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 1170.
- [12] [13] [14] [15]
-Underfull \hbox (badness 3826) in paragraph at lines 1495--1507
+(Font)              scaled to size 8.0pt on input line 1048.
+ [11] [12] [13] [14] [15] [16]
+Underfull \hbox (badness 3826) in paragraph at lines 1574--1586
 []\TU/FreeSerif(2)/b/n/10 Πρωτογενή δεδομένα \TU/FreeSerif(2)/m/n/10 στο \TU/De
 jaVuSansMono(0)/m/n/10 ../data/\TU/FreeSerif(2)/m/n/10 : τα αρχεία BVGraph του 
 cnr-2000 (\TU/DejaVuSansMono(0)/m/n/10 cnr-2000.graph\TU/FreeSerif(2)/m/n/10 , 
@@ -1333,20 +1338,20 @@ cnr-2000 (\TU/DejaVuSansMono(0)/m/n/10 cnr-2000.graph\TU/FreeSerif(2)/m/n/10 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1495--1507
+Underfull \hbox (badness 10000) in paragraph at lines 1574--1586
 \TU/DejaVuSansMono(0)/m/n/10 .properties\TU/FreeSerif(2)/m/n/10 ) από το Labora
 tory for Web Algorithmics (https://law.di.unimi.it/webdata/cnr-2000/) στο
  []
 
 
-Underfull \hbox (badness 2951) in paragraph at lines 1495--1507
+Underfull \hbox (badness 2951) in paragraph at lines 1574--1586
 \TU/DejaVuSansMono(0)/m/n/10 ../data/cnr2000/\TU/FreeSerif(2)/m/n/10 · το αρχεί
 ο \TU/DejaVuSansMono(0)/m/n/10 dataset/data.json \TU/FreeSerif(2)/m/n/10 του ht
 tps://github.com/pmernyei/wiki-cs-dataset (αποθη-
  []
 
 
-Underfull \hbox (badness 2351) in paragraph at lines 1495--1507
+Underfull \hbox (badness 2351) in paragraph at lines 1574--1586
 \TU/FreeSerif(2)/m/n/10 κευμένο ως \TU/DejaVuSansMono(0)/m/n/10 wikics_data.jso
 n\TU/FreeSerif(2)/m/n/10 ) και τα αρχεία CitationFull \TU/DejaVuSansMono(0)/m/n
 /10 cora.npz\TU/FreeSerif(2)/m/n/10 , \TU/DejaVuSansMono(0)/m/n/10 cora_ml.npz\
@@ -1355,7 +1360,7 @@ f(2)/m/n/10 του
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 1517--1523
+Underfull \hbox (badness 5105) in paragraph at lines 1596--1602
 []\TU/FreeSerif(2)/b/n/10 Ανάλυση Σταδίου 1\TU/FreeSerif(2)/m/n/10 : \TU/DejaVu
 SansMono(0)/m/n/10 python3 stage1_analysis.py\TU/FreeSerif(2)/m/n/10 , \TU/Deja
 VuSansMono(0)/m/n/10 python3 stage1_decomposition.py\TU/FreeSerif(2)/m/n/10 , \
@@ -1363,7 +1368,7 @@ TU/DejaVuSansMono(0)/m/n/10 python3
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 1526--1536
+Underfull \hbox (badness 5105) in paragraph at lines 1605--1615
 []\TU/FreeSerif(2)/b/n/10 Ανάλυση Σταδίου 2\TU/FreeSerif(2)/m/n/10 : \TU/DejaVu
 SansMono(0)/m/n/10 python3 stage2_analysis.py\TU/FreeSerif(2)/m/n/10 , \TU/Deja
 VuSansMono(0)/m/n/10 python3 stage2_decomposition.py\TU/FreeSerif(2)/m/n/10 , \
@@ -1371,7 +1376,7 @@ TU/DejaVuSansMono(0)/m/n/10 python3
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1526--1536
+Underfull \hbox (badness 10000) in paragraph at lines 1605--1615
 \TU/DejaVuSansMono(0)/m/n/10 stage2_rapr_anchor.py\TU/FreeSerif(2)/m/n/10 , \TU
 /DejaVuSansMono(0)/m/n/10 python3 stage2_upper_check.py\TU/FreeSerif(2)/m/n/10 
 , \TU/DejaVuSansMono(0)/m/n/10 python3 convergence_check.py\TU/FreeSerif(2)/m/n
@@ -1379,7 +1384,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1526--1536
  []
 
 
-Underfull \hbox (badness 7451) in paragraph at lines 1526--1536
+Underfull \hbox (badness 7451) in paragraph at lines 1605--1615
 \TU/DejaVuSansMono(0)/m/n/10 python3 bound_check.py\TU/FreeSerif(2)/m/n/10 , \T
 U/DejaVuSansMono(0)/m/n/10 python3 verify_stage2.py\TU/FreeSerif(2)/m/n/10 , \T
 U/DejaVuSansMono(0)/m/n/10 python3 stage2_tables.py \TU/FreeSerif(2)/m/n/10 και
@@ -1387,26 +1392,26 @@ U/DejaVuSansMono(0)/m/n/10 python3 stage2_tables.py \TU/FreeSerif(2)/m/n/10 κα
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1540--1545
+Underfull \hbox (badness 10000) in paragraph at lines 1619--1624
 []\TU/FreeSerif(2)/b/n/10 Κείμενα\TU/FreeSerif(2)/m/n/10 : το \TU/DejaVuSansMon
 o(0)/m/n/10 bash build_papers.sh \TU/FreeSerif(2)/m/n/10 εκτελεί το \TU/DejaVuS
 ansMono(0)/m/n/10 make_paper_assets.py \TU/FreeSerif(2)/m/n/10 και μεταγλωττίζε
 ι τα
  []
 
-[16] [17] (./doc_GR.aux)
+[17] [18] (./doc_GR.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 21869 strings out of 476872
- 408357 string characters out of 5804585
- 1949627 words of memory out of 5000000
- 43454 multiletter control sequences out of 15000+600000
+ 21871 strings out of 476846
+ 408546 string characters out of 5803823
+ 1948627 words of memory out of 5000000
+ 43478 multiletter control sequences out of 15000+600000
  566292 words of font info for 135 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,10n,128p,1003b,629s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,10n,128p,1003b,649s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on doc_GR.pdf (17 pages).
+Output written on doc_GR.pdf (18 pages).

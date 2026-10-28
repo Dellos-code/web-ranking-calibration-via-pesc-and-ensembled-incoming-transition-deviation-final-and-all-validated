@@ -1091,6 +1091,135 @@ def real_detail():
         write(os.path.join(OUT, lang, "tab_realdetail.tex"), table_env("tab:realdetail", cap_en, cap_gr, body, lang, "\\footnotesize", place="!htbp"))
 
 
+def wp0_tables():
+    """Generate the mixture mechanism and anchor-matching outputs used by WP0 text."""
+    path = os.path.join(R2, "nonmono_summary.json")
+    if not os.path.exists(path):
+        return
+    me = json.load(open(path))["mechanism"]["trajectories"]
+    levels = (("A", "A1.0", "A0.2"), ("B", "B0.1", "B0.6"))
+    rows = []
+    for exp, first, last in levels:
+        a, b = me[first], me[last]
+        rows.append({
+            "experiment": exp,
+            "delta0": float(a["delta"]),
+            "delta1": float(b["delta"]),
+            "zeta0": float(a["zero_in_frac"]),
+            "zeta1": float(b["zero_in_frac"]),
+            "h0": float(a["h_rule"]),
+            "h1": float(b["h_rule"]),
+            "hraw0": float(a["hraw_rule"]),
+            "hraw1": float(b["hraw_rule"]),
+        })
+    for lang in ("en", "gr"):
+        head = ("experiment & $\\delta$ & $\\zeta$ & $h$ & $h_{\\rm raw}$ \\\\"
+                if lang == "en" else
+                "πείραμα & $\\delta$ & $\\zeta$ & $h$ & $h_{\\rm raw}$ \\\\")
+        lines = []
+        for r in rows:
+            label = ("A: link keep 1.0$\\to$0.2" if r["experiment"] == "A" else
+                     "B: page loss 0.1$\\to$0.6")
+            if lang == "gr":
+                label = ("Α: διατήρηση τόξων 1.0$\\to$0.2" if r["experiment"] == "A" else
+                         "Β: απώλεια σελίδων 0.1$\\to$0.6")
+            cells = [f"{r[k+'0']:.3f}$\\to${r[k+'1']:.3f}" for k in ("delta", "zeta", "h", "hraw")]
+            lines.append(label + " & " + " & ".join(cells) + " \\\\")
+        body = "\\begin{tabular}{@{}lrrrr@{}}\\toprule\n" + head + "\n\\midrule\n" + "\n".join(lines) + "\n\\bottomrule\\end{tabular}"
+        cap_en = ("Experiments A and B are mixtures of dangling-page and zero-in-link effects. "
+                  "Values run from the least damaged to the most severe level.")
+        cap_gr = ("Τα Πειράματα Α και Β είναι μείγματα επιδράσεων κρεμάμενων σελίδων και μηδενικών εισερχόμενων "
+                  "συνδέσεων. Οι τιμές εκτείνονται από την ηπιότερη έως τη σοβαρότερη στάθμη.")
+        write(os.path.join(OUT, lang, "tab_mixture.tex"),
+              table_env("tab:mixture", cap_en, cap_gr, body, lang, "\\small"))
+    write(os.path.join(HERE, "V2_WP0_mixture_table.md"),
+          "| Experiment | $\\delta$ | $\\zeta$ | $h$ | $h_{raw}$ |\n|---|---:|---:|---:|---:|\n" +
+          "\n".join(f"| {r['experiment']} | {r['delta0']:.3f} → {r['delta1']:.3f} | "
+                    f"{r['zeta0']:.3f} → {r['zeta1']:.3f} | {r['h0']:.3f} → {r['h1']:.3f} | "
+                    f"{r['hraw0']:.3f} → {r['hraw1']:.3f} |" for r in rows) + "\n")
+    p = pd.read_csv(os.path.join(R2, "pipelines.csv"))
+    def value(truth, policy, panel="test", col="d_vs_ng13_085"):
+        q = p[(p.truth == truth) & (p.policy == policy) & (p.panel == panel)]
+        return float(q.iloc[0][col])
+    two = "two-stage: rule r + cliplin_TAU(h)"
+    macro("WpZeroNcdVsCanonical", sgn4(value("NCD", two, col="d_vs_ng13_085")))
+    macro("WpZeroNcdVsNg", sgn4(value("NCD", two, col="d_vs_ng13_095")))
+    matched = cmp_stats("NCD95", "test", ("ng13", 0.93), ("ng13", 0.95))
+    macro("WpZeroNfMatched", sgn4(matched["mean"]))
+    macro("WpZeroNfMatchedP", pv(matched["p"]))
+
+
+def mismatch_table():
+    """Anchor-mismatch table (label tab:mismatch): each candidate (r, alpha) against each static [NG13] comparator,
+    under the NCD (reference 0.85) and NCD95 (reference 0.95) truths, on every held-out panel.
+    Candidates use the r convention of their own anchor: rule r with 0.81 for the 0.85 anchor,
+    r = 0.105 with 0.93 for the 0.95 anchor.  The two matched cells are the comparisons the paper
+    claims; every other cell is a deliberate mismatch."""
+    panels = ["test", "scale", "topo", "real"]
+    cands = [(("rule", 0.81), "RuleLo", "rule $r$, $\\alpha=0.81$", "$r$ κανόνα, $\\alpha=0.81$"),
+             (("rule", 0.93), "RuleHi", "rule $r$, $\\alpha=0.93$", "$r$ κανόνα, $\\alpha=0.93$"),
+             (("ng13", 0.93), "NgHi", "$r=0.105$, $\\alpha=0.93$", "$r=0.105$, $\\alpha=0.93$")]
+    comps = [(("can", 0.85), "Can", "$(0.118,\\,0.85)$"), (("ng13", 0.95), "Ng", "$(0.105,\\,0.95)$")]
+    matched = {("NCD", 0, 0), ("NCD95", 1, 1), ("NCD95", 2, 1)}
+    rows = {"en": [], "gr": []}
+    psig, pns = [], []
+    md = ["| truth | candidate | comparator | " + " | ".join(panels) + " |", "|---|---|---|" + "---|" * len(panels)]
+    for t in ("NCD", "NCD95"):
+        for lang in ("en", "gr"):
+            rows[lang].append(f"\\multicolumn{{5}}{{@{{}}l}}{{\\textit{{{'truth' if lang == 'en' else 'αλήθεια'} {t}}}}} \\\\")
+        for ci, (cand, cnm, cen, cgr) in enumerate(cands):
+            for ki, (comp, knm, kname) in enumerate(comps):
+                cells, mdcells = [], []
+                for pn in panels:
+                    st = cmp_stats(t, pn, cand, comp)
+                    sig = st["p"] < 0.05
+                    (psig if sig else pns).append(st["p"])
+                    cells.append(f"{sgn4(st['mean'])} ({st['wins']}/{st['n']})" + ("" if sig else "$^{\\dagger}$"))
+                    mdcells.append(f"{st['mean']:+.4f} ({st['wins']}/{st['n']}; p={st['p']:.2g})")
+                    if pn == "test":
+                        key = f"{'Ncd' if t == 'NCD' else 'Ncdnf'}{cnm}{knm}"
+                        macro(f"Mis{key}", sgn4(st["mean"]))
+                        macro(f"Mis{key}P", pv(st["p"]))
+                        macro(f"Mis{key}Wins", f"{st['wins']}/{st['n']}")
+                mark = "$^{\\star}$" if (t, ci, ki) in matched else ""
+                for lang, clab in (("en", cen), ("gr", cgr)):
+                    rows[lang].append(f"\\quad {clab} vs {kname}{mark} & " + " & ".join(cells) + " \\\\")
+                md.append(f"| {t} | {cen} | {kname} | " + " | ".join(mdcells) + " |")
+    for lang in ("en", "gr"):
+        head = ("candidate $(r,\\alpha)$ vs comparator & \\texttt{test} & \\texttt{scale} & \\texttt{topo} & \\texttt{real} \\\\"
+                if lang == "en" else
+                "υποψήφιο $(r,\\alpha)$ έναντι αναφοράς & \\texttt{test} & \\texttt{scale} & \\texttt{topo} & \\texttt{real} \\\\")
+        body = ("\\begin{tabular}{@{}lcccc@{}}\n\\toprule\n" + head + "\n\\midrule\n" +
+                "\n".join(rows[lang]) +
+                "\n\\bottomrule\n\\end{tabular}")
+        pmax = f"{max(psig):.4f}".rstrip("0")
+        cap_en = ("Anchor matching. Mean Kendall $\\tau$ difference (candidate minus comparator), averaged over graphs, "
+                  f"with graph wins in parentheses, on the four held-out panels; $^{{\\dagger}}$ marks an exact Wilcoxon $p\\ge0.05$ "
+                  f"(every other cell has $p\\le{pmax}$). The comparators are the "
+                  "static [NG13] settings $(r,\\alpha)$. Cells marked $^{\\star}$ are the anchor-matched comparisons claimed "
+                  "in the text; the others are deliberate mismatches, in which the candidate, the comparator or the "
+                  "truth is defined at the other damping. With five real graphs the smallest attainable "
+                  "$p$ is $0.0625$.")
+        cap_gr = ("Αντιστοίχιση άγκυρας. Μέση διαφορά $\\tau$ του Kendall (υποψήφιο μείον αναφορά), κατά μέσο όρο ανά γράφο, "
+                  f"με νίκες γράφων σε παρένθεση, στα τέσσερα σύνολα εκτός δείγματος· το $^{{\\dagger}}$ σημαίνει ακριβές $p\\ge0.05$ "
+                  f"του Wilcoxon (κάθε άλλο κελί έχει $p\\le{pmax}$). Οι αναφορές είναι "
+                  "οι στατικές ρυθμίσεις $(r,\\alpha)$ του [NG13]. Τα κελιά με $^{\\star}$ είναι οι συγκρίσεις με αντιστοίχιση "
+                  "άγκυρας που διατυπώνονται στο κείμενο· τα υπόλοιπα είναι σκόπιμες ασυμφωνίες, όπου το υποψήφιο, η αναφορά ή η "
+                  "αλήθεια ορίζεται στην άλλη απόσβεση. Με πέντε πραγματικούς γράφους "
+                  "το μικρότερο εφικτό $p$ είναι $0.0625$.")
+        write(os.path.join(OUT, lang, "tab_mismatch.tex"),
+              table_env("tab:mismatch", cap_en, cap_gr, body, lang, "\\scriptsize", star=True))
+    write(os.path.join(HERE, "V2_WP0_mismatch_table.md"), "\n".join(md) + "\n")
+    # best constant for the pairing used by the tool at the 0.95 anchor (rule r), fitted on calib only
+    mcal = S2.valid(df2, "NCD95") & (df2["panel"] == "calib").to_numpy()
+    cur = S2.curves(TAU2, "rule", "NCD95")[mcal]
+    bases = df2["base"].to_numpy()[mcal]
+    gmean = np.mean([cur[bases == b].mean(0) for b in np.unique(bases)], axis=0)
+    jb = int(np.argmax(gmean))
+    macro("MisRuleBestCalib", f3(float(GRID[jb])))
+    macro("MisRuleBestCalibGap", sgn4(float(gmean[jb] - gmean[J[0.93]])))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     real_dataset_table()
@@ -1112,6 +1241,8 @@ def main():
     pipelines()
     convergence()
     real_detail()
+    wp0_tables()
+    mismatch_table()
     lines = ["% generated by make_paper_assets.py -- do not edit",
              "% every value is mode-agnostic: signed numbers and powers of ten are wrapped in",
              "% \\ensuremath, so a macro can be used both in running text and inside $...$"]

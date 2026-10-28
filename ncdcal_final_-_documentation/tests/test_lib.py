@@ -184,6 +184,32 @@ def test_perturbations():
     assert ga.m == round(0.4 * g.m) and ga.n == g.n
     gb = L.newly_added_pages(g, 0.3, rng)
     assert gb.m < g.m and gb.n == g.n
+    gc = L.mixed_damage(g, 0.8, 0.3, np.random.default_rng(7))
+    assert gc.n == g.n and gc.m <= g.m
+    assert gc.meta["mixed_damage_order"] == "B_then_A"
+    seed = 71
+    direct = L.sparsify_arcs(g, 0.6, np.random.default_rng(seed))
+    mixed_a = L.mixed_damage(g, 0.6, 0.0, np.random.default_rng(seed))
+    assert np.array_equal(direct.src, mixed_a.src)
+    assert np.array_equal(direct.dst, mixed_a.dst)
+    direct_b = L.newly_added_pages(g, 0.3, np.random.default_rng(seed))
+    mixed_b = L.mixed_damage(g, 1.0, 0.3, np.random.default_rng(seed))
+    assert np.array_equal(direct_b.src, mixed_b.src)
+    assert np.array_equal(direct_b.dst, mixed_b.dst)
+    again = L.mixed_damage(g, 0.8, 0.3, np.random.default_rng(99))
+    same = L.mixed_damage(g, 0.8, 0.3, np.random.default_rng(99))
+    assert np.array_equal(again.src, same.src) and np.array_equal(again.dst, same.dst)
+    levels = (0.9, 0.7, 0.5)
+    dz = []
+    for level in levels:
+        vals = []
+        for seed in range(5):
+            damaged = L.mixed_damage(g, level, 0.4, np.random.default_rng(seed))
+            ops = L.build_operators(damaged)
+            feats = L.structural_features(ops)
+            vals.append((feats["dangling_frac"], feats["zero_in_frac"]))
+        dz.append(np.mean(vals, axis=0))
+    assert np.all(np.diff(np.asarray(dz), axis=0) >= -0.05)
 
 
 if __name__ == "__main__":

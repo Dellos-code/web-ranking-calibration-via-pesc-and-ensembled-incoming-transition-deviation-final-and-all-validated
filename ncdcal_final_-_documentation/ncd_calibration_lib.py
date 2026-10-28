@@ -306,6 +306,45 @@ def newly_added_pages(g: Graph, page_frac: float, rng: np.random.Generator,
     return g.subgraph_arcs(~drop, f"|B{page_frac:.2f}")
 
 
+def mixed_damage(g: Graph, keep_frac: float, page_frac: float,
+                 rng: np.random.Generator, order: str = "B_then_A") -> Graph:
+    """Compose the existing B and A perturbations without changing either primitive.
+
+    ``B_then_A`` first removes incoming links of the selected pages and then sparsifies
+    the resulting arc set. ``A_then_B`` reverses that order for the preregistered
+    sensitivity run. The same generator is consumed in the stated order.
+    """
+    if order not in ("B_then_A", "A_then_B"):
+        raise ValueError("order must be 'B_then_A' or 'A_then_B'")
+    if not (0.0 <= keep_frac <= 1.0 and 0.0 <= page_frac <= 1.0):
+        raise ValueError("keep_frac and page_frac must lie in [0, 1]")
+    if page_frac == 0.0:
+        out = sparsify_arcs(g, keep_frac, rng)
+        return out.__class__(out.n, out.src, out.dst, out.block,
+                             g.name + f"|C{keep_frac:.2f},0.00,{order}",
+                             dict(g.meta, mixed_damage_order=order,
+                                  mixed_damage_keep=float(keep_frac),
+                                  mixed_damage_pages=0.0))
+    if keep_frac == 1.0:
+        out = newly_added_pages(g, page_frac, rng)
+        return out.__class__(out.n, out.src, out.dst, out.block,
+                             g.name + f"|C1.00,{page_frac:.2f},{order}",
+                             dict(g.meta, mixed_damage_order=order,
+                                  mixed_damage_keep=1.0,
+                                  mixed_damage_pages=float(page_frac)))
+    if order == "B_then_A":
+        out = newly_added_pages(g, page_frac, rng)
+        out = sparsify_arcs(out, keep_frac, rng)
+    else:
+        out = sparsify_arcs(g, keep_frac, rng)
+        out = newly_added_pages(out, page_frac, rng)
+    return out.__class__(out.n, out.src, out.dst, out.block,
+                         g.name + f"|C{keep_frac:.2f},{page_frac:.2f},{order}",
+                         dict(g.meta, mixed_damage_order=order,
+                              mixed_damage_keep=float(keep_frac),
+                              mixed_damage_pages=float(page_frac)))
+
+
 # ---------------------------------------------------------------------------
 # 7. Synthetic generators
 # ---------------------------------------------------------------------------

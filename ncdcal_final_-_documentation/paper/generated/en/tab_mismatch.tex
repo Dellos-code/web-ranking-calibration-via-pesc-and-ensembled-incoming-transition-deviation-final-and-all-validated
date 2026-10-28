@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Anchor matching. Mean Kendall $\tau$ difference (candidate minus comparator), averaged over graphs, with graph wins in parentheses, on the four held-out panels; $^{\dagger}$ marks an exact Wilcoxon $p\ge0.05$ (every other cell has $p\le0.0269$). The comparators are the static [NG13] settings $(r,\alpha)$. Cells marked $^{\star}$ are the anchor-matched comparisons claimed in the text; the others are deliberate mismatches, in which the candidate, the comparator or the truth is defined at the other damping. With five real graphs the smallest attainable $p$ is $0.0625$.}
+\label{tab:mismatch}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+candidate $(r,\alpha)$ vs comparator & \texttt{test} & \texttt{scale} & \texttt{topo} & \texttt{real} \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{truth NCD}} \\
+\quad rule $r$, $\alpha=0.81$ vs $(0.118,\,0.85)$$^{\star}$ & $+$0.0110 (31/32) & $+$0.0102 (11/12) & $+$0.0036 (23/24) & $+$0.0017 (2/5)$^{\dagger}$ \\
+\quad rule $r$, $\alpha=0.81$ vs $(0.105,\,0.95)$ & $+$0.0743 (32/32) & $+$0.0756 (12/12) & $+$0.0515 (24/24) & $+$0.0848 (5/5)$^{\dagger}$ \\
+\quad rule $r$, $\alpha=0.93$ vs $(0.118,\,0.85)$ & $-$0.0414 (0/32) & $-$0.0472 (0/12) & $-$0.0318 (0/24) & $-$0.0777 (0/5)$^{\dagger}$ \\
+\quad rule $r$, $\alpha=0.93$ vs $(0.105,\,0.95)$ & $+$0.0219 (31/32) & $+$0.0182 (11/12) & $+$0.0162 (24/24) & $+$0.0053 (4/5)$^{\dagger}$ \\
+\quad $r=0.105$, $\alpha=0.93$ vs $(0.118,\,0.85)$ & $-$0.0441 (0/32) & $-$0.0455 (0/12) & $-$0.0300 (0/24) & $-$0.0528 (0/5)$^{\dagger}$ \\
+\quad $r=0.105$, $\alpha=0.93$ vs $(0.105,\,0.95)$ & $+$0.0192 (32/32) & $+$0.0199 (12/12) & $+$0.0180 (24/24) & $+$0.0303 (5/5)$^{\dagger}$ \\
+\multicolumn{5}{@{}l}{\textit{truth NCD95}} \\
+\quad rule $r$, $\alpha=0.81$ vs $(0.118,\,0.85)$ & $-$0.0109 (6/32) & $-$0.0124 (2/12) & $-$0.0069 (2/24) & $-$0.0206 (0/5)$^{\dagger}$ \\
+\quad rule $r$, $\alpha=0.81$ vs $(0.105,\,0.95)$ & $-$0.0303 (2/32) & $-$0.0306 (1/12) & $-$0.0172 (1/24) & $-$0.0654 (0/5)$^{\dagger}$ \\
+\quad rule $r$, $\alpha=0.93$ vs $(0.118,\,0.85)$ & $+$0.0283 (31/32) & $+$0.0245 (10/12) & $+$0.0137 (21/24) & $+$0.0424 (5/5)$^{\dagger}$ \\
+\quad rule $r$, $\alpha=0.93$ vs $(0.105,\,0.95)$$^{\star}$ & $+$0.0089 (30/32) & $+$0.0062 (10/12) & $+$0.0034 (20/24) & $-$0.0025 (1/5)$^{\dagger}$ \\
+\quad $r=0.105$, $\alpha=0.93$ vs $(0.118,\,0.85)$ & $+$0.0205 (32/32) & $+$0.0197 (11/12) & $+$0.0130 (23/24) & $+$0.0443 (5/5)$^{\dagger}$ \\
+\quad $r=0.105$, $\alpha=0.93$ vs $(0.105,\,0.95)$$^{\star}$ & $+$0.0011 (19/32)$^{\dagger}$ & $+$0.0015 (7/12)$^{\dagger}$ & $+$0.0026 (20/24) & $-$0.0006 (2/5)$^{\dagger}$ \\
+\bottomrule
+\end{tabular}
+\end{table*}

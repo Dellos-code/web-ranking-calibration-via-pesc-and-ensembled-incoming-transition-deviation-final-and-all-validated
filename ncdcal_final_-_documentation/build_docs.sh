@@ -24,6 +24,12 @@ for L in EN GR; do
   for pass in 1 2 3; do
     (cd "$BUILD" && xelatex -interaction=nonstopmode "doc_$L.tex" > "doc_$L.pass$pass.log" 2>&1) || true
   done
+  if grep -Ein '^!|Overfull|multiply defined|undefined (references|citations?)' \
+      "$BUILD/doc_$L.log" "$BUILD/doc_$L.pass3.log"; then
+    echo "documentation build checks failed for $L" >&2
+    rm -rf "$BUILD"
+    exit 1
+  fi
   errors=$(grep -c '^!' "$BUILD/doc_$L.log" || true)
   overfull=$(grep -c 'Overfull' "$BUILD/doc_$L.log" || true)
   cp "$BUILD/doc_$L.pdf" "DOCUMENTATION_$L.pdf"
